@@ -1,0 +1,182 @@
+---
+import { ExternalLink } from 'lucide-astro';
+
+const projects = [
+  {
+    title: "SgamApp",
+    type: "Mobile App Realesed",
+    description: "Un'applicazione mobile cross-platform (React Native/Kotlin) studiata per l'inclusività. Interfacce grandi, chiare, zero distrazioni. Strumenti digitali accessibili per l'utenza fragile.",
+    tags: ["React Native", "Kotlin", "Accessibility"],
+    color: "var(--nebula-cyan)",
+    link: "#"
+  },
+  {
+    title: "Yumeverse Games",
+    type: "Web Platform",
+    description: "Sviluppo di landing page ad altissime prestazioni. Animazioni complesse senza intaccare i Web Vitals, puro Astro e Tailwind per un'esperienza da urlo al primo click.",
+    tags: ["Astro", "Tailwind", "Performance"],
+    color: "var(--nebula-magenta)",
+    link: "#"
+  }
+];
+---
+
+<section id="progetti" class="section">
+  <div class="section-header">
+    <h2 class="section-title heading-galaxy">In <span class="text-gradient">Evidenza</span></h2>
+    <p class="section-subtitle">I progetti principali a cui sto lavorando in questo periodo.</p>
+  </div>
+  
+  <div class="projects-grid">
+    {projects.map((project) => (
+      <div class="project-card galaxy-card" style={`--project-color: ${project.color}`}>
+        <div class="card-glow"></div>
+        <div class="card-content">
+          <div class="project-header">
+            <span class="project-type">{project.type}</span>
+            <a href={project.link} class="out-link" aria-label={`Vedi ${project.title}`}>
+              <ExternalLink size={20} />
+            </a>
+          </div>
+          
+          <h3 class="project-title heading-galaxy">{project.title}</h3>
+          <p class="project-description">{project.description}</p>
+          
+          <div class="project-tags">
+            {project.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section {
+    margin-bottom: 7rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 3.5rem;
+    }
+  }
+  
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    font-weight: 300;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .project-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 1;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Decorative colored glow based on the specific project */
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--project-color);
+    box-shadow: 0 0 20px var(--project-color);
+    opacity: 0.8;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-type {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--project-color);
+  }
+  
+  .out-link {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+  
+  .project-card:hover .out-link {
+    color: var(--project-color);
+  }
+  
+  .project-title {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  
+  .project-description {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+  
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .tag {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+</style>

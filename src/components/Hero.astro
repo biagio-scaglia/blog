@@ -1,0 +1,197 @@
+---
+import { Mail, Phone } from 'lucide-astro';
+---
+
+<section class="hero galaxy-card">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="heading-galaxy text-gradient">Biagio<br/>Scaglia</h1>
+      <h2 class="role">Fullstack Developer & UI Designer</h2>
+      <p class="bio">
+        Sviluppatore web orientato ai risultati. Unisco l'affidabilità del backend con .NET all'interattività del frontend in React e Astro, puntando su performance e design pulito.
+      </p>
+      
+      <div class="contact-info">
+        <a href="tel:+393513150134" class="contact-link">
+          <Phone size={18} />
+          <span>+39 351 315 0134</span>
+        </a>
+        <a href="mailto:biagio.scaglia01@gmail.com" class="contact-link">
+          <Mail size={18} />
+          <span>biagio.scaglia01@gmail.com</span>
+        </a>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="#competenze" class="galaxy-button primary">Le mie competenze</a>
+        <a href="/blog" class="galaxy-button secondary">Leggi il Blog</a>
+      </div>
+    </div>
+    
+    <div class="hero-image-container">
+      <div class="avatar-glow">
+        <img src="/avatar-placeholder.svg" alt="Biagio Scaglia" class="avatar-img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    /* Adjusted mobile padding to avoid overflow */
+    padding: 2.5rem 1.5rem;
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 150%;
+    background: radial-gradient(ellipse at center, rgba(94, 23, 235, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    transform: rotate(15deg);
+    pointer-events: none;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 3.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .hero {
+      padding: 4rem;
+    }
+    
+    .hero-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .hero-text {
+      flex: 1.5;
+      padding-right: 2rem;
+    }
+    
+    .hero-image-container {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  
+  .heading-galaxy {
+    /* Smaller baseline font to fit 320px screens perfectly */
+    font-size: 3.25rem;
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  @media (min-width: 768px) {
+    .heading-galaxy {
+      font-size: 5.5rem;
+    }
+  }
+  
+  .role {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .bio {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: 2.5rem;
+    max-width: 650px;
+    font-weight: 300;
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  
+  @media (min-width: 600px) {
+    .contact-info {
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+  }
+  
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+  
+  .contact-link:hover {
+    color: var(--nebula-cyan);
+  }
+  
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+  
+  .hero-image-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .avatar-glow {
+    position: relative;
+    border-radius: 50%;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.4), rgba(255, 0, 127, 0.4));
+    box-shadow: 0 0 40px rgba(94, 23, 235, 0.5);
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .avatar-img {
+    border-radius: 50%;
+    display: block;
+    background: var(--galaxy-bg);
+    border: 4px solid var(--galaxy-dark);
+    object-fit: cover;
+    /* Responsive sizing instead of hardcoded width/height to avoid mobile scaling overflow */
+    width: 180px;
+    height: 180px;
+    max-width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .avatar-img {
+      width: 220px;
+      height: 220px;
+    }
+  }
+</style>

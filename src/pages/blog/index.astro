@@ -1,114 +1,221 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
+import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import Footer from '../../components/Footer.astro';
+import { Sparkles, Calendar } from 'lucide-astro';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout 
+  title="L'Osservatorio | Blog di Biagio Scaglia"
+  description="Il blog personale di Biagio Scaglia, esplorazioni cosmiche su Fullstack Development, design e molto altro."
+>
+  <main class="mario-container">
+    <Header />
+    
+    <section class="section">
+      <div class="section-header">
+        <h1 class="heading-galaxy section-title">L'<span class="text-gradient">Osservatorio</span></h1>
+        <p class="section-subtitle">Appunti di viaggio digitali, guide spaziali e riflessioni sul codice.</p>
+      </div>
+      
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="blog-card galaxy-card">
+            <div class="card-glow-border"></div>
+            <div class="blog-card-content">
+              <div class="post-meta">
+                <span class="badge badge-glow flex-badge">
+                  <Calendar size={14} class="calendar-icon" />
+                  {post.data.pubDate.toLocaleDateString('it-IT', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </span>
+              </div>
+              <h2 class="post-title heading-galaxy">{post.data.title}</h2>
+              <p class="post-description">{post.data.description}</p>
+            </div>
+            
+            <div class="read-more">
+              <Sparkles size={16} class="sparkle-icon" />
+              <span>Avvia Esplorazione</span>
+              <span class="arrow">→</span>
+            </div>
+          </a>
+        ))}
+        {posts.length === 0 && (
+          <div class="empty-state galaxy-card">
+            <Sparkles size={32} class="empty-icon text-gradient" />
+            <p>I sensori non rilevano alcun articolo in questo quadrante. Torna presto!</p>
+          </div>
+        )}
+      </div>
+    </section>
+    
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .section {
+    margin-bottom: 7rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 4.5rem;
+    }
+  }
+  
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    font-weight: 300;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Blog Card Galaxy Styling */
+  .blog-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  .card-glow-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--nebula-cyan), var(--nebula-purple));
+    box-shadow: 0 0 15px var(--nebula-cyan);
+    opacity: 0.5;
+    transition: opacity 0.3s ease, width 0.3s ease;
+  }
+  
+  .blog-card:hover .card-glow-border {
+    opacity: 1;
+    width: 6px;
+  }
+  
+  .blog-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex-grow: 1;
+    z-index: 2;
+  }
+  
+  .post-meta {
+    display: flex;
+    align-items: center;
+  }
+  
+  .flex-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(94, 23, 235, 0.2);
+    border: 1px solid rgba(94, 23, 235, 0.4);
+    color: var(--starlight);
+  }
+  
+  .post-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  
+  .blog-card:hover .post-title {
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  
+  .post-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  
+  .read-more {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+    color: var(--nebula-cyan);
+    margin-top: auto;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .blog-card:hover .read-more {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+  }
+  
+  .arrow {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  .blog-card:hover .arrow {
+    transform: translateX(6px);
+  }
+  
+  .empty-state {
+    padding: 4rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .empty-icon {
+    opacity: 0.8;
+  }
+  
+  .empty-state p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+</style>

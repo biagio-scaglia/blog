@@ -1,13 +1,17 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Calendar, Tag, ArrowLeft } from 'lucide-astro';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
 }
 type Props = CollectionEntry<'blog'>;
 
@@ -15,6 +19,252 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<Layout title={`${post.data.title} | Blog di Biagio Scaglia`} description={post.data.description}>
+  <main class="mario-container">
+    <Header />
+    
+    <article class="post-article galaxy-card">
+      <div class="post-header">
+        <h1 class="heading-galaxy post-title">{post.data.title}</h1>
+        
+        <div class="post-meta-container">
+          <div class="meta-item badge badge-glow">
+            <Calendar size={14} class="meta-icon" />
+            <span>
+              {post.data.pubDate.toLocaleDateString('it-IT', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
+          </div>
+          <div class="meta-item badge" style="background: rgba(0, 240, 255, 0.1); border-color: rgba(0, 240, 255, 0.3);">
+            <Tag size={14} class="meta-icon" style="color: var(--nebula-cyan);" />
+            <span style="color: #fff;">Esplorazione</span>
+          </div>
+        </div>
+        
+        <p class="post-lead">{post.data.description}</p>
+      </div>
+      
+      <div class="post-hero-divider"></div>
+      
+      <div class="post-content">
+        <Content />
+      </div>
+    </article>
+    
+    <div class="back-link-container">
+      <a href="/blog" class="back-button galaxy-button secondary">
+        <ArrowLeft size={18} />
+        <span>Ritorna all'Osservatorio</span>
+      </a>
+    </div>
+    
+    <Footer />
+  </main>
+</Layout>
+
+<style is:global>
+  .post-article {
+    padding: 2rem;
+    margin-bottom: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (min-width: 768px) {
+    .post-article {
+      padding: 4rem 5rem;
+    }
+  }
+  
+  .post-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+  
+  .post-title {
+    font-size: 2.5rem;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  @media (min-width: 768px) {
+    .post-title {
+      font-size: 4rem;
+    }
+  }
+  
+  .post-meta-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  
+  .post-lead {
+    font-size: 1.35rem;
+    color: var(--nebula-cyan);
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .post-hero-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--nebula-magenta), var(--nebula-cyan), transparent);
+    opacity: 0.5;
+    margin-bottom: 3rem;
+  }
+  
+  .post-content {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-weight: 300;
+  }
+  
+  .post-content h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .post-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: var(--nebula-cyan);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--nebula-cyan);
+  }
+  
+  .post-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--starlight);
+  }
+  
+  .post-content p {
+    margin-bottom: 1.75rem;
+  }
+  
+  .post-content a {
+    color: var(--nebula-cyan);
+    font-weight: 500;
+    text-decoration: none;
+    background-image: linear-gradient(var(--nebula-cyan), var(--nebula-cyan));
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    transition: background-size 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s;
+  }
+  
+  .post-content a:hover {
+    color: var(--text-primary);
+    background-size: 100% 100%;
+  }
+  
+  .post-content ul, .post-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content li {
+    margin-bottom: 0.75rem;
+  }
+  
+  .post-content li::marker {
+    color: var(--nebula-magenta);
+  }
+  
+  .post-content pre {
+    padding: 1.5rem;
+    border: 1px solid rgba(94, 23, 235, 0.3);
+    border-radius: var(--radius-md);
+    background-color: #05020a !important; /* Deep space black */
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    font-size: 0.95em;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .post-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background-color: rgba(94, 23, 235, 0.2);
+    color: var(--nebula-cyan);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  
+  .post-content pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  
+  .post-content strong {
+    font-weight: 600;
+    color: var(--starlight);
+  }
+  
+  .post-content blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 4px solid var(--nebula-magenta);
+    background: rgba(255, 0, 127, 0.05);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  
+  .post-content blockquote p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    margin: 2rem 0;
+  }
+  
+  .back-link-container {
+    margin-bottom: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+</style>
