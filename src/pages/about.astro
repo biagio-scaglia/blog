@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 ---
 
 <Layout 
@@ -12,6 +13,8 @@ import Footer from '../components/Footer.astro';
     <Header />
     
     <section class="about-section galaxy-card">
+      <Breadcrumbs paths={[{ name: 'Chi Sono', url: '/about' }]} />
+      
       <div class="content-wrapper">
         <h1 class="heading-galaxy text-gradient">Chi Sono</h1>
         

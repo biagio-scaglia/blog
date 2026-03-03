@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Telescope, ArrowLeft } from 'lucide-astro';
+---
+
+<Layout 
+  title="404 | Pagina Non Trovata - Biagio Scaglia"
+  description="Ops! Sembra che tu ti sia perso nello spazio profondo. Ritorna alla base."
+>
+  <main class="mario-container">
+    <Header />
+    
+    <section class="error-section">
+      <div class="error-card galaxy-card">
+        <div class="error-glow"></div>
+        
+        <Telescope size={80} class="error-icon text-gradient" />
+        
+        <h1 class="heading-galaxy error-code">404</h1>
+        <h2 class="error-title">Perso nel <span class="text-gradient">Vuoto Spaziale?</span></h2>
+        
+        <p class="error-description">
+          I nostri sensori non rilevano alcuna pagina a queste coordinate. 
+          Potrebbe essere stata spostata in un altro sistema solare o forse non è mai esistita.
+        </p>
+        
+        <div class="error-actions">
+          <a href="/" class="galaxy-button primary">
+            <ArrowLeft size={18} />
+            Ritorna alla Base
+          </a>
+          <a href="/blog" class="galaxy-button secondary">Esplora il Blog</a>
+        </div>
+      </div>
+    </section>
+    
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .error-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem 0;
+  }
+  
+  .error-card {
+    position: relative;
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .error-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 240, 255, 0.1) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+    animation: rotate 20s linear infinite;
+  }
+  
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .error-icon {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    color: var(--nebula-cyan);
+    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
+  }
+  
+  .error-code {
+    font-size: 6rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (min-width: 768px) {
+    .error-code {
+      font-size: 8rem;
+    }
+  }
+  
+  .error-title {
+    font-size: 2rem;
+    font-family: var(--font-heading);
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .error-description {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+</style>

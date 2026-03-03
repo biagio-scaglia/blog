@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ShieldAlert, RefreshCw } from 'lucide-astro';
+
+interface Props {
+  error?: unknown;
+}
+
+const { error } = Astro.props;
+---
+
+<Layout 
+  title="500 | Errore di Sistema - Biagio Scaglia"
+  description="Anomalia critica di sistema rilevata nei server centrali."
+>
+  <main class="mario-container">
+    <Header />
+    
+    <section class="error-section">
+      <div class="error-card galaxy-card critical-alert">
+        <div class="error-glow critical"></div>
+        
+        <ShieldAlert size={80} class="error-icon" />
+        
+        <h1 class="heading-galaxy error-code text-gradient">500</h1>
+        <h2 class="error-title">Anomalia di <span class="text-gradient">Sistema Rilevata</span></h2>
+        
+        <p class="error-description">
+          Si è verificato un cedimento critico del nucleo stellare (Errore Interno del Server).
+          I bot di terra sono già stati inviati per ripristinare i sistemi di contenimento.
+        </p>
+        
+        <div class="error-actions">
+          <a href="/" class="galaxy-button primary restart-btn">
+            <RefreshCw size={18} />
+            Riavvia Sistemi (Torna alla Home)
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .error-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem 0;
+  }
+  
+  .error-card {
+    position: relative;
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .critical-alert {
+    border-color: rgba(255, 0, 127, 0.4);
+    box-shadow: 0 0 30px rgba(255, 0, 127, 0.2);
+  }
+  
+  .error-glow.critical {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 0, 127, 0.15) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+    animation: pulse-danger 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-danger {
+    0% { opacity: 0.5; transform: scale(0.95); }
+    50% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0.5; transform: scale(0.95); }
+  }
+  
+  .error-icon {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    color: var(--nebula-magenta);
+    filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.6));
+  }
+  
+  .error-code {
+    font-size: 6rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (min-width: 768px) {
+    .error-code {
+      font-size: 8rem;
+    }
+  }
+  
+  .error-title {
+    font-size: 2rem;
+    font-family: var(--font-heading);
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .error-description {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .restart-btn {
+    background: linear-gradient(135deg, var(--nebula-magenta), #ff4b2b);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+  }
+  
+  .restart-btn:hover {
+    box-shadow: 0 0 30px rgba(255, 0, 127, 0.8);
+  }
+</style>

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { Sparkles, Calendar } from 'lucide-astro';
 
 const posts = (await getCollection('blog')).sort(
@@ -18,6 +19,8 @@ const posts = (await getCollection('blog')).sort(
     <Header />
     
     <section class="section">
+      <Breadcrumbs paths={[{ name: 'Blog', url: '/blog' }]} />
+      
       <div class="section-header">
         <h1 class="heading-galaxy section-title">L'<span class="text-gradient">Osservatorio</span></h1>
         <p class="section-subtitle">Appunti di viaggio digitali, guide spaziali e riflessioni sul codice.</p>
