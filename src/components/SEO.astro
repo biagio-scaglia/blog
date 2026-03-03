@@ -1,0 +1,62 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/default-og-image.jpg', // Placeholder for a future social image
+  canonicalUrl = Astro.url.href,
+} = Astro.props;
+
+// Determine the full URL for social images (requires site to be set in astro.config.mjs)
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://biagioscaglia.com';
+const socialImageURL = new URL(image, siteUrl).href;
+
+// Build a super-strict CSP to prevent XSS. 
+// Note: We include 'unsafe-inline' for styles because Astro injects scoped styles inline by default.
+// We also include 'unsafe-inline' for scripts if Astro needs it for ViewTransitions or simple hydration.
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: https:",
+  "connect-src 'self'",
+  "frame-ancestors 'none'", // Prevents Clickjacking
+  "form-action 'self'",
+].join('; ');
+---
+
+<!-- Browser Security Headers (Meta Equivalents) -->
+<meta http-equiv="Content-Security-Policy" content={csp} />
+<meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+<!-- Standard SEO -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:site_name" content="Biagio Scaglia | Portfolio & Blog" />
+
+<!-- Twitter / X -->
+<!-- Use summary_large_image if you eventually provide a 1200x630 image -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={socialImageURL} />
+
+<!-- Author Identity -->
+<meta name="author" content="Biagio Scaglia" />
+<meta name="generator" content={Astro.generator} />
