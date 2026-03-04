@@ -1,4 +1,5 @@
 ---
+import { Github, Linkedin, Mail, ShieldCheck } from 'lucide-astro';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -10,10 +11,18 @@ const currentYear = new Date().getFullYear();
     </div>
     
     <div class="footer-links">
-      <a href="https://github.com/biagio-scaglia" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-      <a href="https://linkedin.com/in/biagio-scaglia" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-      <a href="mailto:biagio.scaglia01@gmail.com" class="footer-link">Contattami</a>
-      <a href="/privacy" class="footer-link">Privacy Policy</a>
+      <a href="https://github.com/biagio-scaglia" target="_blank" rel="noopener noreferrer" class="footer-link">
+        <Github size={16} class="footer-icon" /> GitHub
+      </a>
+      <a href="https://linkedin.com/in/biagio-scaglia" target="_blank" rel="noopener noreferrer" class="footer-link">
+        <Linkedin size={16} class="footer-icon" /> LinkedIn
+      </a>
+      <a href="mailto:biagio.scaglia01@gmail.com" class="footer-link">
+        <Mail size={16} class="footer-icon" /> Contattami
+      </a>
+      <a href="/privacy" class="footer-link">
+        <ShieldCheck size={16} class="footer-icon" /> Privacy Policy
+      </a>
     </div>
   </div>
   
@@ -70,15 +79,29 @@ const currentYear = new Date().getFullYear();
   }
   
   .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-weight: 500;
     font-size: 0.95rem;
     color: var(--text-secondary);
     transition: color 0.3s ease;
   }
   
+  .footer-icon {
+    opacity: 0.7;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
   .footer-link:hover {
     color: var(--nebula-cyan);
     text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+  
+  .footer-link:hover .footer-icon {
+    transform: translateY(-2px);
+    color: #fff;
+    opacity: 1;
   }
   
   .footer-bottom {

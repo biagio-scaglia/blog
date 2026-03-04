@@ -11,8 +11,8 @@ const {
   title,
   description,
   image = '/default-og-image.jpg', // Placeholder for a future social image
-  canonicalUrl = Astro.url.href,
-  keywords = "Biagio Scaglia, Web Developer, Fullstack, UI Designer, Astro, React, React Native, Tailwind, .NET, Sviluppatore Italia",
+  canonicalUrl = Astro.url.href.replace(/\/$/, ''), // Strip trailing slash for stricter canonicals
+  keywords = "Biagio Scaglia, Web Developer Italia, Full-stack Developer, UI Designer, Sviluppo Siti Web, Astro Web Framework, Programmatore React, React Native Developer, Tailwind CSS, Sviluppatore C# .NET, Sviluppo App Mobile, SEO Frontend",
 } = Astro.props;
 
 // Determine the full URL for social images (requires site to be set in astro.config.mjs)
@@ -50,6 +50,7 @@ const csp = [
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
+<meta property="og:locale" content="it_IT" />
 <meta property="og:image" content={socialImageURL} />
 <meta property="og:site_name" content="Biagio Scaglia | Portfolio & Blog" />
 
