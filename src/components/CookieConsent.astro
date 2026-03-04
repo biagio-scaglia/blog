@@ -1,0 +1,195 @@
+---
+---
+
+<div id="cookie-consent-modal" class="cookie-overlay hidden">
+  <div class="cookie-card galaxy-card">
+    <div class="card-glow-border"></div>
+    <div class="cookie-header">
+      <h3 class="heading-galaxy">Gestione Cookie 🍪</h3>
+    </div>
+    <div class="cookie-body">
+      <p>
+        Hey viaggiatore spaziale! Questo sito utilizza cookie tecnici strettamente necessari per il funzionamento e cookie analitici anonimi per migliorare la tua esperienza di navigazione.
+      </p>
+      <p class="cookie-detail">
+        Cliccando su "Accetta Tutti", acconsenti all'uso dei cookie. Puoi leggere di più nella nostra <a href="/privacy" class="privacy-link">Privacy Policy</a>.
+      </p>
+    </div>
+    <div class="cookie-actions">
+      <button id="btn-reject-cookies" class="galaxy-button secondary border-ghost">Solo Necessari</button>
+      <button id="btn-accept-cookies" class="galaxy-button primary">Accetta Tutti</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple functional JS to handle the Cookie Consent Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const consentModal = document.getElementById('cookie-consent-modal');
+    const btnAccept = document.getElementById('btn-accept-cookies');
+    const btnReject = document.getElementById('btn-reject-cookies');
+    
+    // Check if user has already made a choice
+    const hasConsented = localStorage.getItem('biagio_blog_cookie_consent');
+    
+    if (!hasConsented) {
+      // Small delay for dramatic effect / avoid sudden flash
+      setTimeout(() => {
+        consentModal?.classList.remove('hidden');
+        consentModal?.classList.add('fade-in');
+      }, 1000);
+    }
+    
+    const closeAndSave = (value) => {
+      localStorage.setItem('biagio_blog_cookie_consent', value);
+      consentModal?.classList.add('fade-out');
+      setTimeout(() => {
+        consentModal?.classList.add('hidden');
+      }, 500); // Wait for the fade out animation to finish
+    };
+    
+    btnAccept?.addEventListener('click', () => closeAndSave('all'));
+    btnReject?.addEventListener('click', () => closeAndSave('necessary'));
+  });
+</script>
+
+<style>
+  .cookie-overlay {
+    position: fixed;
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  
+  /* Support for Mobile Bottom Navigation Bar */
+  @media (max-width: 767px) {
+    .cookie-overlay {
+      bottom: calc(70px + 1rem); /* Nav bar height + spacing */
+    }
+  }
+  /* iPhone safe area support */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    @media (max-width: 767px) {
+      .cookie-overlay {
+        bottom: calc(70px + env(safe-area-inset-bottom) + 1rem);
+      }
+    }
+  }
+
+  .cookie-overlay.fade-in {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .cookie-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+
+  .cookie-card {
+    position: relative;
+    max-width: 550px;
+    width: 100%;
+    padding: 1.5rem;
+    background: rgba(10, 5, 20, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(94, 23, 235, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(94, 23, 235, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+  }
+
+  .card-glow-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--nebula-cyan), var(--nebula-purple));
+    box-shadow: 0 0 15px var(--nebula-cyan);
+  }
+
+  .cookie-header h3 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .cookie-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cookie-body p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .cookie-detail {
+    font-size: 0.85rem !important;
+    opacity: 0.8;
+  }
+
+  .privacy-link {
+    color: var(--nebula-cyan);
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+  }
+
+  .privacy-link:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+  }
+
+  .cookie-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap; /* Safety for very small screens */
+  }
+
+  /* Specific overrides to fit modal properly */
+  .cookie-actions .galaxy-button {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  
+  @media (min-width: 480px) {
+    .cookie-actions .galaxy-button {
+      flex: 0 1 auto;
+    }
+  }
+  
+  .border-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .border-ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+</style>

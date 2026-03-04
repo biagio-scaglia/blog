@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
 	title: string;
@@ -28,6 +29,7 @@ const { title, description } = Astro.props;
 		<div class="layout-wrapper">
 			<slot />
 		</div>
+		<CookieConsent />
 	</body>
 </html>
 

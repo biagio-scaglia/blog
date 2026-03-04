@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Privacy Policy | Biagio Scaglia"
+  description="Informativa sulla privacy del sito."
+>
+  <main class="mario-container">
+    <Header />
+    
+    <section class="privacy-section">
+      <div class="galaxy-card policy-card">
+        <h1 class="heading-galaxy text-gradient">Privacy Policy</h1>
+        
+        <div class="policy-content">
+          <p><strong>Ultimo aggiornamento:</strong> {new Date().toLocaleDateString('it-IT')}</p>
+          
+          <h2>1. Introduzione</h2>
+          <p>Benvenuto sul sito di Biagio Scaglia. La tua privacy è importante. Questa policy spiega in modo semplice come vengono gestiti i tuoi dati quando visiti o interagisci con questo sito.</p>
+          
+          <h2>2. Quali dati vengono raccolti</h2>
+          <p>Questo è principalmente un sito statico personale e di portfolio. Vengono raccolti dati in due modi principali:</p>
+          <ul>
+            <li><strong>Dati di navigazione (Analitici anonimi):</strong> Possiamo utilizzare strumenti statistici (come Cloudflare o Google Analytics) che raccolgono informazioni su come gli utenti usano il sito, tramite cookie di terze parti. I dati vengono raccolti in forma anonima o aggregata.</li>
+            <li><strong>Informazioni fornite volontariamente:</strong> Se decidi di inviarmi un'email tramite i link di contatto presenti sul sito, il tuo indirizzo e le informazioni contenute nell'email saranno utilizzati esclusivamente per poterti rispondere.</li>
+          </ul>
+
+          <h2>3. Cookie</h2>
+          <p>Questo sito utilizza Cookie. Un cookie è un piccolo file di testo che viene memorizzato sul tuo dispositivo.</p>
+          <ul>
+            <li><strong>Cookie Tecnici Costitutivi:</strong> Utilizzati per ricordare le tue preferenze (ad esempio la chiusura del banner dei cookie, salvato nel tuo browser tramite `localStorage`). Non richiedono consenso esplcito, in quanto essenziali.</li>
+            <li><strong>Cookie Analitici:</strong> Utilizziamo strumenti per capire il traffico del sito web. Hanno lo scopo di raccogliere informazioni generali sul comportamento degli utenti senza identificare personalmente il singolo utente visitatore. Puoi scegliere di accettarli o rifiutarli tramite il banner a comparsa iniziale.</li>
+          </ul>
+
+          <h2>4. Sicurezza</h2>
+          <p>La sicurezza del sito è presa seriamente. Per farti navigare in sicurezza, l'intero sito viene ospitato tramite infrastrutture cloud sicure e servito esclusivamente tramite protocollo <strong>HTTPS</strong>. Inoltre, sono state attivate e vengono implementate rigorose regole per proteggere il sito da attacchi informatici esterni.</p>
+
+          <h2>5. Diritti dell'utente</h2>
+          <p>Essendo residente in Europa, la navigazione è tutelata dal GDPR. Hai il diritto in qualsiasi momento di:</p>
+          <ul>
+            <li>Richiedere chiarimenti sul trattamento dei dati.</li>
+            <li>Opporsi o limitare l'eventuale trattamento.</li>
+          </ul>
+
+          <h2>6. Contatti</h2>
+          <p>Per qualsiasi domanda relativa alla seguente Cookie o Privacy Policy, puoi farmi affidamento e contattarmi via e-mail all'indirizzo presente nelle sezioni contatti del sito.</p>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .privacy-section {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto 5rem;
+  }
+
+  .policy-card {
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .policy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .policy-content h2 {
+    color: var(--starlight);
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .policy-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    font-weight: 300;
+  }
+
+  .policy-content ul {
+    list-style-type: none;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .policy-content li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .policy-content li strong {
+    color: var(--starlight);
+    font-weight: 500;
+    margin-right: 0.25rem;
+  }
+
+  .policy-content li::before {
+    content: "▹";
+    color: var(--nebula-cyan);
+    font-weight: bold;
+    display: inline-block;
+    width: 1.5em;
+    margin-left: -1em;
+  }
+
+  a {
+    color: var(--nebula-cyan);
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+  }
+
+  a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+
+  @media (max-width: 768px) {
+    .policy-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
