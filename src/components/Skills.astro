@@ -9,6 +9,21 @@ const softSkills = [
   "Adattabilità", "Team Leadership"
 ];
 
+// Combine the icons into a reusable array for the marquee
+const techStackIcons = [
+  { name: ".NET", icon: "/icons/csharp.svg" },
+  { name: "React", icon: "/icons/react.svg" },
+  { name: "JavaScript", icon: "/icons/javascript.svg" },
+  { name: "TypeScript", icon: "/icons/typescript.svg" },
+  { name: "Node.js", icon: "/icons/nodejs.svg" },
+  { name: "HTML5", icon: "/icons/html.svg" },
+  { name: "CSS3", icon: "/icons/css.svg" },
+  { name: "Git", icon: "/icons/git.svg" },
+  { name: "Vue", icon: "/icons/vuejs.svg" },
+  { name: "Angular", icon: "/icons/angular.svg" },
+  { name: "MySQL", icon: "/icons/mysql.svg" }
+];
+
 const languages = [
   { name: "Italiano", level: "madrelingua" },
   { name: "Inglese", level: "b1" },
@@ -27,10 +42,23 @@ const languages = [
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="block-icon"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         <h3 class="block-title">Competenze Tecniche</h3>
       </div>
-      <div class="skills-tags">
-        {hardSkills.map((skill) => (
-          <span class="skill-tag tech">{skill}</span>
-        ))}
+      <div class="skills-marquee-container">
+        <div class="skills-marquee">
+          <!-- First Set -->
+          {techStackIcons.map((skill) => (
+            <div class="tech-icon-wrapper" title={skill.name}>
+              <img src={skill.icon} alt={skill.name} class="tech-icon" loading="lazy" />
+              <span class="icon-tooltip">{skill.name}</span>
+            </div>
+          ))}
+          <!-- Duplicated Set for Infinite Loop -->
+          {techStackIcons.map((skill) => (
+            <div class="tech-icon-wrapper" title={skill.name}>
+              <img src={skill.icon} alt={skill.name} class="tech-icon" loading="lazy" />
+              <span class="icon-tooltip">{skill.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
     
@@ -126,27 +154,105 @@ const languages = [
     gap: 0.85rem;
   }
   
-  .skill-tag {
+  /* MARQUEE STYLES */
+  .skills-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 1.5rem 0;
+    
+    /* Fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  
+  .skills-marquee {
+    display: flex;
+    flex-wrap: nowrap; /* ENFORCE NO WRAP */
+    width: max-content;
+    animation: scroll 25s linear infinite;
+  }
+  
+  .skills-marquee:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+    /* -50% because the array is duplicated exactly twice */
+  }
+  
+  .tech-icon-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    min-width: 80px; /* ENFORCE SIZE */
+    min-height: 80px; /* ENFORCE SIZE */
+    flex-shrink: 0; /* ENFORCE ROW INTEGRITY */
+    margin: 0 1rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--glass-border);
-    padding: 0.5rem 1.25rem;
-    border-radius: 100px;
-    font-weight: 400;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     backdrop-filter: blur(4px);
+    cursor: pointer;
   }
   
-  .skill-tag:hover {
-    transform: translateY(-3px);
+  .tech-icon {
+    width: 40px !important; 
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+    transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
   }
   
-  .skill-tag.tech:hover {
+  .icon-tooltip {
+    position: absolute;
+    bottom: -35px;
+    background: var(--nebula-purple);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+    font-weight: 500;
+  }
+  
+  .tech-icon-wrapper:hover {
+    transform: translateY(-8px);
     border-color: rgba(0, 240, 255, 0.5);
-    background: rgba(0, 240, 255, 0.1);
-    color: var(--nebula-cyan);
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    background: rgba(0, 240, 255, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.15);
   }
+  
+  .tech-icon-wrapper:hover .tech-icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.6));
+  }
+  
+  .tech-icon-wrapper:hover .icon-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Remove old unused classes */
   
   .skill-tag.soft:hover {
     border-color: rgba(255, 0, 127, 0.5);
