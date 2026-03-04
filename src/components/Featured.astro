@@ -4,11 +4,11 @@ import { ExternalLink } from 'lucide-astro';
 const projects = [
   {
     title: "SgamApp",
-    type: "Mobile App Realesed",
+    type: "Mobile App Released",
     description: "Un'applicazione mobile cross-platform (React Native/Kotlin) studiata per l'inclusività. Interfacce grandi, chiare, zero distrazioni. Strumenti digitali accessibili per l'utenza fragile.",
     tags: ["React Native", "Kotlin", "Accessibility"],
     color: "var(--nebula-cyan)",
-    link: "#"
+    link: "https://sgamapp.vercel.app"
   },
   {
     title: "Yumeverse Games",
@@ -16,7 +16,7 @@ const projects = [
     description: "Sviluppo di landing page ad altissime prestazioni. Animazioni complesse senza intaccare i Web Vitals, puro Astro e Tailwind per un'esperienza da urlo al primo click.",
     tags: ["Astro", "Tailwind", "Performance"],
     color: "var(--nebula-magenta)",
-    link: "#"
+    link: ""
   }
 ];
 ---
@@ -34,9 +34,11 @@ const projects = [
         <div class="card-content">
           <div class="project-header">
             <span class="project-type">{project.type}</span>
-            <a href={project.link} class="out-link" aria-label={`Vedi ${project.title}`}>
-              <ExternalLink size={20} />
-            </a>
+            {project.link !== '' && (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="out-link" aria-label={`Vedi ${project.title}`}>
+                <ExternalLink size={20} />
+              </a>
+            )}
           </div>
           
           <h3 class="project-title heading-galaxy">{project.title}</h3>

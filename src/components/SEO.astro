@@ -4,6 +4,7 @@ export interface Props {
   description: string;
   image?: string;
   canonicalUrl?: string;
+  keywords?: string;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   description,
   image = '/default-og-image.jpg', // Placeholder for a future social image
   canonicalUrl = Astro.url.href,
+  keywords = "Biagio Scaglia, Web Developer, Fullstack, UI Designer, Astro, React, React Native, Tailwind, .NET, Sviluppatore Italia",
 } = Astro.props;
 
 // Determine the full URL for social images (requires site to be set in astro.config.mjs)
@@ -39,6 +41,7 @@ const csp = [
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 <!-- Standard SEO -->
+<meta name="keywords" content={keywords} />
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
 
