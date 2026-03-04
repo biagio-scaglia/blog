@@ -5,7 +5,8 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { Calendar, Tag, ArrowLeft } from 'lucide-astro';
+import { Calendar, Tag, ArrowLeft, Share2 } from 'lucide-astro';
+import ShareButton from '../../components/ShareButton.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -58,6 +59,12 @@ const { Content } = await render(post);
       <div class="post-content">
         <Content />
       </div>
+
+      <ShareButton 
+        title={post.data.title} 
+        description={post.data.description} 
+        url={Astro.url.href} 
+      />
     </article>
     
     <div class="back-link-container">

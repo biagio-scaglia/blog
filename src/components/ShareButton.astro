@@ -1,0 +1,164 @@
+---
+import { Share2, Copy, Check } from 'lucide-astro';
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+}
+
+const { title, description, url } = Astro.props;
+---
+
+<div class="share-container galaxy-card">
+  <div class="share-header">
+    <Share2 size={20} class="share-main-icon" />
+    <span>Ti è piaciuto l'articolo? Condividilo!</span>
+  </div>
+  
+  <div class="share-actions">
+    <button id="web-share-btn" class="galaxy-button primary share-btn" data-title={title} data-text={description} data-url={url}>
+      <Share2 size={16} />
+      <span>Condividi</span>
+    </button>
+    
+    <button id="copy-link-btn" class="galaxy-button secondary share-btn" data-url={url}>
+      <div class="icon-stack">
+        <Copy size={16} class="copy-icon" />
+        <Check size={16} class="check-icon" />
+      </div>
+      <span class="btn-text">Copia Link</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  function setupShare() {
+    const shareBtn = document.getElementById('web-share-btn');
+    const copyBtn = document.getElementById('copy-link-btn');
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const title = shareBtn.getAttribute('data-title');
+        const text = shareBtn.getAttribute('data-text');
+        const url = shareBtn.getAttribute('data-url');
+
+        if (navigator.share) {
+          try {
+            await navigator.share({ title, text, url });
+          } catch (err) {
+            console.log('Share failed:', err);
+          }
+        } else {
+          // Fallback if Web Share API is not available (e.g. some desktop browsers)
+          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title + ' ' + url)}`, '_blank');
+        }
+      });
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const url = copyBtn.getAttribute('data-url');
+        const btnText = copyBtn.querySelector('.btn-text');
+        
+        try {
+          await navigator.clipboard.writeText(url || window.location.href);
+          copyBtn.classList.add('copied');
+          if (btnText) btnText.textContent = 'Copiato!';
+          
+          setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            if (btnText) btnText.textContent = 'Copia Link';
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    }
+  }
+
+  // Support both normal load and Astro ViewTransitions if used
+  setupShare();
+  document.addEventListener('astro:after-swap', setupShare);
+</script>
+
+<style>
+  .share-container {
+    margin: 4rem 0 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(94, 23, 235, 0.05);
+    border: 1px dashed rgba(0, 240, 255, 0.3);
+    text-align: center;
+  }
+
+  .share-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--starlight);
+  }
+
+  .share-main-icon {
+    color: var(--nebula-cyan);
+    filter: drop-shadow(0 0 5px var(--nebula-cyan));
+  }
+
+  .share-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .share-btn {
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* Copy Button Success State */
+  .icon-stack {
+    position: relative;
+    width: 16px;
+    height: 16px;
+  }
+
+  .check-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: scale(0.5);
+    color: #4ade80; /* Success green */
+    transition: all 0.3s ease;
+  }
+
+  .copy-icon {
+    transition: all 0.3s ease;
+  }
+
+  .copied .copy-icon {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  .copied .check-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .copied.galaxy-button.secondary {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+  }
+</style>
