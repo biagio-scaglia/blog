@@ -1,48 +1,28 @@
 ---
-title: 'Il Dietro le Quinte di Questo Blog: Astro, Performance ed Estetica'
-description: 'Scopri come ho progettato e sviluppato questo portfolio/blog puntando su prestazioni assolute (0 kb di JS al client) e un design ispirato al cosmo e ai videogiochi.'
+title: 'Benvenuti nel mio spazio digitale'
+description: 'Una breve introduzione su chi sono, di cosa mi occupo e quale sarà lo scopo di questo blog.'
 pubDate: 2026-03-04
 ---
 
-Quando ho deciso di rinnovare il mio spazio web personale, mi sono posto un obiettivo ambizioso: **unire un'estetica sbalorditiva a prestazioni estreme**. Volevo un luogo digitale che parlasse di me non solo attraverso le parole, ma attraverso l'architettura tecnica e il design stesso.
+Ciao e benvenuto sul mio sito personale. Mi chiamo Biagio Scaglia e sono uno sviluppatore web e UI designer italiano. 
 
-Ecco il racconto di come è nato questo progetto.
+Ho creato questo spazio per raccogliere i miei pensieri, i miei progetti e le mie esperienze nel mondo della progettazione software e dello sviluppo web. L'idea alla base di questo blog non è solo quella di mostrare il mio curriculum, ma di condividere il mio percorso professionale, le sfide che affronto quotidianamente scrivendo codice e le soluzioni che trovo lungo la strada.
 
-## 1. La Scelta Tecnologica: Astro 🚀
+## Di cosa mi occupo
 
-Come *Fullstack Developer*, amo React e lo uso quotidianamente. Tuttavia, per un blog statico e un portfolio, caricare l'intera libreria React sul client (generando kilobyte di *bundle* JavaScript per componenti che non cambiano mai) non era la scelta ottimale.
+Nel corso della mia carriera mi sono specializzato sia nel frontend che nel backend, acquisendo una visione completa del ciclo di vita di un'applicazione web. 
 
-La soluzione è stata **Astro**.
-Astro mi ha permesso di sviluppare utilizzando l'architettura a componenti (proprio come React), ma con un approccio "Zero-JS" di default (Islands Architecture). Questo significa che al momento del "Build", Astro trasforma tutti i miei componenti in puro HTML e CSS, restituendo ai browser degli utenti pagine leggere come piume. Il risultato è proprio quello che cercavo: velocità istantanea e **Lighthouse Score alle stelle**.
+Lavoro costantemente per migliorare la qualità del mio codice, concentrandomi su:
+- Architetture solide e scalabili, principalmente utilizzando l'ecosistema .NET per la logica di business e la gestione dei dati.
+- Interfacce utente fluide, accessibili e orientate alle performance, sfruttando tecnologie moderne come React e Astro.
+- Lo sviluppo di applicazioni mobili cross-platform.
 
-## 2. L'Estetica "Mario Galaxy" 🌌
+Inoltre, dedico grande attenzione al design. Credo fermamente che un'ottima architettura software perda la sua efficacia se non è accompagnata da un'interfaccia intuitiva e piacevole da utilizzare.
 
-Non volevo il "classico" CV noioso o il tipico layout "Corporate" in scala di grigi. Mettendo insieme la mia passione per i videogiochi e per lo spazio profondo, l'ispirazione visiva chiara era lo stile cosmico e vibrante.
+## Cosa troverai qui
 
-Ho stabilito una **palette colori** precisa in puro Vanilla CSS (`global.css`):
-- **Base (Dark Void):** Sfondi quasi neri per non affaticare la vista.
-- **Neon Cyan & Magenta:** Accenti cromatici brillanti per i bottoni, le glow-shadows (le ombre luminescenti) e i componenti testuali importanti.
-- **Glassmorphism:** Molti dei contenitori principali (le *Galaxy Cards*) sfoggiano sfondi semi-trasparenti, bordi sottili e sfocature (`backdrop-filter: blur`), che ricordano visiere di astronavi o interfacce futuristiche.
+Questo blog fungerà da raccoglitore per i miei appunti e le mie ricerche. Gli argomenti principali spazieranno dalle best practice di programmazione, all'analisi di nuovi framework, fino a riflessioni più ampie sull'ingegneria del software e sul design delle interfacce.
 
-## 3. Le Sfide e le Vittorie Tecniche 🛠️
+Pubblicherò anche approfondimenti sui miei progetti personali e documenterò le librerie o gli strumenti che trovo utili nel lavoro di tutti i giorni. 
 
-La costruzione del sito ha presentato alcune battaglie stimolanti:
-
-### La Responsività Mobile "A Prova di Bomba"
-Uno degli ostacoli è stata l'adattabilità agli schermi piccolissimi. Immagini con larghezza fissata o padding ereditati rischiavano di creare l'insopportabile scorrimento orizzontale su mobile.
-- **La Soluzione:** Ho implementato rigidi controlli `max-width: 100%`, `box-sizing: border-box`, e un ingegnoso pre-load (con `fetchpriority="high"`) sull'immagine dell'avatar per distruggere letteralmente le metriche lente del _Largest Contentful Paint (LCP)_.
-
-### L'Abbandono dell'Hamburger Menu
-Inizialmente avevo previsto il classico Menu ad Hamburger per i dispositivi mobili basato su codice JavaScript inline. Presto ho realizzato che questo esponeva a ritardi nel rendering e a conflitti con lo scope di esecuzione di Astro.
-- **La Soluzione App-like:** L'ho eliminato del tutto. Ho riprogettato la Mobile UI creando una **Bottom Navigation Bar** puramente in CSS (visibile in basso sul telefono). Un pattern ispirato alle vere e proprie App mobili: zero JavaScript, zero fail, ed esecuzione istantanea al tocco. E rispetta persino lo spazio `safe-area-inset-bottom` di iOS!
-
-### Hardening SEO & Sicurezza Assoluta
-Con Astro ho reso il sito una roccia:
-- Ho iniettato meta-tag potentissimi nel componente globale (Content Security Policy, X-XSS-Protection). Essendo statico non ho un server da difendere, ma proteggo comunque il browser dei visitatori da eventuali code-injection di terze parti (come malevole estensioni browser).
-- Ho generato in modo automatico su ogni build una `Sitemap XML`, configurando le intelligenze dei Web Crawler via bot-file. E quando condivido i post, ci sono splendide **Open Graph Cards** pre-impostate che emergono sui feed social.
-
-## Il Futuro dell'Osservatorio 🔭
-
-Questo sito non è un traguardo, ma un **punto di partenza**. È il mio "_Osservatorio personale_" dove poter sperimentare codice visivo, animazioni fluenti, concetti di ottimizzazione e appunti di sviluppo che spero torneranno utili anche a qualcun altro là fuori.
-
-Intanto il Server di Build segnala zero errori, velocità estrema e design in orbita. La missione è stata un grandissimo successo.
+Spero che i contenuti che troverai qui possano esserti utili o, quantomeno, offrirti uno spunto di riflessione interessante. Buona lettura.
