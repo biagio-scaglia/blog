@@ -1,0 +1,264 @@
+---
+import RetroLayout from '../layouts/RetroLayout.astro';
+import Window from '../components/Window.astro';
+import { SITE_TITLE } from '../consts';
+import { Image } from 'astro:assets';
+import gamingImg from '../assets/gaming_shrine.png';
+import moeImg from '../assets/moe_shrine.png';
+import JoystickIcon from '../components/icons/JoystickIcon.astro';
+import CDIcon from '../components/icons/CDIcon.astro';
+import FloppyIcon from '../components/icons/FloppyIcon.astro';
+import TVIcon from '../components/icons/TVIcon.astro';
+---
+
+<RetroLayout title={`Gaming & Anime Shrine - ${SITE_TITLE}`} description="Biagio's personal repository of video games and Moe anime.">
+	<div class="shrine-container">
+		
+		<!-- Row 1: Gaming Shrine -->
+		<Window title="gaming_shrine.exe" theme="blue" icon="joystick">
+			<div class="shrine-box">
+				<h2 class="shrine-heading">
+					<JoystickIcon size={16} class="shrine-icon" /> Retro Gaming & RPG Database
+				</h2>
+				
+				<div class="shrine-grid">
+					<div class="shrine-image-frame">
+						<Image src={gamingImg} alt="Retro Gaming Console" class="shrine-img" width={140} height={140} />
+					</div>
+					<div class="shrine-text">
+						<p>
+							Welcome to the gaming sub-node! My passion for video games spans from late-90s PC chiptunes and classic ARPGs to handheld consoles and custom emulation machines.
+						</p>
+						<p>
+							I am also the author and developer of <strong>"Vellum - RPG Companion"</strong>, a mobile assistant designed for tabletop role-playing enthusiasts.
+						</p>
+					</div>
+				</div>
+
+				<h3 class="subsection-title"><FloppyIcon size={12} class="shrine-icon" /> Saved States & Favorites:</h3>
+				<table class="shrine-table" width="100%" border="1" cellpadding="5" cellspacing="0">
+					<thead>
+						<tr class="shrine-table-header">
+							<th style="width: 30%;">Platform</th>
+							<th style="width: 40%;">Titles / Genres</th>
+							<th style="width: 30%;">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong>PC</strong></td>
+							<td>Diablo II: LOD, Fallout 2, Baldur's Gate II</td>
+							<td>Active Grind</td>
+						</tr>
+						<tr>
+							<td><strong>Game Boy Advance</strong></td>
+							<td>Golden Sun, Pokémon Emerald, Castlevania Aria of Sorrow</td>
+							<td>Emulated / Modded</td>
+						</tr>
+						<tr>
+							<td><strong>PlayStation 2</strong></td>
+							<td>Silent Hill 2, FFX, Metal Gear Solid 3</td>
+							<td>Classic Replays</td>
+						</tr>
+						<tr>
+							<td><strong>Handhelds</strong></td>
+							<td>PSP-3000, Nintendo DS Lite, Game Boy Color</td>
+							<td>Hardware Modded</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</Window>
+
+		<!-- Row 2: Moe Shrine -->
+		<Window title="moe_shrine.lnk" theme="pink" icon="cd">
+			<div class="shrine-box">
+				<h2 class="shrine-heading">
+					<CDIcon size={16} class="shrine-icon" /> The Moe Anime Sanctuary
+				</h2>
+
+				<div class="shrine-grid reverse">
+					<div class="shrine-text">
+						<p>
+							Moe (萌え) represents a unique peak of comfort, character design, and slice-of-life storytelling from the late 90s to the early 2010s.
+						</p>
+						<p>
+							For me, these shows are like digital warm blankets—full of calm, friendship, simple joys, and incredible retro-nostalgic aesthetics.
+						</p>
+					</div>
+					<div class="shrine-image-frame">
+						<Image src={moeImg} alt="Moe Anime Art" class="shrine-img" width={140} height={140} />
+					</div>
+				</div>
+
+				<h3 class="subsection-title"><TVIcon size={12} class="shrine-icon" /> Recommended Watching Logs:</h3>
+				<ul class="moe-list">
+					<li>
+						<strong>Lucky☆Star (2007)</strong> 
+						<span class="bubble">Lucky!</span>
+						<p class="desc">The ultimate peak of early-Internet otaku culture, MS Paint references, and random discussions about eating chocolate cornets.</p>
+					</li>
+					<li>
+						<strong>Azumanga Daioh (2002)</strong>
+						<span class="bubble">Classic</span>
+						<p class="desc">The blueprint of all school slice-of-life anime. Relatable character dynamics, absurd humor, and the iconic Chiyo-chan.</p>
+					</li>
+					<li>
+						<strong>Cardcaptor Sakura (1998)</strong>
+						<span class="bubble">Mahou Shoujo</span>
+						<p class="desc">Beautiful CLAMP artwork, cute outfits, and an unmatched sense of pure passion, discovery, and magic.</p>
+					</li>
+					<li>
+						<strong>K-On! (2009)</strong>
+						<span class="bubble">Houkago Tea Time</span>
+						<p class="desc">Teatime, cute instruments, and a legendary soundtrack. A masterpiece in character-driven comfort.</p>
+					</li>
+				</ul>
+			</div>
+		</Window>
+	</div>
+</RetroLayout>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.shrine-container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.shrine-box {
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.6;
+	}
+
+	.shrine-heading {
+		font-family: $font-tahoma;
+		font-size: 15px;
+		color: $win-blue;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border-bottom: 2px solid $win-light-gray;
+		padding-bottom: 6px;
+	}
+
+	.shrine-icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.shrine-grid {
+		display: flex;
+		gap: 15px;
+		margin-bottom: 15px;
+		align-items: center;
+
+		&.reverse {
+			flex-direction: row-reverse;
+		}
+
+		@media (max-width: 600px) {
+			flex-direction: column !important;
+		}
+	}
+
+	.shrine-image-frame {
+		@include win95-border-inset;
+		background: #000;
+		padding: 4px;
+		width: 140px;
+		height: 140px;
+		flex-shrink: 0;
+	}
+
+	.shrine-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		image-rendering: pixelated;
+	}
+
+	.shrine-text {
+		flex-grow: 1;
+		p {
+			margin: 0 0 10px 0;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.subsection-title {
+		font-family: $font-tahoma;
+		font-size: 13px;
+		color: $win-blue;
+		margin: 20px 0 10px 0;
+		font-weight: bold;
+	}
+
+	.shrine-table {
+		font-size: 11px;
+		border-collapse: collapse;
+		@include win95-border-inset;
+
+		.shrine-table-header {
+			background: $win-blue;
+			color: $win-white;
+			font-family: $font-tahoma;
+			font-weight: bold;
+			text-align: left;
+		}
+
+		th, td {
+			padding: 6px 10px;
+			border: 1px solid $win-dark-gray;
+		}
+
+		tr {
+			background: $win-white;
+			&:nth-child(even) {
+				background: $win-light-gray;
+			}
+		}
+	}
+
+	.moe-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			margin-bottom: 15px;
+			border-bottom: 1px dashed $win-dark-gray;
+			padding-bottom: 10px;
+			position: relative;
+
+			&:last-child {
+				border-bottom: none;
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+		}
+
+		.bubble {
+			font-size: 9px;
+			background: #ffeb3b;
+			color: #000;
+			padding: 2px 5px;
+			border-radius: 4px;
+			margin-left: 8px;
+			font-weight: bold;
+			@include win95-border-outset;
+		}
+
+		.desc {
+			margin: 5px 0 0 0;
+			color: #333333;
+			font-size: 11px;
+		}
+	}
+</style>

@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import RetroLayout from '../../layouts/RetroLayout.astro';
 import Window from '../../components/Window.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).sort(
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 
-const coverImage = post.data.cover || (post.data.heroImage ? post.data.heroImage.src : null);
+const coverImage = post.data.cover || post.data.heroImage;
 const galleryImages = post.data.gallery || [];
 ---
 
@@ -40,7 +41,7 @@ const galleryImages = post.data.gallery || [];
 
 			{coverImage && (
 				<div class="post-cover-frame">
-					<img src={coverImage} alt={post.data.title} class="post-cover-img" />
+					<Image src={coverImage} alt={post.data.title} class="post-cover-img" width={800} />
 				</div>
 			)}
 
@@ -52,9 +53,9 @@ const galleryImages = post.data.gallery || [];
 				<div class="post-gallery-section">
 					<h3 class="gallery-title">📷 Post Photo Gallery</h3>
 					<div class="post-gallery-grid">
-						{galleryImages.map((img: string) => (
+						{galleryImages.map((img: any) => (
 							<div class="gallery-frame">
-								<img src={img} alt="Gallery item" class="gallery-img" />
+								<Image src={img} alt="Gallery item" class="gallery-img" width={300} height={300} />
 							</div>
 						))}
 					</div>
@@ -64,8 +65,8 @@ const galleryImages = post.data.gallery || [];
 			<div class="post-signature">
 				<p class="signature-line">---</p>
 				<p class="signature-content">
-					✍️ <em>Logged by <strong>Biagio Scaglia</strong> (Webmaster)</em><br />
-					📧 contact [at] biagioscaglia [dot] dev
+					<em>Logged by <strong>Biagio Scaglia</strong> (Webmaster)</em><br />
+					contact [at] biagioscaglia [dot] dev
 				</p>
 			</div>
 
