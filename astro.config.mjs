@@ -4,7 +4,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
 	site: 'https://biagio-scaglia.github.io',
-	base: '/blog',
+	base: '/blog/',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
