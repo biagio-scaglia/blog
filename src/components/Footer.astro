@@ -20,11 +20,11 @@ const postsCount = posts.length;
 	</div>
 
 	<div class="footer-text-links">
-		<a href="/">Home</a> | 
-		<a href="/blog">Blog</a> | 
-		<a href="/interests">Interests</a> | 
-		<a href="/about">About</a> | 
-		<a href="/rss.xml" target="_blank">RSS</a> | 
+		<a href={import.meta.env.BASE_URL}>Home</a> | 
+		<a href={`${import.meta.env.BASE_URL}blog`}>Blog</a> | 
+		<a href={`${import.meta.env.BASE_URL}interests`}>Interests</a> | 
+		<a href={`${import.meta.env.BASE_URL}about`}>About</a> | 
+		<a href={`${import.meta.env.BASE_URL}rss.xml`} target="_blank">RSS</a> | 
 		<a href="#top">Back to Top ↑</a>
 	</div>
 

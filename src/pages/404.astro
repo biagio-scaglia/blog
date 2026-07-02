@@ -1,0 +1,192 @@
+---
+import RetroLayout from '../layouts/RetroLayout.astro';
+import Window from '../components/Window.astro';
+import { Image } from 'astro:assets';
+import nyanCat from '../assets/nyan-cat.gif';
+import { SITE_TITLE } from '../consts';
+---
+
+<RetroLayout title={`404 Not Found - ${SITE_TITLE}`} description="Error 404: Cyberspace path not found.">
+	<Window title="system_error_404.dll" theme="rainbow" icon="joystick">
+		<div class="error-404-container">
+			<div class="space-sky">
+				<!-- Star fields -->
+				<div class="space-star star-1"></div>
+				<div class="space-star star-2"></div>
+				<div class="space-star star-3"></div>
+				<div class="space-star star-4"></div>
+				<div class="space-star star-5"></div>
+				<div class="space-star star-6"></div>
+				
+				<!-- Nyan Cat moving container -->
+				<div class="nyan-traveler">
+					<Image src={nyanCat} alt="Nyan Cat traveling in space" class="nyan-image" />
+				</div>
+			</div>
+			
+			<div class="speech-bubble">
+				<div class="bubble-content">
+					<strong>NYAN NYAN NYAN!</strong><br />
+					<em>Translation:</em> "Oh no, wanderer! The digital coordinates you requested are missing from the cyberspace database. You are floating in an empty sector!"
+				</div>
+			</div>
+
+			<div class="actions-row">
+				<a href={import.meta.env.BASE_URL} class="home-btn">
+					🛸 [ Return to Home Base ]
+				</a>
+			</div>
+		</div>
+	</Window>
+</RetroLayout>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.error-404-container {
+		font-family: $font-verdana;
+		text-align: center;
+		padding: 15px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.space-sky {
+		width: 100%;
+		height: 180px;
+		background: #003366;
+		background-image: radial-gradient(circle, #05051a, #001a33);
+		@include win95-border-inset;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.space-star {
+		position: absolute;
+		background: #fff;
+		width: 3px;
+		height: 3px;
+		opacity: 0.8;
+		border-radius: 50%;
+		
+		&.star-1 { top: 20%; left: 15%; animation: twinkle 1s infinite alternate; }
+		&.star-2 { top: 40%; left: 75%; animation: twinkle 1.5s infinite alternate; }
+		&.star-3 { top: 75%; left: 30%; animation: twinkle 2s infinite alternate; }
+		&.star-4 { top: 15%; left: 85%; animation: twinkle 1.2s infinite alternate; }
+		&.star-5 { top: 80%; left: 80%; animation: twinkle 1.8s infinite alternate; }
+		&.star-6 { top: 60%; left: 10%; animation: twinkle 1.4s infinite alternate; }
+	}
+
+	.nyan-traveler {
+		position: absolute;
+		top: 30%;
+		left: -150px;
+		width: 120px;
+		animation: nyan-fly 8s infinite linear;
+	}
+
+	.nyan-image {
+		width: 100%;
+		height: auto;
+		image-rendering: pixelated;
+	}
+
+	.speech-bubble {
+		position: relative;
+		background: #ffffcc;
+		border: 2px solid #000;
+		padding: 15px;
+		width: 90%;
+		max-width: 450px;
+		@include retro-shadow;
+		font-size: 12px;
+		line-height: 1.5;
+		color: #000;
+		border-radius: 4px;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: -12px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-width: 0 10px 12px 10px;
+			border-style: solid;
+			border-color: transparent transparent #000 transparent;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -9px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-width: 0 9px 10px 9px;
+			border-style: solid;
+			border-color: transparent transparent #ffffcc transparent;
+			z-index: 10;
+		}
+	}
+
+	.actions-row {
+		margin-top: 10px;
+	}
+
+	.home-btn {
+		display: inline-block;
+		@include win95-border-outset;
+		background: $win-gray;
+		color: $win-text;
+		font-family: $font-tahoma;
+		font-size: 13px;
+		font-weight: bold;
+		padding: 8px 20px;
+		text-decoration: none;
+		transition: all 0.1s steps(2);
+		cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M10 2l3 0 0 12 3 0 0-7 2 0 0 7 1 0 0-6 2 0 0 6 1 0 0-5 2 0 0 9-1 0 0 2-1 0 0 1-1 0 0 1-7 0 0-1-3 0 0-1-1 0 0-5-2 0 0-3 2 0 0-3z' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>") 10 2, pointer;
+
+		&:hover {
+			background: $win-light-gray;
+			color: #000;
+		}
+
+		&:active {
+			border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+			padding: 9px 19px 7px 21px;
+		}
+	}
+
+	@keyframes twinkle {
+		0% { opacity: 0.2; }
+		100% { opacity: 1; }
+	}
+
+	@keyframes nyan-fly {
+		0% {
+			left: -150px;
+			transform: scaleX(1) translateY(0);
+		}
+		48% {
+			transform: scaleX(1) translateY(-10px);
+		}
+		50% {
+			left: calc(100% + 50px);
+			transform: scaleX(1) translateY(-10px);
+		}
+		51% {
+			transform: scaleX(-1) translateY(-10px);
+		}
+		53% {
+			left: calc(100% + 50px);
+		}
+		98% {
+			transform: scaleX(-1) translateY(10px);
+		}
+		100% {
+			left: -150px;
+			transform: scaleX(-1) translateY(0);
+		}
+	}
+</style>

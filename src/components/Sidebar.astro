@@ -90,7 +90,7 @@ const currentDay = 2; // July 2nd, 2026
 				{categories.map(([cat, count]) => (
 					<li>
 						<FolderIcon size={12} class="cat-icon" />
-						<a href={`/blog?category=${cat}`}>{cat}</a>
+						<a href={`${import.meta.env.BASE_URL}blog?category=${cat}`}>{cat}</a>
 						<span class="cat-count">({count})</span>
 					</li>
 				))}
@@ -103,7 +103,7 @@ const currentDay = 2; // July 2nd, 2026
 			{tags.map(([tag, count]) => {
 				const size = 9 + Math.min(count * 2, 8);
 				return (
-					<a href={`/blog?tag=${tag}`} style={`font-size: ${size}px;`} class="tag-link">
+					<a href={`${import.meta.env.BASE_URL}blog?tag=${tag}`} style={`font-size: ${size}px;`} class="tag-link">
 						#{tag}
 					</a>
 				);
@@ -114,11 +114,11 @@ const currentDay = 2; // July 2nd, 2026
 	<Window title="favorite_links" theme="purple" icon="globe">
 		<div class="links-widget">
 			<ul class="links-list">
-				<li><a href="https://astro.build" target="_blank"><GlobeIcon size={12} class="link-icon" /> Astro Home</a></li>
-				<li><a href="https://w3schools.com" target="_blank"><NotepadIcon size={12} class="link-icon" /> W3Schools CSS</a></li>
-				<li><a href="https://geocities.restorativland.org" target="_blank"><FloppyIcon size={12} class="link-icon" /> GeoCities Mirror</a></li>
-				<li><a href="https://slashdot.org" target="_blank"><ComputerIcon size={12} class="link-icon" /> Slashdot News</a></li>
-				<li><a href="https://www.animenewsnetwork.com" target="_blank"><JoystickIcon size={12} class="link-icon" /> Anime News</a></li>
+				<li><a href="https://astro.build" target="_blank" rel="noopener noreferrer"><GlobeIcon size={12} class="link-icon" /> Astro Home</a></li>
+				<li><a href="https://w3schools.com" target="_blank" rel="noopener noreferrer"><NotepadIcon size={12} class="link-icon" /> W3Schools CSS</a></li>
+				<li><a href="https://geocities.restorativland.org" target="_blank" rel="noopener noreferrer"><FloppyIcon size={12} class="link-icon" /> GeoCities Mirror</a></li>
+				<li><a href="https://slashdot.org" target="_blank" rel="noopener noreferrer"><ComputerIcon size={12} class="link-icon" /> Slashdot News</a></li>
+				<li><a href="https://www.animenewsnetwork.com" target="_blank" rel="noopener noreferrer"><JoystickIcon size={12} class="link-icon" /> Anime News</a></li>
 			</ul>
 		</div>
 	</Window>

@@ -3,7 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://biagio-scaglia.github.io',
+	base: '/blog',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

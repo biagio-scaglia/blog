@@ -20,7 +20,7 @@ const { post } = Astro.props;
 			</span>
 		</div>
 		<h3 class="post-title">
-			<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+			<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>{post.data.title}</a>
 		</h3>
 		<p class="post-desc">{post.data.description}</p>
 		<div class="post-tags">

@@ -76,15 +76,15 @@ import { SITE_TITLE } from '../consts';
 		★★★ Welcome to the galactic web logs of Biagio Cyberspace! Last updated: July 2026. Optimized for Netscape Navigator 4.0 and 800x600 resolution. ★★★
 	</marquee>
 	<div class="header-menu">
-		<a href="/">[ Home Page ]</a>
+		<a href={import.meta.env.BASE_URL}>[ Home Page ]</a>
 		<span class="divider">|</span>
-		<a href="/blog">[ Blog Directory ]</a>
+		<a href={`${import.meta.env.BASE_URL}blog`}>[ Blog Directory ]</a>
 		<span class="divider">|</span>
-		<a href="/interests">[ Interests ]</a>
+		<a href={`${import.meta.env.BASE_URL}interests`}>[ Interests ]</a>
 		<span class="divider">|</span>
-		<a href="/about">[ About Me ]</a>
+		<a href={`${import.meta.env.BASE_URL}about`}>[ About Me ]</a>
 		<span class="divider">|</span>
-		<a href="/rss.xml" target="_blank">[ RSS Syndicate ]</a>
+		<a href={`${import.meta.env.BASE_URL}rss.xml`} target="_blank">[ RSS Syndicate ]</a>
 	</div>
 </header>
 

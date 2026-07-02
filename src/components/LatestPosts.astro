@@ -18,7 +18,7 @@ const recentPosts = posts
 					<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
 					{isNew && <span class="new-tag">NEW!</span>}
 				</div>
-				<a href={`/blog/${post.id}/`} class="post-title-link">
+				<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`} class="post-title-link">
 					{post.data.title}
 				</a>
 				<p class="post-desc">{post.data.description}</p>
