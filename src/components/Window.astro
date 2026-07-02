@@ -11,7 +11,7 @@ import CDIcon from './icons/CDIcon.astro';
 
 interface Props {
 	title: string;
-	theme?: 'windows' | 'pink' | 'blue' | 'green' | 'yellow' | 'purple';
+	theme?: 'windows' | 'pink' | 'blue' | 'green' | 'yellow' | 'purple' | 'rainbow';
 	style?: string;
 	icon?: 'computer' | 'folder' | 'floppy' | 'notepad' | 'globe' | 'camera' | 'guestbook' | 'joystick' | 'cd';
 }
@@ -251,5 +251,36 @@ const { title, theme = 'windows', style = '', icon } = Astro.props;
 			border-color: #7b1fa2 #ffffff #ffffff #7b1fa2;
 			background: #fdfaff;
 		}
+	}
+
+	.theme-rainbow {
+		animation: rainbow-border 6s infinite alternate ease-in-out;
+		background: #ffffff;
+
+		.window-titlebar {
+			background: linear-gradient(90deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7, #c7ceea);
+			color: #333333;
+			text-shadow: none;
+		}
+
+		.control-btn {
+			background: #f0f0f0;
+			border-color: #ffffff #808080 #808080 #ffffff;
+			color: #333333;
+		}
+
+		.window-body {
+			border-color: #808080 #ffffff #ffffff #808080;
+			background: #ffffff;
+		}
+	}
+
+	@keyframes rainbow-border {
+		0% { border-color: #ff9aa2; box-shadow: 4px 4px 0px #ffb7b2; }
+		20% { border-color: #ffb7b2; box-shadow: 4px 4px 0px #ffdac1; }
+		40% { border-color: #ffdac1; box-shadow: 4px 4px 0px #e2f0cb; }
+		60% { border-color: #e2f0cb; box-shadow: 4px 4px 0px #b5ead7; }
+		80% { border-color: #b5ead7; box-shadow: 4px 4px 0px #c7ceea; }
+		100% { border-color: #c7ceea; box-shadow: 4px 4px 0px #ff9aa2; }
 	}
 </style>

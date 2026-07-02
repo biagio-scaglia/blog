@@ -69,7 +69,7 @@ import nyanCat from '../assets/nyan-cat.gif';
 		<Guestbook />
 	</Window>
 
-	<Window title="nyan.exe" theme="windows" icon="joystick">
+	<Window title="nyan.exe" theme="rainbow" icon="joystick">
 		<div class="nyan-box">
 			<Image src={nyanCat} alt="Nyan Cat!" class="nyan-gif" />
 			<p class="nyan-text">
@@ -167,5 +167,16 @@ import nyanCat from '../assets/nyan-cat.gif';
 		text-shadow: 1px 1px 0 #000;
 		font-weight: bold;
 		margin: 0;
+		animation: rainbow-text 4s infinite linear;
+	}
+
+	@keyframes rainbow-text {
+		0% { color: #ff3333; }
+		17% { color: #ffae19; }
+		33% { color: #ffff33; }
+		50% { color: #33ff33; }
+		67% { color: #3333ff; }
+		83% { color: #8a33ff; }
+		100% { color: #ff3333; }
 	}
 </style>
