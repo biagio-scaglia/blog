@@ -61,6 +61,14 @@ const galleryImages = post.data.gallery || [];
 				</div>
 			)}
 
+			<div class="post-signature">
+				<p class="signature-line">---</p>
+				<p class="signature-content">
+					✍️ <em>Logged by <strong>Biagio Scaglia</strong> (Webmaster)</em><br />
+					📧 contact [at] biagioscaglia [dot] dev
+				</p>
+			</div>
+
 			<div class="post-tags-list">
 				{post.data.tags.map((tag: string) => (
 					<a href={`/blog?tag=${tag}`} class="tag-badge">#{tag}</a>
@@ -168,6 +176,27 @@ const galleryImages = post.data.gallery || [];
 		ul, ol {
 			margin-left: 20px;
 			margin-bottom: 12px;
+		}
+	}
+
+	.post-signature {
+		margin-top: 20px;
+		margin-bottom: 15px;
+		padding: 10px;
+		background: $win-light-gray;
+		@include win95-border-inset;
+		font-family: $font-tahoma;
+		font-size: 11px;
+
+		.signature-line {
+			margin: 0 0 5px 0;
+			color: $win-dark-gray;
+		}
+
+		.signature-content {
+			margin: 0;
+			color: $win-text;
+			line-height: 1.4;
 		}
 	}
 

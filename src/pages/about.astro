@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import profilePic from '../assets/avatar.png';
 import ComputerIcon from '../components/icons/ComputerIcon.astro';
 import NotepadIcon from '../components/icons/NotepadIcon.astro';
+import GlobeIcon from '../components/icons/GlobeIcon.astro';
 ---
 
 <RetroLayout title={`About Me - ${SITE_TITLE}`} description="Biography of the webmaster">
@@ -55,6 +56,11 @@ import NotepadIcon from '../components/icons/NotepadIcon.astro';
 			<h3 class="about-subheading"><ComputerIcon size={14} /> Hardware Specs</h3>
 			<p>
 				Currently writing from a custom beige-tower build running modern tooling, outputting to dual CRT monitors for the ultimate low-resolution testing experience!
+			</p>
+
+			<h3 class="about-subheading"><GlobeIcon size={14} /> Colophon & Web Standards</h3>
+			<p>
+				This portal conforms strictly to the **HTML 4.01 Transitional** and **CSS 2.0** layout models. It is built to load instantly over a 56k dial-up connection. Generates static HTML via modern tools (Astro) with zero tracking scripts, zero cookie consent overlays, and absolute compatibility with legacy clients. 
 			</p>
 		</div>
 	</Window>

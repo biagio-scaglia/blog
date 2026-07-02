@@ -91,6 +91,16 @@ const { title, description } = Astro.props;
 					playClickSound();
 				}
 			});
+
+			// Scrolling browser tab title marquee
+			(function() {
+				const originalTitle = document.title;
+				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier... ";
+				setInterval(() => {
+					titleText = titleText.substring(1) + titleText.substring(0, 1);
+					document.title = titleText;
+				}, 350);
+			})();
 		</script>
 	</body>
 </html>
