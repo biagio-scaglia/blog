@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="article-card-folder">
+	<div class="folder-tab">
+		<span class="folder-category">[{post.data.category}]</span>
+	</div>
+	<div class="folder-body">
+		<div class="post-meta">
+			<span class="post-date">
+				📁 Filed on: <FormattedDate date={post.data.pubDate} />
+			</span>
+		</div>
+		<h3 class="post-title">
+			<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+		</h3>
+		<p class="post-desc">{post.data.description}</p>
+		<div class="post-tags">
+			{post.data.tags.map((tag: string) => (
+				<span class="tag-badge">#{tag}</span>
+			))}
+		</div>
+	</div>
+</div>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.article-card-folder {
+		margin-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.folder-tab {
+		align-self: flex-start;
+		background: $win-gray;
+		@include win95-border-outset;
+		border-bottom: none;
+		padding: 3px 10px;
+		font-family: $font-tahoma;
+		font-size: 10px;
+		font-weight: bold;
+		color: $win-blue;
+		z-index: 2;
+		position: relative;
+		bottom: -2px;
+	}
+
+	.folder-body {
+		background: #ffffff;
+		@include win95-border-outset;
+		padding: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		z-index: 1;
+	}
+
+	.post-meta {
+		font-family: $font-tahoma;
+		font-size: 10px;
+		color: $win-dark-gray;
+	}
+
+	.post-title {
+		margin: 0;
+		font-size: 16px;
+
+		a {
+			color: #0000ff;
+			text-decoration: underline;
+
+			&:hover {
+				color: #ff0000;
+				background: #ffffe0;
+			}
+		}
+	}
+
+	.post-desc {
+		font-family: $font-verdana;
+		font-size: 12px;
+		color: #333;
+		margin: 0;
+		line-height: 1.4;
+	}
+
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-top: 4px;
+	}
+
+	.tag-badge {
+		font-family: $font-retro-mono;
+		font-size: 10px;
+		background: #eeeeee;
+		@include win95-border-inset;
+		padding: 1px 4px;
+		color: #555;
+	}
+</style>

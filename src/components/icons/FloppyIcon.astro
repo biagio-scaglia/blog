@@ -1,0 +1,28 @@
+---
+interface Props {
+	size?: number;
+	class?: string;
+}
+const { size = 16, class: className } = Astro.props;
+---
+<svg 
+	xmlns="http://www.w3.org/2000/svg" 
+	viewBox="0 0 16 16" 
+	width={size} 
+	height={size} 
+	class={className}
+	style="image-rendering: pixelated; shape-rendering: crispEdges; display: inline-block; vertical-align: middle;"
+>
+	<!-- Floppy body -->
+	<path d="M1 1h12l2 2v12H1V1z" fill="#000080" stroke="#000000" stroke-width="1" />
+	<!-- Inner highlights -->
+	<line x1="2" y1="2" x2="12" y2="2" stroke="#ffffff" />
+	<line x1="2" y1="2" x2="2" y2="14" stroke="#ffffff" />
+	<!-- Metal slider (top) -->
+	<rect x="4" y="2" width="6" height="4" fill="#c0c0c0" stroke="#000000" stroke-width="1" />
+	<rect x="5" y="3" width="2" height="2" fill="#808080" />
+	<!-- Label (bottom) -->
+	<rect x="3" y="8" width="10" height="7" fill="#ffffff" stroke="#000000" stroke-width="1" />
+	<line x1="5" y1="10" x2="11" y2="10" stroke="#ff0000" />
+	<line x1="5" y1="12" x2="11" y2="12" stroke="#0000ff" />
+</svg>

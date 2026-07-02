@@ -1,0 +1,251 @@
+---
+import GuestbookIcon from './icons/GuestbookIcon.astro';
+import NotepadIcon from './icons/NotepadIcon.astro';
+---
+
+<div class="guestbook-container">
+	<div class="guestbook-form-section">
+		<h3 class="section-title"><GuestbookIcon size={14} class="title-icon" /> Sign the Guestbook</h3>
+		<form class="guestbook-form" id="gb-form">
+			<div class="form-row">
+				<label for="gb-name">Your Handle:</label>
+				<input type="text" id="gb-name" required placeholder="RetroCoder" />
+			</div>
+			<div class="form-row">
+				<label for="gb-email">Email Address:</label>
+				<input type="email" id="gb-email" placeholder="coder@geocities.com" />
+			</div>
+			<div class="form-row">
+				<label for="gb-site">Web URL:</label>
+				<input type="url" id="gb-site" placeholder="http://retro-net.org" />
+			</div>
+			<div class="form-row">
+				<label for="gb-msg">Message:</label>
+				<textarea id="gb-msg" rows="3" required placeholder="Cool site! :-)"></textarea>
+			</div>
+			<div class="form-actions">
+				<input type="submit" value="Submit Message!" />
+				<button type="reset">Clear Form</button>
+			</div>
+		</form>
+	</div>
+
+	<hr class="form-divider" />
+
+	<div class="guestbook-entries-section">
+		<h3 class="section-title"><NotepadIcon size={14} class="title-icon" /> Previous Sign-ins</h3>
+		<div class="entries-list" id="gb-entries-list">
+			<!-- Populated via JavaScript client-side from LocalStorage -->
+		</div>
+	</div>
+</div>
+
+<script>
+	interface GuestbookEntry {
+		name: string;
+		message: string;
+		date: string;
+		color: string;
+	}
+
+	const defaultEntries: GuestbookEntry[] = [
+		{
+			name: "KawaiiGamer99",
+			message: "OMG such a cute website! (*^▽^*) I love the Win95 theme and the music selection. Added you to my favorite links! Peace! ~~~",
+			date: "2026-07-01 14:22",
+			color: "#ff00ff"
+		},
+		{
+			name: "Cyber_Neo_2000",
+			message: "Excellent personal archive, admin. The load speeds are lightning fast. Can you tell me what compiler you used? Keep surfin' the net! B-)",
+			date: "2026-06-28 03:45",
+			color: "#0000ff"
+		},
+		{
+			name: "RetroWanderer",
+			message: "Wow, this really brings me back. Reminds me of my old fansite from 2002. Neat stuff! Checking out your blog posts now. :-)",
+			date: "2026-06-25 18:10",
+			color: "#008000"
+		}
+	];
+
+	const colors = ["#ff00ff", "#0000ff", "#008000", "#800080", "#008080", "#b22222", "#ff8c00"];
+
+	const entriesList = document.getElementById('gb-entries-list');
+	const gbForm = document.getElementById('gb-form') as HTMLFormElement | null;
+
+	function loadEntries(): GuestbookEntry[] {
+		const stored = localStorage.getItem('guestbook_entries');
+		if (stored) {
+			try {
+				return JSON.parse(stored);
+			} catch (e) {
+				console.error("Failed to parse guestbook entries, resetting to default.", e);
+			}
+		}
+		localStorage.setItem('guestbook_entries', JSON.stringify(defaultEntries));
+		return defaultEntries;
+	}
+
+	function saveEntries(entries: GuestbookEntry[]) {
+		localStorage.setItem('guestbook_entries', JSON.stringify(entries));
+	}
+
+	function renderEntries() {
+		if (!entriesList) return;
+		const entries = loadEntries();
+		entriesList.innerHTML = entries.map(entry => `
+			<div class="entry-card">
+				<div class="entry-meta">
+					<span class="entry-name" style="color: ${entry.color}">${escapeHtml(entry.name)}</span>
+					<span class="entry-date">(${entry.date})</span>
+				</div>
+				<div class="entry-body">
+					${escapeHtml(entry.message)}
+				</div>
+			</div>
+		`).join('');
+	}
+
+	function escapeHtml(str: string): string {
+		return str.replace(/[&<>'"]/g, 
+			tag => ({
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				"'": '&#39;',
+				'"': '&quot;'
+			}[tag] || tag)
+		);
+	}
+
+	if (gbForm) {
+		gbForm.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const nameInput = document.getElementById('gb-name') as HTMLInputElement | null;
+			const msgInput = document.getElementById('gb-msg') as HTMLTextAreaElement | null;
+
+			if (!nameInput || !msgInput) return;
+
+			const name = nameInput.value.trim();
+			const message = msgInput.value.trim();
+
+			if (!name || !message) return;
+
+			const randomColor = colors[Math.floor(Math.random() * colors.length)];
+			const now = new Date();
+			const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+			const newEntry: GuestbookEntry = {
+				name,
+				message,
+				date: formattedDate,
+				color: randomColor
+			};
+
+			const entries = loadEntries();
+			entries.unshift(newEntry);
+			saveEntries(entries);
+			renderEntries();
+
+			gbForm.reset();
+		});
+	}
+
+	// Initial load and render
+	renderEntries();
+</script>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.guestbook-container {
+		background: $win-light-gray;
+	}
+
+	.section-title {
+		font-family: $font-tahoma;
+		font-size: 14px;
+		color: $win-blue;
+		border-bottom: 2px groove #fff;
+		padding-bottom: 4px;
+		margin-bottom: 12px;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.title-icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.guestbook-form {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.form-row {
+		display: flex;
+		align-items: center;
+
+		label {
+			width: 100px;
+			font-family: $font-verdana;
+			font-size: 11px;
+			font-weight: bold;
+		}
+
+		input, textarea {
+			flex-grow: 1;
+		}
+	}
+
+	.form-actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: 6px;
+		margin-top: 5px;
+	}
+
+	.form-divider {
+		margin: 20px 0;
+	}
+
+	.entries-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.entry-card {
+		background: #ffffff;
+		@include win95-border-inset;
+		padding: 8px 12px;
+	}
+
+	.entry-meta {
+		display: flex;
+		justify-content: space-between;
+		font-family: $font-tahoma;
+		font-size: 11px;
+		border-bottom: 1px dotted #ccc;
+		padding-bottom: 4px;
+		margin-bottom: 6px;
+	}
+
+	.entry-name {
+		font-weight: bold;
+	}
+
+	.entry-date {
+		color: #666;
+	}
+
+	.entry-body {
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.4;
+	}
+</style>

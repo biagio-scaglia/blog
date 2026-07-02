@@ -1,0 +1,62 @@
+---
+---
+
+<div class="webring-box" id="webring-section">
+	<div class="webring-title">🕸️ RetroWeb Ring 🕸️</div>
+	<div class="webring-body">
+		<p class="webring-desc">This site is member #1337 of the global Astro RetroWeb Ring community!</p>
+		<div class="webring-links">
+			<a href="https://sadgrl.online" target="_blank">[ Prev ]</a>
+			<a href="https://geocities.restorativland.org" target="_blank">[ Hub ]</a>
+			<a href="https://wiby.me" target="_blank">[ Random ]</a>
+			<a href="https://neocities.org" target="_blank">[ Next ]</a>
+		</div>
+	</div>
+</div>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.webring-box {
+		@include double-retro-border($neon-magenta);
+		background: #fff8ff;
+		padding: 8px;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	.webring-title {
+		font-family: $font-tahoma;
+		font-size: 13px;
+		font-weight: bold;
+		color: #800080;
+		text-shadow: 1px 1px 0px #ffc0cb;
+		margin-bottom: 6px;
+	}
+
+	.webring-desc {
+		font-family: $font-verdana;
+		font-size: 10px;
+		color: #444;
+		margin-bottom: 8px;
+	}
+
+	.webring-links {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		font-family: $font-tahoma;
+		font-size: 11px;
+		font-weight: bold;
+
+		a {
+			color: #800080;
+			text-decoration: none;
+
+			&:hover {
+				color: #ffffff;
+				background: #ff00ff;
+			}
+		}
+	}
+</style>

@@ -1,0 +1,255 @@
+---
+import ComputerIcon from './icons/ComputerIcon.astro';
+import FolderIcon from './icons/FolderIcon.astro';
+import FloppyIcon from './icons/FloppyIcon.astro';
+import NotepadIcon from './icons/NotepadIcon.astro';
+import GlobeIcon from './icons/GlobeIcon.astro';
+import CameraIcon from './icons/CameraIcon.astro';
+import GuestbookIcon from './icons/GuestbookIcon.astro';
+import JoystickIcon from './icons/JoystickIcon.astro';
+import CDIcon from './icons/CDIcon.astro';
+
+interface Props {
+	title: string;
+	theme?: 'windows' | 'pink' | 'blue' | 'green' | 'yellow' | 'purple';
+	style?: string;
+	icon?: 'computer' | 'folder' | 'floppy' | 'notepad' | 'globe' | 'camera' | 'guestbook' | 'joystick' | 'cd';
+}
+
+const { title, theme = 'windows', style = '', icon } = Astro.props;
+---
+
+<div class={`window-container theme-${theme}`} style={style}>
+	<div class="window-titlebar">
+		<div class="title-left">
+			{icon === 'computer' && <ComputerIcon size={14} class="titlebar-icon" />}
+			{icon === 'folder' && <FolderIcon size={14} class="titlebar-icon" />}
+			{icon === 'floppy' && <FloppyIcon size={14} class="titlebar-icon" />}
+			{icon === 'notepad' && <NotepadIcon size={14} class="titlebar-icon" />}
+			{icon === 'globe' && <GlobeIcon size={14} class="titlebar-icon" />}
+			{icon === 'camera' && <CameraIcon size={14} class="titlebar-icon" />}
+			{icon === 'guestbook' && <GuestbookIcon size={14} class="titlebar-icon" />}
+			{icon === 'joystick' && <JoystickIcon size={14} class="titlebar-icon" />}
+			{icon === 'cd' && <CDIcon size={14} class="titlebar-icon" />}
+			<span class="title-text">{title}</span>
+		</div>
+		<div class="title-controls">
+			<div class="control-btn mini">_</div>
+			<div class="control-btn max">[]</div>
+			<div class="control-btn close">X</div>
+		</div>
+	</div>
+	<div class="window-body">
+		<slot />
+	</div>
+</div>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.window-container {
+		@include win95-border-outset;
+		background: $win-gray;
+		padding: 3px;
+		@include retro-shadow;
+		margin-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+
+		&:hover .titlebar-icon {
+			animation: wobble-icon 0.6s ease;
+		}
+	}
+
+	.window-titlebar {
+		background: $win-blue;
+		background: $grad-win;
+		color: $win-white;
+		font-family: $font-tahoma;
+		font-weight: bold;
+		font-size: 11px;
+		padding: 3px 6px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		user-select: none;
+	}
+
+	.title-left {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		overflow: hidden;
+		flex-grow: 1;
+	}
+
+	.titlebar-icon {
+		flex-shrink: 0;
+	}
+
+	.title-text {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.title-controls {
+		display: flex;
+		gap: 2px;
+	}
+
+	@keyframes wobble-icon {
+		0%, 100% { transform: rotate(0deg); }
+		25% { transform: rotate(-8deg); }
+		75% { transform: rotate(8deg); }
+	}
+
+	.control-btn {
+		@include win95-border-outset;
+		background: $win-gray;
+		color: $win-text;
+		font-family: $font-retro-mono;
+		font-size: 9px;
+		font-weight: bold;
+		width: 14px;
+		height: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M10 2l3 0 0 12 3 0 0-7 2 0 0 7 1 0 0-6 2 0 0 6 1 0 0-5 2 0 0 9-1 0 0 2-1 0 0 1-1 0 0 1-7 0 0-1-3 0 0-1-1 0 0-5-2 0 0-3 2 0 0-3z' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>") 10 2, pointer;
+
+		&:hover {
+			background: #e0e0e0;
+		}
+
+		&.close:hover {
+			background: #ff3333 !important;
+			color: #ffffff !important;
+		}
+
+		&:active {
+			border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+			padding-top: 1px;
+			padding-left: 1px;
+		}
+	}
+
+	.window-body {
+		@include win95-border-inset;
+		background: $win-white;
+		padding: 10px;
+		color: $win-text;
+		overflow-y: auto;
+		flex-grow: 1;
+	}
+
+	.theme-pink {
+		border-color: #ffb6c1 #ff69b4 #ff69b4 #ffb6c1;
+		background: #ffe4e1;
+		box-shadow: 4px 4px 0px #db7093;
+
+		.window-titlebar {
+			background: linear-gradient(90deg, #ff69b4 0%, #ffc0cb 100%);
+			color: #ffffff;
+		}
+
+		.control-btn {
+			background: #ffc0cb;
+			border-color: #ffffff #db7093 #db7093 #ffffff;
+			color: #8b008d;
+		}
+
+		.window-body {
+			border-color: #db7093 #ffffff #ffffff #db7093;
+			background: #fff8f7;
+		}
+	}
+
+	.theme-blue {
+		border-color: #add8e6 #4682b4 #4682b4 #add8e6;
+		background: #e6f2ff;
+		box-shadow: 4px 4px 0px #4682b4;
+
+		.window-titlebar {
+			background: linear-gradient(90deg, #4682b4 0%, #b0c4de 100%);
+			color: #ffffff;
+		}
+
+		.control-btn {
+			background: #b0c4de;
+			border-color: #ffffff #4682b4 #4682b4 #ffffff;
+			color: #002244;
+		}
+
+		.window-body {
+			border-color: #4682b4 #ffffff #ffffff #4682b4;
+			background: #f7fbff;
+		}
+	}
+
+	.theme-green {
+		border-color: #98fb98 #2e8b57 #2e8b57 #98fb98;
+		background: #eaffea;
+		box-shadow: 4px 4px 0px #2e8b57;
+
+		.window-titlebar {
+			background: linear-gradient(90deg, #2e8b57 0%, #98fb98 100%);
+			color: #ffffff;
+		}
+
+		.control-btn {
+			background: #98fb98;
+			border-color: #ffffff #2e8b57 #2e8b57 #ffffff;
+			color: #003300;
+		}
+
+		.window-body {
+			border-color: #2e8b57 #ffffff #ffffff #2e8b57;
+			background: #f7fff7;
+		}
+	}
+
+	.theme-yellow {
+		border-color: #ffeb3b #f57f17 #f57f17 #ffeb3b;
+		background: #fffde7;
+		box-shadow: 4px 4px 0px #f57f17;
+
+		.window-titlebar {
+			background: linear-gradient(90deg, #f57f17 0%, #ffeb3b 100%);
+			color: #ffffff;
+		}
+
+		.control-btn {
+			background: #ffeb3b;
+			border-color: #ffffff #f57f17 #f57f17 #ffffff;
+			color: #5d4037;
+		}
+
+		.window-body {
+			border-color: #f57f17 #ffffff #ffffff #f57f17;
+			background: #fffff9;
+		}
+	}
+
+	.theme-purple {
+		border-color: #e040fb #7b1fa2 #7b1fa2 #e040fb;
+		background: #faf2ff;
+		box-shadow: 4px 4px 0px #7b1fa2;
+
+		.window-titlebar {
+			background: linear-gradient(90deg, #7b1fa2 0%, #e040fb 100%);
+			color: #ffffff;
+		}
+
+		.control-btn {
+			background: #e040fb;
+			border-color: #ffffff #7b1fa2 #7b1fa2 #ffffff;
+			color: #31004a;
+		}
+
+		.window-body {
+			border-color: #7b1fa2 #ffffff #ffffff #7b1fa2;
+			background: #fdfaff;
+		}
+	}
+</style>

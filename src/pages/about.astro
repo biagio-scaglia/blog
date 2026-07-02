@@ -1,63 +1,149 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import RetroLayout from '../layouts/RetroLayout.astro';
+import Window from '../components/Window.astro';
+import { SITE_TITLE } from '../consts';
+import { Image } from 'astro:assets';
+import profilePic from '../assets/avatar.png';
+import ComputerIcon from '../components/icons/ComputerIcon.astro';
+import NotepadIcon from '../components/icons/NotepadIcon.astro';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<RetroLayout title={`About Me - ${SITE_TITLE}`} description="Biography of the webmaster">
+	<Window title="about_webmaster.txt" theme="pink" icon="computer">
+		<div class="about-container">
+			<h2 class="about-title"><ComputerIcon size={18} /> Greetings, cyber wanderer!</h2>
+			<div class="bio-intro">
+				<div class="bio-avatar-frame">
+					<Image src={profilePic} alt="Astro Webmaster" class="bio-avatar" />
+				</div>
+				<div class="bio-desc">
+					<p>
+						Welcome! I am the lead operator and designer of Biagio Cyberspace. I have been building sites, tinkering with hardware, and writing code since 2004.
+					</p>
+					<p>
+						This site is my digital sandbox, built to preserve the nostalgic essence of the early web while leveraging modern static site generation with Astro.
+					</p>
+				</div>
+			</div>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+			<table class="bio-table" width="100%" border="1" cellpadding="5" cellspacing="0">
+				<tr class="bio-header">
+					<th colspan="2"><NotepadIcon size={12} class="title-icon" /> User Profile Database</th>
+				</tr>
+				<tr>
+					<td style="width: 30%;"><strong>Alias:</strong></td>
+					<td>Astro_Wanderer</td>
+				</tr>
+				<tr>
+					<td><strong>Operating Base:</strong></td>
+					<td>Rome, Italy</td>
+				</tr>
+				<tr>
+					<td><strong>First Computer:</strong></td>
+					<td>Pentium III 800MHz / 128MB RAM / Win98 SE</td>
+				</tr>
+				<tr>
+					<td><strong>Favorite Editors:</strong></td>
+					<td>Notepad, Vim, Astro Engine</td>
+				</tr>
+				<tr>
+					<td><strong>Interests:</strong></td>
+					<td>Retro console modding, MIDI synth music, pixel art, cyberpunk lore</td>
+				</tr>
+			</table>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<h3 class="about-subheading"><ComputerIcon size={14} /> Hardware Specs</h3>
+			<p>
+				Currently writing from a custom beige-tower build running modern tooling, outputting to dual CRT monitors for the ultimate low-resolution testing experience!
+			</p>
+		</div>
+	</Window>
+</RetroLayout>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+<style lang="scss">
+	@use "../styles/variables" as *;
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+	.about-container {
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.5;
+	}
+
+	.bio-intro {
+		display: flex;
+		gap: 15px;
+		margin-bottom: 20px;
+		align-items: flex-start;
+	}
+
+	.bio-avatar-frame {
+		@include win95-border-inset;
+		background: #000;
+		padding: 4px;
+		width: 100px;
+		height: 100px;
+		flex-shrink: 0;
+	}
+
+	.bio-avatar {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		image-rendering: pixelated;
+	}
+
+	.bio-desc {
+		flex-grow: 1;
+
+		p {
+			margin: 0 0 10px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.bio-table {
+		border-collapse: collapse;
+		border: 1px solid $win-dark-gray;
+		font-size: 11px;
+		margin-bottom: 20px;
+
+		.bio-header {
+			background: #ff69b4;
+			color: #ffffff;
+			font-family: $font-tahoma;
+			font-size: 11px;
+			font-weight: bold;
+		}
+
+		td, th {
+			border: 1px solid $win-dark-gray;
+			padding: 5px 8px;
+		}
+	}
+
+	.about-title {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.about-subheading {
+		font-family: $font-tahoma;
+		font-size: 13px;
+		color: $win-blue;
+		border-bottom: 1px dashed $win-dark-gray;
+		padding-bottom: 3px;
+		margin-bottom: 8px;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.title-icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+</style>

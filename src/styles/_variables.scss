@@ -1,0 +1,51 @@
+$win-teal: #008080;
+$win-gray: #c0c0c0;
+$win-dark-gray: #808080;
+$win-light-gray: #dfdfdf;
+$win-blue: #000080;
+$win-blue-light: #1084d0;
+$win-text: #000000;
+$win-white: #ffffff;
+
+$pastel-pink: #ffd3e8;
+$pastel-yellow: #fff3cd;
+$pastel-green: #d4edda;
+$pastel-blue: #d1ecf1;
+$pastel-purple: #f3e5f5;
+$pastel-peach: #ffe8d6;
+
+$neon-green: #00ff00;
+$neon-magenta: #ff00ff;
+$neon-cyan: #00ffff;
+$neon-yellow: #ffff00;
+
+$font-verdana: "Verdana", "Geneva", sans-serif;
+$font-tahoma: "Tahoma", "Geneva", sans-serif;
+$font-gothic: "MS PGothic", "Hiragino Kaku Gothic Pro W3", sans-serif;
+$font-retro-mono: "Courier New", "Courier", monospace;
+
+$border-outset: 2px solid;
+$border-inset: 2px solid;
+
+@mixin win95-border-outset {
+  border: $border-outset;
+  border-color: $win-white $win-dark-gray $win-dark-gray $win-white;
+}
+
+@mixin win95-border-inset {
+  border: $border-inset;
+  border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+}
+
+@mixin double-retro-border($color) {
+  border: 4px double $color;
+}
+
+@mixin retro-shadow {
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.35);
+}
+
+$grad-win: linear-gradient(90deg, $win-blue 0%, $win-blue-light 100%);
+$grad-rainbow: linear-gradient(90deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7, #c7ceea);
+$grad-sunset: linear-gradient(180deg, #ff5e62 0%, #ff9966 100%);
+$grad-cyber: linear-gradient(90deg, $neon-magenta 0%, $win-blue 100%);

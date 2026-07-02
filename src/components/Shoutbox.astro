@@ -1,0 +1,238 @@
+---
+---
+
+<div class="shoutbox-widget">
+	<div class="shoutbox-list" id="shoutbox-list">
+		<!-- Populated via JavaScript client-side from LocalStorage -->
+	</div>
+
+	<div class="shoutbox-form">
+		<input type="text" id="shout-input" placeholder="Type a message..." maxlength="80" />
+		<button id="shout-btn">GO!</button>
+	</div>
+</div>
+
+<script>
+	interface ShoutEntry {
+		name: string;
+		date: string;
+		message: string;
+		color: string;
+	}
+
+	const defaultShouts: ShoutEntry[] = [
+		{
+			name: "Biagio",
+			date: "(07/02 15:45)",
+			message: "Banner fixed in pure CSS! Surfs up! \\(*^▽^*)/",
+			color: "user-magenta"
+		},
+		{
+			name: "Retro_Wanderer",
+			date: "(07/01 18:22)",
+			message: "Astro is actually amazing for retro web design. B-)",
+			color: "user-green"
+		},
+		{
+			name: "Cyber_Gamer",
+			date: "(06/29 11:05)",
+			message: "Signing from a CRT monitor at 1024x768! (^_<)",
+			color: "user-cyan"
+		}
+	];
+
+	const shoutInput = document.getElementById('shout-input') as HTMLInputElement | null;
+	const shoutBtn = document.getElementById('shout-btn');
+	const shoutList = document.getElementById('shoutbox-list');
+
+	const nicknames = ['NeonWave', 'PixelSurfer', 'GlitchCat', 'WebWanderer', '8bit_Explorer', 'RetroLover99'];
+	const colors = ['user-magenta', 'user-green', 'user-cyan', 'user-purple', 'user-blue'];
+	const emojis = ['(^_~)', '(*^▽^*)', 'B-)', 'p(^o^)q', 'd(^_^)b', ':-)', ':-D'];
+
+	function loadShouts(): ShoutEntry[] {
+		const stored = localStorage.getItem('shoutbox_entries');
+		if (stored) {
+			try {
+				return JSON.parse(stored);
+			} catch (e) {
+				console.error("Failed to parse shoutbox entries, resetting to default.", e);
+			}
+		}
+		localStorage.setItem('shoutbox_entries', JSON.stringify(defaultShouts));
+		return defaultShouts;
+	}
+
+	function saveShouts(shouts: ShoutEntry[]) {
+		localStorage.setItem('shoutbox_entries', JSON.stringify(shouts));
+	}
+
+	function renderShouts() {
+		if (!shoutList) return;
+		const shouts = loadShouts();
+		shoutList.innerHTML = shouts.map(shout => `
+			<div class="shout-item">
+				<div class="shout-meta">
+					<span class="shout-user ${shout.color}">${escapeHtml(shout.name)}</span>
+					<span class="shout-date">${shout.date}</span>
+				</div>
+				<p class="shout-text">${escapeHtml(shout.message)}</p>
+			</div>
+		`).join('');
+	}
+
+	function escapeHtml(str: string): string {
+		return str.replace(/[&<>'"]/g, 
+			tag => ({
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				"'": '&#39;',
+				'"': '&quot;'
+			}[tag] || tag)
+		);
+	}
+
+	function addShout() {
+		if (!shoutInput || !shoutList || !shoutInput.value.trim()) return;
+
+		const text = shoutInput.value.trim();
+		const randomNick = nicknames[Math.floor(Math.random() * nicknames.length)];
+		const randomColor = colors[Math.floor(Math.random() * colors.length)];
+		const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+		
+		const now = new Date();
+		const formattedDate = `(${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')})`;
+
+		const newShout: ShoutEntry = {
+			name: randomNick,
+			date: formattedDate,
+			message: `${text} ${randomEmoji}`,
+			color: randomColor
+		};
+
+		const shouts = loadShouts();
+		shouts.unshift(newShout);
+		saveShouts(shouts);
+		renderShouts();
+		
+		shoutInput.value = '';
+		shoutList.scrollTop = 0;
+		
+		// Add flash effect to the newly created element
+		const firstChild = shoutList.firstElementChild as HTMLElement | null;
+		if (firstChild) {
+			firstChild.classList.add('new-shout');
+			setTimeout(() => {
+				firstChild.classList.remove('new-shout');
+			}, 800);
+		}
+	}
+
+	if (shoutBtn && shoutInput) {
+		shoutBtn.addEventListener('click', addShout);
+		shoutInput.addEventListener('keypress', (e) => {
+			if (e.key === 'Enter') {
+				addShout();
+			}
+		});
+	}
+
+	// Initial load and render
+	renderShouts();
+</script>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.shoutbox-widget {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.shoutbox-list {
+		background: #ffffff;
+		@include win95-border-inset;
+		padding: 6px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		max-height: 180px;
+		overflow-y: auto;
+		font-family: $font-retro-mono;
+		font-size: 11px;
+		
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: $win-gray;
+			border: 1px solid;
+			border-color: $win-white $win-dark-gray $win-dark-gray $win-white;
+		}
+	}
+
+	.shout-item {
+		border-bottom: 1px dashed #dfdfdf;
+		padding-bottom: 6px;
+		
+		&.new-shout {
+			animation: flash-new 0.8s ease-out;
+		}
+
+		&:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+	}
+
+	.shout-meta {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 2px;
+	}
+
+	.shout-user {
+		font-weight: bold;
+		
+		&.user-magenta { color: #ff00ff; }
+		&.user-green { color: #008000; }
+		&.user-cyan { color: #008080; }
+		&.user-purple { color: #800080; }
+		&.user-blue { color: #0000ff; }
+	}
+
+	.shout-date {
+		color: $win-dark-gray;
+		font-size: 9px;
+	}
+
+	.shout-text {
+		margin: 0;
+		line-height: 1.3;
+		color: #333333;
+		word-break: break-all;
+	}
+
+	.shoutbox-form {
+		display: flex;
+		gap: 4px;
+		width: 100%;
+
+		input {
+			flex-grow: 1;
+			font-size: 11px;
+			padding: 2px 4px;
+		}
+
+		button {
+			padding: 2px 8px;
+			font-size: 10px;
+		}
+	}
+
+	@keyframes flash-new {
+		0% { background-color: $pastel-yellow; }
+		100% { background-color: transparent; }
+	}
+</style>

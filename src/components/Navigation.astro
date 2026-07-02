@@ -1,0 +1,72 @@
+---
+---
+
+<nav class="retro-nav">
+	<ul class="nav-list">
+		<li>
+			<span class="bullet">★</span>
+			<a href="/">Home Page</a>
+		</li>
+		<li>
+			<span class="bullet">★</span>
+			<a href="/blog">My Blog Directory</a>
+		</li>
+		<li>
+			<span class="bullet">★</span>
+			<a href="/about">About the Webmaster</a>
+		</li>
+		<li>
+			<span class="bullet">★</span>
+			<a href="/rss.xml" target="_blank">RSS Syndicate</a>
+		</li>
+	</ul>
+</nav>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.retro-nav {
+		background: #ffffff;
+		@include win95-border-inset;
+		padding: 10px;
+	}
+
+	.nav-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			font-family: $font-tahoma;
+			font-size: 12px;
+			font-weight: bold;
+		}
+	}
+
+	.bullet {
+		color: $neon-magenta;
+		text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+		animation: blink 1.5s infinite step-start;
+	}
+
+	a {
+		color: #0000ee;
+		text-decoration: underline;
+
+		&:hover {
+			color: #ff0000;
+			background: #ffff00;
+		}
+	}
+
+	@keyframes blink {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0; }
+	}
+</style>

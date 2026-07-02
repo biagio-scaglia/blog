@@ -1,114 +1,154 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import RetroLayout from '../../layouts/RetroLayout.astro';
+import Window from '../../components/Window.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
+<RetroLayout title={`Blog Directory - ${SITE_TITLE}`} description="Browse the diary logs of the Astro-Webmaster">
+	<div class="active-filter-alert" id="filter-alert" style="display: none;">
+		<div class="alert-box">
+			<span class="alert-text">Active Filter: <strong id="filter-type">None</strong> = <span id="filter-value">None</span></span>
+			<a href="/blog" class="clear-btn">[ Show All Logs ]</a>
+		</div>
+	</div>
+
+	<Window title="blog_directory.exe" theme="blue">
+		<div class="blog-dir-header">
+			<h2>📂 diary_logs/</h2>
+			<p>Double click or click a log file to view the entries. Current index contains {posts.length} entries.</p>
+		</div>
+
+		<div class="posts-container">
+			{posts.map((post) => {
+				const year = post.data.pubDate.getFullYear();
+				const month = String(post.data.pubDate.getMonth() + 1).padStart(2, '0');
+				const archiveKey = `${year}-${month}`;
+				
+				return (
+					<div 
+						class="post-wrapper" 
+						data-category={post.data.category || 'General'}
+						data-archive={archiveKey}
+						data-tags={post.data.tags ? post.data.tags.join(',') : ''}
+					>
+						<ArticleCard post={post} />
+					</div>
+				);
+			})}
+		</div>
+	</Window>
+</RetroLayout>
+
+<script>
+	const params = new URLSearchParams(window.location.search);
+	const category = params.get('category');
+	const tag = params.get('tag');
+	const archive = params.get('archive');
+	
+	const alertDiv = document.getElementById('filter-alert');
+	const filterTypeSpan = document.getElementById('filter-type');
+	const filterValueSpan = document.getElementById('filter-value');
+	const postWrappers = document.querySelectorAll('.post-wrapper');
+
+	if (category || tag || archive) {
+		if (alertDiv && filterTypeSpan && filterValueSpan) {
+			alertDiv.style.display = 'block';
+			if (category) {
+				filterTypeSpan.textContent = 'Category';
+				filterValueSpan.textContent = category;
+			} else if (tag) {
+				filterTypeSpan.textContent = 'Tag';
+				filterValueSpan.textContent = '#' + tag;
+			} else if (archive) {
+				filterTypeSpan.textContent = 'Archive Month';
+				filterValueSpan.textContent = archive;
 			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+		}
+
+		postWrappers.forEach((wrapper) => {
+			if (!(wrapper instanceof HTMLElement)) return;
+			let match = false;
+			if (category && wrapper.dataset.category === category) {
+				match = true;
+			} else if (tag) {
+				const tags = wrapper.dataset.tags ? wrapper.dataset.tags.split(',') : [];
+				if (tags.includes(tag)) {
+					match = true;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
+			} else if (archive && wrapper.dataset.archive === archive) {
+				match = true;
 			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+
+			if (match) {
+				wrapper.style.display = 'block';
+			} else {
+				wrapper.style.display = 'none';
+			}
+		});
+	}
+</script>
+
+<style lang="scss">
+	@use "../../styles/variables" as *;
+
+	.blog-dir-header {
+		font-family: $font-tahoma;
+		border-bottom: 2px groove #fff;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+
+		h2 {
+			color: $win-blue;
+			font-size: 16px;
+			margin: 0;
+		}
+
+		p {
+			font-size: 11px;
+			color: #555;
+			margin: 4px 0 0 0;
+		}
+	}
+
+	.active-filter-alert {
+		margin-bottom: 12px;
+	}
+
+	.alert-box {
+		@include win95-border-outset;
+		background: #ffffcc;
+		border: 1px dashed #ff9900;
+		padding: 8px 12px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: $font-verdana;
+		font-size: 11px;
+	}
+
+	.alert-text {
+		color: #cc6600;
+	}
+
+	.clear-btn {
+		font-weight: bold;
+		color: #0000ff;
+		text-decoration: none;
+
+		&:hover {
+			color: #ff0000;
+			text-decoration: underline;
+		}
+	}
+
+	.posts-container {
+		display: flex;
+		flex-direction: column;
+	}
+</style>

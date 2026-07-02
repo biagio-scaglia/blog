@@ -1,0 +1,64 @@
+---
+interface Props {
+	start?: number;
+}
+
+const { start = 37194 } = Astro.props;
+const digits = String(start).padStart(6, '0').split('');
+---
+
+<div class="hit-counter-wrapper">
+	<span class="counter-label">Visitor Count:</span>
+	<div class="counter-digits">
+		{digits.map((digit) => (
+			<div class="digit-box">{digit}</div>
+		))}
+	</div>
+</div>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.hit-counter-wrapper {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		background: #000000;
+		@include win95-border-inset;
+		padding: 6px 12px;
+		font-family: $font-retro-mono;
+	}
+
+	.counter-label {
+		color: $neon-green;
+		font-size: 9px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: 4px;
+		font-weight: bold;
+	}
+
+	.counter-digits {
+		display: flex;
+		background: #111;
+		border: 1px solid #444;
+	}
+
+	.digit-box {
+		width: 16px;
+		height: 24px;
+		background: linear-gradient(180deg, #222 0%, #000 50%, #222 100%);
+		color: #ff0000;
+		font-size: 16px;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-right: 1px solid #444;
+		text-shadow: 0px 0px 4px #ff0000;
+
+		&:last-child {
+			border-right: none;
+		}
+	}
+</style>

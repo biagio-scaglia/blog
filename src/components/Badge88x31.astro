@@ -1,0 +1,124 @@
+---
+interface Props {
+	type: 'ie6' | 'netscape' | 'notepad' | 'astro' | 'css' | 'webring';
+}
+
+const { type } = Astro.props;
+
+const urls = {
+	ie6: "https://en.wikipedia.org/wiki/Internet_Explorer_6",
+	netscape: "https://en.wikipedia.org/wiki/Netscape",
+	notepad: "https://en.wikipedia.org/wiki/Notepad_(software)",
+	astro: "https://astro.build",
+	css: "https://jigsaw.w3.org/css-validator/",
+	webring: "#webring-section"
+};
+
+const url = urls[type];
+const target = type === 'webring' ? '_self' : '_blank';
+---
+
+<a href={url} target={target} class={`badge-link badge-link-${type}`}>
+	<div class={`badge-container badge-${type}`}>
+	{type === 'ie6' && (
+		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="88" height="31" fill="#000000"/>
+			<rect x="1" y="1" width="86" height="29" fill="#000080"/>
+			<rect x="2" y="2" width="20" height="27" fill="#ffffff"/>
+			<text x="6" y="20" fill="#0000ff" font-family="Courier New, monospace" font-size="16" font-weight="bold">e</text>
+			<text x="26" y="12" fill="#ffffff" font-family="Tahoma, sans-serif" font-size="7" font-weight="bold">MSIE 6.0</text>
+			<text x="26" y="20" fill="#00ffff" font-family="Tahoma, sans-serif" font-size="6" font-weight="bold">OPTIMIZED</text>
+			<rect x="1" y="1" width="86" height="29" stroke="#ffffff" stroke-width="1" stroke-opacity="0.5" fill="none"/>
+		</svg>
+	)}
+
+	{type === 'netscape' && (
+		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="88" height="31" fill="#000000"/>
+			<rect x="1" y="1" width="86" height="29" fill="#004040"/>
+			<rect x="2" y="2" width="20" height="27" fill="#000000"/>
+			<text x="7" y="20" fill="#ff8000" font-family="Verdana, sans-serif" font-size="14" font-weight="bold">N</text>
+			<text x="26" y="12" fill="#ffffff" font-family="Tahoma, sans-serif" font-size="7" font-weight="bold">NETSCAPE</text>
+			<text x="26" y="22" fill="#ffc000" font-family="Tahoma, sans-serif" font-size="8" font-style="italic" font-weight="bold">NOW!</text>
+			<rect x="1" y="1" width="86" height="29" stroke="#ffffff" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+		</svg>
+	)}
+
+	{type === 'notepad' && (
+		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="88" height="31" fill="#c0c0c0"/>
+			<rect x="1" y="1" width="86" height="29" fill="#ffffff"/>
+			<rect x="3" y="4" width="18" height="23" fill="#eeeeee" stroke="#000000" stroke-width="1"/>
+			<line x1="6" y1="8" x2="18" y2="8" stroke="#0000ff" stroke-width="1"/>
+			<line x1="6" y1="12" x2="18" y2="12" stroke="#000000" stroke-width="1"/>
+			<line x1="6" y1="16" x2="14" y2="16" stroke="#000000" stroke-width="1"/>
+			<text x="26" y="13" fill="#000000" font-family="Tahoma, sans-serif" font-size="7" font-weight="bold">MADE WITH</text>
+			<text x="26" y="23" fill="#ff0000" font-family="Courier New, monospace" font-size="9" font-weight="bold">NOTEPAD</text>
+			<rect x="0" y="0" width="88" height="31" stroke="#808080" stroke-width="1" fill="none"/>
+			<line x1="0" y1="0" x2="88" y2="0" stroke="#ffffff" stroke-width="1"/>
+			<line x1="0" y1="0" x2="0" y2="31" stroke="#ffffff" stroke-width="1"/>
+		</svg>
+	)}
+
+	{type === 'astro' && (
+		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="88" height="31" fill="#000000"/>
+			<rect x="1" y="1" width="86" height="29" fill="#1b122c"/>
+			<path d="M7 23 L11 8 L15 23 Z" fill="#ff5d00"/>
+			<circle cx="11" cy="14" r="2" fill="#ffffff"/>
+			<text x="24" y="13" fill="#ffffff" font-family="Tahoma, sans-serif" font-size="7" font-weight="bold">POWERED BY</text>
+			<text x="24" y="23" fill="#ff8c00" font-family="Verdana, sans-serif" font-size="9" font-weight="bold">ASTRO</text>
+			<rect x="0" y="0" width="88" height="31" stroke="#808080" stroke-width="1" fill="none"/>
+			<line x1="0" y1="0" x2="88" y2="0" stroke="#ff00ff" stroke-width="1"/>
+		</svg>
+	)}
+
+	{type === 'css' && (
+		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="88" height="31" fill="#000000"/>
+			<rect x="1" y="1" width="86" height="29" fill="#004488"/>
+			<rect x="3" y="4" width="20" height="23" fill="#ffd700"/>
+			<text x="6" y="21" fill="#000080" font-family="Impact, sans-serif" font-size="15">W3C</text>
+			<text x="27" y="13" fill="#ffffff" font-family="Tahoma, sans-serif" font-size="8" font-weight="bold">CSS</text>
+			<text x="27" y="23" fill="#00ffff" font-family="Tahoma, sans-serif" font-size="8" font-weight="bold">VALID!</text>
+			<rect x="1" y="1" width="86" height="29" stroke="#ffffff" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+		</svg>
+	)}
+
+	{type === 'webring' && (
+		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="88" height="31" fill="#000000"/>
+			<rect x="1" y="1" width="86" height="29" fill="#800080"/>
+			<circle cx="12" cy="15" r="8" stroke="#ff00ff" stroke-width="2" fill="none"/>
+			<text x="26" y="13" fill="#ff00ff" font-family="Tahoma, sans-serif" font-size="7" font-weight="bold">RETRO-NET</text>
+			<text x="26" y="23" fill="#ffffff" font-family="Tahoma, sans-serif" font-size="7" font-weight="bold">WEBRING</text>
+			<rect x="1" y="1" width="86" height="29" stroke="#ffffff" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+		</svg>
+	)}
+	</div>
+</a>
+
+<style lang="scss">
+	.badge-link {
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	.badge-container {
+		width: 88px;
+		height: 31px;
+		display: inline-block;
+		cursor: pointer;
+		user-select: none;
+		image-rendering: pixelated;
+
+		svg {
+			display: block;
+		}
+
+		&:hover {
+			filter: brightness(1.2);
+			outline: 1px dashed #ffffff;
+		}
+	}
+</style>

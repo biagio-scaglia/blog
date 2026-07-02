@@ -1,49 +1,171 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import RetroLayout from '../layouts/RetroLayout.astro';
+import Window from '../components/Window.astro';
+import LatestPosts from '../components/LatestPosts.astro';
+import LatestImages from '../components/LatestImages.astro';
+import Guestbook from '../components/Guestbook.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import GlobeIcon from '../components/icons/GlobeIcon.astro';
+import FolderIcon from '../components/icons/FolderIcon.astro';
+import CameraIcon from '../components/icons/CameraIcon.astro';
+import ComputerIcon from '../components/icons/ComputerIcon.astro';
+import JoystickIcon from '../components/icons/JoystickIcon.astro';
+import { Image } from 'astro:assets';
+import nyanCat from '../assets/nyan-cat.gif';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
+<RetroLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<Window title="welcome.txt" theme="windows" icon="computer">
+		<div class="welcome-box">
+			<h2 class="welcome-heading">
+				<ComputerIcon size={16} /> 
+				<span>Welcome to Biagio's cyber portal!</span> 
+				<ComputerIcon size={16} />
+			</h2>
 			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
+				Greetings, wanderer! You have landed on my personal databank. I built this space to host my software projects, retrocomputing experiments, anime reviews, and my thoughts on web development and design.
 			</p>
 			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
+				I'm Biagio Scaglia, a full-stack developer (React, .NET, React Native) and UX/UI designer. Here you'll find technical logs, screenshots of my work, and deep dives into my creations, including my tabletop RPG app, <strong>Vellum - RPG Companion</strong>.
 			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
+			<div class="system-status-table">
+				<table width="100%" border="1" cellpadding="4" cellspacing="0" class="retro-status-table">
+					<tr class="table-header">
+						<th colspan="2"><GlobeIcon size={12} class="title-icon" /> Biagio Cyberspace Node Statistics</th>
+					</tr>
+					<tr>
+						<td><strong>Webmaster:</strong></td>
+						<td>Biagio Scaglia</td>
+					</tr>
+					<tr>
+						<td><strong>Stack:</strong></td>
+						<td>Astro + TypeScript + SCSS</td>
+					</tr>
+					<tr>
+						<td><strong>Current Projects:</strong></td>
+						<td>Vellum - RPG Companion</td>
+					</tr>
+					<tr>
+						<td><strong>Last Updated:</strong></td>
+						<td>July 2, 2026</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</Window>
+
+	<Window title="personal_logs.exe" theme="blue" icon="notepad">
+		<h2 class="section-title"><FolderIcon size={14} class="title-icon" /> Latest Diary Entries</h2>
+		<LatestPosts />
+	</Window>
+
+	<Window title="image_dump" theme="green" icon="camera">
+		<h2 class="section-title"><CameraIcon size={14} class="title-icon" /> Latest Captured Visuals</h2>
+		<p class="section-subtitle">A collection of snaps from my digital camera and sprite edits.</p>
+		<LatestImages />
+	</Window>
+
+	<Window title="guestbook.app" theme="purple" icon="guestbook">
+		<Guestbook />
+	</Window>
+
+	<Window title="nyan.exe" theme="windows" icon="joystick">
+		<div class="nyan-box">
+			<Image src={nyanCat} alt="Nyan Cat!" class="nyan-gif" />
+			<p class="nyan-text">
+				~ NYAN NYAN NYAN NYAN NYAN ~
 			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+		</div>
+	</Window>
+</RetroLayout>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.welcome-box {
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.4;
+	}
+
+	.welcome-heading {
+		color: #800080;
+		text-align: center;
+		margin-bottom: 12px;
+		font-size: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+	}
+
+	.system-status-table {
+		margin-top: 15px;
+	}
+
+	.retro-status-table {
+		border-collapse: collapse;
+		border: 1px solid $win-dark-gray;
+		font-family: $font-retro-mono;
+		font-size: 11px;
+
+		.table-header {
+			background: $win-blue;
+			color: $win-white;
+			font-family: $font-tahoma;
+			font-size: 11px;
+			font-weight: bold;
+		}
+
+		td, th {
+			border: 1px solid $win-dark-gray;
+			padding: 4px 8px;
+		}
+	}
+
+	.section-title {
+		font-family: $font-tahoma;
+		font-size: 14px;
+		color: $win-blue;
+		margin-bottom: 8px;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.title-icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.section-subtitle {
+		font-family: $font-verdana;
+		font-size: 11px;
+		color: #555555;
+		margin-bottom: 12px;
+	}
+
+	.nyan-box {
+		text-align: center;
+		padding: 10px;
+	}
+
+	.nyan-gif {
+		image-rendering: pixelated;
+		width: 100%;
+		max-width: 400px;
+		height: auto;
+		display: block;
+		margin: 0 auto 12px auto;
+		mix-blend-mode: multiply;
+	}
+
+	.nyan-text {
+		font-family: $font-retro-mono;
+		font-size: 16px;
+		color: #ff00ff;
+		text-shadow: 1px 1px 0 #000;
+		font-weight: bold;
+		margin: 0;
+	}
+</style>

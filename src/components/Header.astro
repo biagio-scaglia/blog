@@ -1,85 +1,354 @@
 ---
 import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+<header class="retro-header">
+	<div class="header-logo-container">
+		<div class="logo-box">
+			<h1 class="pixel-logo">{SITE_TITLE}</h1>
+			<p class="slogan">~ Welcome to my personal database ~</p>
 		</div>
-		<div class="social-links">
-			<a href="https://m.webtoo.ls/@astro" target="_blank">
-				<span class="sr-only">Follow Astro on Mastodon</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"
-					></path></svg
-				>
-			</a>
-			<a href="https://twitter.com/astrodotbuild" target="_blank">
-				<span class="sr-only">Follow Astro on Twitter</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-					></path></svg
-				>
-			</a>
-			<a href="https://github.com/withastro/astro" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
-			</a>
+	</div>
+	
+	<div class="code-banner">
+		<!-- Starry background layer -->
+		<div class="stars-layer">
+			<div class="star s-1" style="top: 15%; left: 10%;"></div>
+			<div class="star s-2" style="top: 25%; left: 30%;"></div>
+			<div class="star s-3" style="top: 10%; left: 75%;"></div>
+			<div class="star s-1" style="top: 40%; left: 85%;"></div>
+			<div class="star s-2" style="top: 75%; left: 15%;"></div>
+			<div class="star s-3" style="top: 80%; left: 45%;"></div>
+			<div class="star s-1" style="top: 70%; left: 70%;"></div>
+			<div class="star s-2" style="top: 50%; left: 95%;"></div>
 		</div>
-	</nav>
+
+		<!-- Pixel Art decorative SVG elements -->
+		<div class="banner-decorations">
+			<!-- Rocket ship (top-left) -->
+			<svg class="decor-item rocket" width="48" height="48" viewBox="0 0 16 16" style="image-rendering: pixelated; shape-rendering: crispEdges;">
+				<path d="M0 6h2v4H0zm2 1h2v2H2z" fill="#ff0000" />
+				<path d="M1 7h2v2H1z" fill="#ffaa00" />
+				<rect x="2" y="8" width="1" height="1" fill="#ffff00" />
+				<path d="M4 5h7v6H4z" fill="#ffffff" stroke="#000000" stroke-width="1" />
+				<path d="M11 5h1v6h-1zm1 1h1v4h-1zm1 1h1v2h-1z" fill="#ff0000" stroke="#000000" stroke-width="1" />
+				<path d="M3 4h2v1H3zm0 7h2v1H3z" fill="#0000ff" stroke="#000000" stroke-width="1" />
+				<rect x="7" y="7" width="2" height="2" fill="#00ffff" stroke="#000000" stroke-width="1" />
+			</svg>
+
+			<!-- Alien head (bottom-left) -->
+			<svg class="decor-item alien" width="44" height="44" viewBox="0 0 16 16" style="image-rendering: pixelated; shape-rendering: crispEdges;">
+				<path d="M5 0h6v1h2v1h1v1h1v4h-1v2h-1v2h-1v2h-1v2H5v-2H4v-2H3v-2H2V7h1V3h1V2h1V1h1V0z" fill="#000000" />
+				<path d="M5 1h6v1h1v1h1v4h-1v2h-1v2H9v2H7v-2H5v-2H4V7H3V3h1V2h1V1z" fill="#00ff66" />
+				<path d="M4 5h3v3H4zm5 0h3v3H9z" fill="#000000" />
+				<rect x="5" y="5" width="1" height="1" fill="#ffffff" />
+				<rect x="10" y="5" width="1" height="1" fill="#ffffff" />
+			</svg>
+
+			<!-- Ringed Planet (top-right) -->
+			<svg class="decor-item planet" width="70" height="70" viewBox="0 0 32 32" style="image-rendering: pixelated; shape-rendering: crispEdges;">
+				<path d="M 2 20 L 7 17 L 11 17 L 6 20 Z" fill="#00ff66" />
+				<path d="M 22 14 L 26 12 L 30 10 L 27 12 Z" fill="#00ff66" />
+				<circle cx="16" cy="16" r="7" fill="#7b1fa2" stroke="#000000" stroke-width="1" />
+				<path d="M 12 12 A 7 7 0 0 0 20 20 Z" fill="#4a148c" opacity="0.4" />
+				<path d="M 4 21 L 28 11" stroke="#00ff66" stroke-width="2" stroke-linecap="round" />
+				<circle cx="13" cy="13" r="1.5" fill="#ba68c8" />
+			</svg>
+
+			<!-- Shooting spaceship (bottom-right) -->
+			<svg class="decor-item shooter" width="48" height="48" viewBox="0 0 16 16" style="image-rendering: pixelated; shape-rendering: crispEdges;">
+				<path d="M13 11h2v3h-2zm-11 0h2v3H2z" fill="#0000ff" stroke="#000000" stroke-width="1" />
+				<path d="M4 8h8v5H4z" fill="#ffffff" stroke="#000000" stroke-width="1" />
+				<path d="M7 5h2v3H7z" fill="#ff0000" stroke="#000000" stroke-width="1" />
+				<line x1="1" y1="2" x2="4" y2="5" stroke="#ffff00" stroke-width="1" />
+			</svg>
+		</div>
+
+		<!-- Banner Text -->
+		<div class="banner-text-box">
+			<span class="banner-welcome">WELCOME TO...</span>
+			<h1 class="banner-title">BIAGIO CYBERSPACE</h1>
+			<span class="banner-subtitle">EXPLORE THE VIRTUAL FRONTIER | SITE SINCE 2004</span>
+		</div>
+	</div>
+
+	<marquee class="welcome-marquee" scrollamount="4">
+		★★★ Welcome to the galactic web logs of Biagio Cyberspace! Last updated: July 2026. Optimized for Netscape Navigator 4.0 and 800x600 resolution. ★★★
+	</marquee>
+	<div class="header-menu">
+		<a href="/">[ Home Page ]</a>
+		<span class="divider">|</span>
+		<a href="/blog">[ Blog Directory ]</a>
+		<span class="divider">|</span>
+		<a href="/about">[ About Me ]</a>
+		<span class="divider">|</span>
+		<a href="/rss.xml" target="_blank">[ RSS Syndicate ]</a>
+	</div>
 </header>
-<style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.retro-header {
+		background: $win-gray;
+		@include win95-border-outset;
+		padding: 6px;
+		margin-bottom: 15px;
 	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+	.header-logo-container {
+		background: #000000;
+		@include win95-border-inset;
+		padding: 15px;
+		text-align: center;
+		margin-bottom: 6px;
+		background-image: repeating-linear-gradient(45deg, #111, #111 2px, #000 2px, #000 4px);
 	}
-	nav {
+
+	.logo-box {
+		display: inline-block;
+	}
+
+	.pixel-logo {
+		font-family: $font-gothic;
+		font-size: 32px;
+		color: $neon-cyan;
+		text-shadow: 2px 2px 0px $neon-magenta, -2px -2px 0px #000;
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		animation: pulse-shadow 2s infinite alternate;
+	}
+
+	.slogan {
+		font-family: $font-retro-mono;
+		font-size: 11px;
+		color: $neon-green;
+		margin: 5px 0 0 0;
+	}
+
+	.code-banner {
+		@include win95-border-inset;
+		background: #05051a;
+		overflow: hidden;
+		height: 150px;
+		margin-bottom: 6px;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: center;
+		position: relative;
+		user-select: none;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
+
+	.stars-layer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
+
+	.star {
+		position: absolute;
+		background: #ffffff;
+		width: 2px;
+		height: 2px;
+		opacity: 0.8;
+		
+		&.s-1 {
+			animation: twinkle 1s infinite alternate;
+		}
+		&.s-2 {
+			animation: twinkle 1.5s infinite alternate;
+		}
+		&.s-3 {
+			width: 3px;
+			height: 3px;
+			background: $neon-cyan;
+			animation: twinkle 2s infinite alternate;
+		}
 	}
-	.social-links,
-	.social-links a {
+
+	.banner-decorations {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.decor-item {
+		position: absolute;
+		
+		&.rocket {
+			top: 15px;
+			left: 5%;
+			animation: drift-rocket 4s infinite alternate ease-in-out;
+		}
+		
+		&.alien {
+			bottom: 15px;
+			left: 8%;
+			animation: bob 3s infinite ease-in-out;
+		}
+		
+		&.planet {
+			top: 10px;
+			right: 8%;
+			animation: pulse-planet 6s infinite alternate ease-in-out;
+		}
+		
+		&.shooter {
+			bottom: 15px;
+			right: 6%;
+			animation: drift-shooter 5s infinite alternate ease-in-out;
+		}
+	}
+
+	.banner-text-box {
+		text-align: center;
+		z-index: 10;
+		font-family: 'VT323', monospace;
 		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-shadow: 2px 2px 0px #000;
 	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+
+	.banner-welcome {
+		color: $neon-yellow;
+		font-size: 18px;
+		letter-spacing: 2px;
+		font-weight: bold;
+		margin-bottom: 2px;
+	}
+
+	.banner-title {
+		color: $neon-yellow;
+		font-size: 48px;
+		margin: 0;
+		line-height: 1;
+		font-weight: normal;
+		text-shadow: 
+			3px 3px 0px #000000, 
+			-1px -1px 0px #000000, 
+			1px -1px 0px #000000, 
+			-1px 1px 0px #000000, 
+			1px 1px 0px #000000;
+		letter-spacing: 1px;
+		animation: title-glow 3s infinite alternate;
+	}
+
+	.banner-subtitle {
+		color: $neon-cyan;
+		font-size: 16px;
+		letter-spacing: 1px;
+		margin-top: 4px;
+		font-weight: bold;
+	}
+
+	.welcome-marquee {
+		background: $win-blue;
+		color: $neon-yellow;
+		font-family: $font-tahoma;
+		font-size: 11px;
+		font-weight: bold;
+		padding: 2px 4px;
+		@include win95-border-inset;
+		margin-bottom: 6px;
+	}
+
+	.header-menu {
+		@include win95-border-inset;
+		background: $win-white;
+		padding: 8px;
+		text-align: center;
+		font-family: $font-tahoma;
+		font-size: 12px;
+		font-weight: bold;
+
+		a {
+			color: #0000ee;
+			text-decoration: none;
+			padding: 2px 6px;
+
+			&:hover {
+				color: #ffffff;
+				background: $win-blue;
+			}
+		}
+
+		.divider {
+			color: $win-dark-gray;
+			margin: 0 4px;
+		}
+	}
+
+	// Animations
+	@keyframes twinkle {
+		0% { opacity: 0.2; }
+		100% { opacity: 1; }
+	}
+
+	@keyframes bob {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-5px); }
+	}
+
+	@keyframes drift-rocket {
+		0% { transform: translate(0, 0) rotate(0deg); }
+		100% { transform: translate(5px, -3px) rotate(2deg); }
+	}
+
+	@keyframes drift-shooter {
+		0% { transform: translate(0, 0); }
+		100% { transform: translate(-4px, 4px); }
+	}
+
+	@keyframes pulse-planet {
+		0% { transform: scale(1) rotate(0deg); }
+		100% { transform: scale(1.05) rotate(3deg); }
+	}
+
+	@keyframes title-glow {
+		0% { color: $neon-yellow; }
+		100% { color: #ffffff; text-shadow: 3px 3px 0px #000000, 0 0 8px rgba(255,255,0,0.5); }
+	}
+
+	@keyframes pulse-shadow {
+		0% {
+			text-shadow: 2px 2px 0px $neon-magenta;
+		}
+		100% {
+			text-shadow: 2px 2px 0px $neon-yellow, -2px -2px 0px $neon-magenta;
+		}
+	}
+
+	// Media queries for responsiveness (avoid squeezing)
+	@media (max-width: 768px) {
+		.decor-item {
+			&.alien, &.rocket, &.shooter {
+				display: none; // Hide smaller icons on small screens to avoid clutter
+			}
+			&.planet {
+				right: 4%;
+				width: 50px;
+				height: 50px;
+			}
+		}
+		
+		.banner-title {
+			font-size: 36px;
+		}
+		
+		.banner-welcome {
+			font-size: 14px;
+		}
+		
+		.banner-subtitle {
+			font-size: 12px;
 		}
 	}
 </style>
