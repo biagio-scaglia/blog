@@ -2,19 +2,23 @@
 import '../styles/global.scss';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { Font } from 'astro:assets';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	article?: boolean;
+	publishedDate?: Date;
+	modifiedDate?: Date;
+	tags?: string[];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, article = false, publishedDate, modifiedDate, tags = [] } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString() : 'https://biagioscaglia.dev';
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://biagio-scaglia.github.io/blog/';
 const personId = `${siteUrl}#person`;
 const websiteId = `${siteUrl}#website`;
 
@@ -28,7 +32,7 @@ const personSchema = {
 			"jobTitle": "Full Stack Software Developer & UX/UI Designer",
 			"url": siteUrl,
 			"sameAs": [
-				"https://github.com/biagioscaglia"
+				"https://github.com/biagio-scaglia"
 			],
 			"knowsAbout": [
 				"Software Development",
@@ -38,16 +42,27 @@ const personSchema = {
 				"React Native",
 				"UX/UI Design",
 				"Retrocomputing",
-				"Tabletop RPGs"
+				"Tabletop RPGs",
+				"Video Games",
+				"Anime",
+				"Web Design",
+				"Independent Web"
 			],
-			"description": "Biagio Scaglia is a Full Stack Software Developer, UX/UI Designer, and the creator of 'Vellum - RPG Companion' mobile app."
+			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Rome, Italy. He specializes in React, TypeScript, .NET, and React Native. Creator of the mobile app 'Vellum - RPG Companion'.",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Rome",
+				"addressRegion": "Lazio",
+				"addressCountry": "IT"
+			}
 		},
 		{
 			"@type": "WebSite",
 			"@id": websiteId,
 			"url": siteUrl,
 			"name": "Biagio Cyberspace",
-			"description": "Biagio Scaglia's personal blog: full-stack developer, UX/UI designer, and lover of the retro web.",
+			"description": SITE_DESCRIPTION,
+			"inLanguage": "en",
 			"publisher": {
 				"@id": personId
 			}
@@ -59,8 +74,16 @@ const personSchema = {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
+
+<!-- Favicon: Desktop + Mobile -->
 <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-<link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+<link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} sizes="32x32" />
+<link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
+<link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
+<meta name="theme-color" content="#000080" />
+<meta name="msapplication-TileColor" content="#000080" />
+
+<!-- Sitemap & RSS -->
 <link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
 <link
 	rel="alternate"
@@ -68,28 +91,66 @@ const personSchema = {
 	title={SITE_TITLE}
 	href={new URL(`${import.meta.env.BASE_URL}rss.xml`, Astro.site)}
 />
+
+<!-- LLM Discoverability -->
+<link rel="alternate" type="text/plain" href={`${import.meta.env.BASE_URL}llms.txt`} title="LLM Documentation" />
+
+<!-- Generator -->
 <meta name="generator" content={Astro.generator} />
 
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-
 <Font cssVariable="--font-atkinson" preload />
 
+<!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
+<!-- Primary SEO Meta Tags -->
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="author" content="Biagio Scaglia" />
+<meta name="publisher" content="Biagio Scaglia" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow" />
 
-<meta property="og:type" content="website" />
+<!-- GEO Meta Tags -->
+<meta name="geo.region" content="IT-RM" />
+<meta name="geo.placename" content="Rome" />
+<meta name="geo.position" content="41.9028;12.4964" />
+<meta name="ICBM" content="41.9028, 12.4964" />
+
+<!-- Language & Content -->
+<meta http-equiv="content-language" content="en" />
+<meta name="language" content="English" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={article ? "article" : "website"} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:site_name" content="Biagio Cyberspace" />
+<meta property="og:locale" content="en_US" />
+{article && publishedDate && (
+	<meta property="article:published_time" content={publishedDate.toISOString()} />
+)}
+{article && modifiedDate && (
+	<meta property="article:modified_time" content={modifiedDate.toISOString()} />
+)}
+{article && (
+	<meta property="article:author" content="Biagio Scaglia" />
+)}
+{article && tags.map((tag) => (
+	<meta property="article:tag" content={tag} />
+))}
 
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={Astro.url} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image.src, Astro.url)} />
-
+<meta name="twitter:creator" content="@biagioscaglia" />
+<meta name="twitter:site" content="@biagioscaglia" />

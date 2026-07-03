@@ -3,9 +3,7 @@ title: "Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026"
 description: "A nostalgic journey through HTML tables, beveled SCSS styling, and pixel art to rediscover the joy of hand-crafted websites."
 pubDate: "Jul 02 2026"
 category: "Coding"
-tags: ["astro", "css", "web-history", "retro"]
-cover: "../../assets/retro_desktop.png"
-gallery: ["../../assets/retro_cat.png"]
+tags: ["astro", "css", "web-culture", "retro", "webdev"]
 ---
 
 There is something magical about browsing an old GeoCities or Angelfire page saved on the Wayback Machine. It's not just passive nostalgia for the days when MIDI music would autostart (often scaring us half to death); it's the feeling of visiting a digital space that actually belonged to someone, built by hand, pixel by pixel.
