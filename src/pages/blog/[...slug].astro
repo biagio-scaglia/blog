@@ -28,6 +28,33 @@ const galleryImages = post.data.gallery || [];
 const postUrl = new URL(Astro.url.pathname, Astro.site || 'https://biagioscaglia.dev').toString();
 const authorId = Astro.site ? `${Astro.site.toString()}#person` : 'https://biagioscaglia.dev#person';
 
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://biagio-scaglia.github.io/blog';
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Home",
+			"item": siteUrl
+		},
+		{
+			"@type": "ListItem",
+			"position": 2,
+			"name": "Blog",
+			"item": `${siteUrl}/blog/`
+		},
+		{
+			"@type": "ListItem",
+			"position": 3,
+			"name": post.data.title,
+			"item": postUrl
+		}
+	]
+};
+
 const blogPostSchema = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
@@ -60,6 +87,7 @@ const blogPostSchema = {
 
 <RetroLayout title={`${post.data.title} - Retro-Net`} description={post.data.description} article={true} publishedDate={post.data.pubDate} modifiedDate={post.data.updatedDate} tags={post.data.tags}>
 	<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostSchema)} />
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 	<Window title={`view_log.sys - ${post.id}`} theme="windows">
 		<article class="retro-post">
 			<div class="post-metadata">

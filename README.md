@@ -1,63 +1,97 @@
-# Astro Starter Kit: Blog
+# 🛸 Biagio Cyberspace
 
-```sh
-npm create astro@latest -- --template blog
-```
+A personal blog built with [Astro](https://astro.build), inspired by the charm of the independent web of the late '90s and early 2000s. This is Biagio Scaglia's small corner of the Internet — a place created out of passion, curiosity, and a love for sharing, not to chase numbers or algorithms.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Live:** [biagio-scaglia.github.io/blog](https://biagio-scaglia.github.io/blog/)
 
-Features:
+## ✨ Features
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+- 🖥️ **Retro-inspired design** — Window-style UI components, 88x31 badges, hit counter, shoutbox, guestbook, webring, and a music player that evokes the GeoCities era
+- 📝 **Blog with Markdown & MDX** — Content collections with typed frontmatter
+- 🗺️ **SEO-friendly** — Canonical URLs, Open Graph, sitemap, and RSS feed
+- 🤖 **LLM-discoverable** — `llms.txt` and `llms-full.txt` for AI crawlers
+- 🎨 **SCSS design system** — Variables, patterns, and a global stylesheet
+- 🚀 **Automated deploy** — GitHub Actions CI/CD to GitHub Pages
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 🗂️ Project Structure
 
 ```text
-├── public/
+├── public/                  # Static assets (favicons, manifest, robots.txt, llms.txt)
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── assets/              # Fonts & images processed by Astro
+│   ├── components/
+│   │   ├── Header.astro         # Site header & navigation
+│   │   ├── Footer.astro         # Site footer
+│   │   ├── Sidebar.astro        # Retro sidebar with widgets
+│   │   ├── Window.astro         # Draggable window-style container
+│   │   ├── MusicPlayer.astro    # Embedded music player widget
+│   │   ├── Shoutbox.astro       # Shoutbox widget
+│   │   ├── Guestbook.astro      # Guestbook widget
+│   │   ├── Badge88x31.astro     # Classic 88x31 pixel badge
+│   │   ├── HitCounter.astro     # Retro hit counter
+│   │   ├── MoodWidget.astro     # Current mood widget
+│   │   ├── Webring.astro        # Webring navigation
+│   │   ├── ArticleCard.astro    # Blog post card
+│   │   ├── BaseHead.astro       # <head> with meta, OG, fonts
+│   │   └── ...
+│   ├── content/
+│   │   └── blog/            # Blog posts (Markdown)
+│   ├── layouts/
+│   │   └── RetroLayout.astro    # Main retro-themed layout
+│   ├── pages/
+│   │   ├── index.astro          # Homepage
+│   │   ├── about.astro          # About page
+│   │   ├── interests.astro      # Interests page
+│   │   ├── blog/                # Blog listing & post pages
+│   │   ├── rss.xml.js           # RSS feed endpoint
+│   │   └── 404.astro            # Custom 404 page
+│   ├── styles/
+│   │   ├── global.scss          # Global styles
+│   │   ├── _variables.scss      # SCSS variables & tokens
+│   │   └── _patterns.scss       # Reusable SCSS patterns
+│   ├── consts.ts            # Site title & description
+│   ├── content.config.ts    # Content collection schemas
+│   └── env.d.ts             # Astro client type definitions
+├── .github/
+│   └── workflows/
+│       └── deploy.yml       # GitHub Actions deploy pipeline
+├── astro.config.mjs         # Astro configuration
+├── tsconfig.json            # TypeScript configuration
+└── package.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command            | Action                                           |
+| :----------------- | :----------------------------------------------- |
+| `npm install`      | Install dependencies                             |
+| `npm run dev`      | Start local dev server at `localhost:4321`        |
+| `npm run build`    | Build the production site to `./dist/`            |
+| `npm run preview`  | Preview the build locally before deploying        |
+| `npm run deploy`   | Build and deploy to GitHub Pages via `gh-pages`   |
 
-## 👀 Want to learn more?
+## 🚀 Deployment
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site deploys automatically to **GitHub Pages** on every push to `master` or `main` via a [GitHub Actions workflow](.github/workflows/deploy.yml).
 
-## Credit
+You can also deploy manually with:
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+```sh
+npm run deploy
+```
+
+This builds the site and publishes the `dist/` folder to the `gh-pages` branch.
+
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) v7
+- [MDX](https://mdxjs.com/) for rich content
+- [SCSS](https://sass-lang.com/) for styling
+- [TypeScript](https://www.typescriptlang.org/) for type safety
+- [Sharp](https://sharp.pixelplumbing.com/) for image optimization
+
+## 📄 License
+
+This is a personal project. All blog content and original assets are © Biagio Scaglia.

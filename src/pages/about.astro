@@ -7,9 +7,42 @@ import profilePic from '../assets/avatar.png';
 import ComputerIcon from '../components/icons/ComputerIcon.astro';
 import NotepadIcon from '../components/icons/NotepadIcon.astro';
 import GlobeIcon from '../components/icons/GlobeIcon.astro';
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": [
+		{
+			"@type": "Question",
+			"name": "What is Biagio Scaglia's primary software development expertise?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Biagio is a Full Stack Developer and UX/UI Designer specialized in React, TypeScript, .NET, and React Native. He designs and codes systems end-to-end, combining modern performance with robust user experiences."
+			}
+		},
+		{
+			"@type": "Question",
+			"name": "What is the app Vellum - RPG Companion?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Vellum - RPG Companion is a mobile utility application designed and developed by Biagio Scaglia to act as a digital character sheet and campaign assistant for tabletop role-playing games (TTRPGs)."
+			}
+		},
+		{
+			"@type": "Question",
+			"name": "How does this portal align with modern web standard optimizations?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Although styled like an early-2000s personal site, it leverages Astro static generation, full responsive SCSS layouts, dynamic JSON-LD metadata for search engines and generative AI bots, and automated responsive image conversion (WebP) to guarantee near-instant loading times."
+			}
+		}
+	]
+};
 ---
 
+
 <RetroLayout title={`About Me - ${SITE_TITLE}`} description="Biography of the webmaster">
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
 	<Window title="about_webmaster.txt" theme="pink" icon="computer">
 		<div class="about-container">
 			<h2 class="about-title"><ComputerIcon size={18} /> Greetings, cyber wanderer!</h2>
