@@ -74,21 +74,30 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 	const entriesList = document.getElementById('gb-entries-list');
 	const gbForm = document.getElementById('gb-form') as HTMLFormElement | null;
 
+	let inMemoryEntries: GuestbookEntry[] | null = null;
+
 	function loadEntries(): GuestbookEntry[] {
-		const stored = localStorage.getItem('guestbook_entries');
-		if (stored) {
-			try {
-				return JSON.parse(stored);
-			} catch (e) {
-				console.error("Failed to parse guestbook entries, resetting to default.", e);
+		try {
+			const stored = localStorage.getItem('guestbook_entries');
+			if (stored) {
+				const parsed = JSON.parse(stored);
+				if (Array.isArray(parsed) && parsed.length > 0) return parsed;
 			}
+			localStorage.setItem('guestbook_entries', JSON.stringify(defaultEntries));
+		} catch (e) {
+			console.warn("localStorage unavailable for guestbook, using in-memory state.", e);
+			if (inMemoryEntries) return inMemoryEntries;
 		}
-		localStorage.setItem('guestbook_entries', JSON.stringify(defaultEntries));
 		return defaultEntries;
 	}
 
 	function saveEntries(entries: GuestbookEntry[]) {
-		localStorage.setItem('guestbook_entries', JSON.stringify(entries));
+		inMemoryEntries = entries;
+		try {
+			localStorage.setItem('guestbook_entries', JSON.stringify(entries));
+		} catch (e) {
+			console.warn("Could not save guestbook entries to localStorage.", e);
+		}
 	}
 
 	function renderEntries() {

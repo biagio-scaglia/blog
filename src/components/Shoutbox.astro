@@ -49,21 +49,30 @@
 	const colors = ['user-magenta', 'user-green', 'user-cyan', 'user-purple', 'user-blue'];
 	const emojis = ['(^_~)', '(*^▽^*)', 'B-)', 'p(^o^)q', 'd(^_^)b', ':-)', ':-D'];
 
+	let inMemoryShouts: ShoutEntry[] | null = null;
+
 	function loadShouts(): ShoutEntry[] {
-		const stored = localStorage.getItem('shoutbox_entries');
-		if (stored) {
-			try {
-				return JSON.parse(stored);
-			} catch (e) {
-				console.error("Failed to parse shoutbox entries, resetting to default.", e);
+		try {
+			const stored = localStorage.getItem('shoutbox_entries');
+			if (stored) {
+				const parsed = JSON.parse(stored);
+				if (Array.isArray(parsed) && parsed.length > 0) return parsed;
 			}
+			localStorage.setItem('shoutbox_entries', JSON.stringify(defaultShouts));
+		} catch (e) {
+			console.warn("localStorage unavailable for shoutbox, using in-memory state.", e);
+			if (inMemoryShouts) return inMemoryShouts;
 		}
-		localStorage.setItem('shoutbox_entries', JSON.stringify(defaultShouts));
 		return defaultShouts;
 	}
 
 	function saveShouts(shouts: ShoutEntry[]) {
-		localStorage.setItem('shoutbox_entries', JSON.stringify(shouts));
+		inMemoryShouts = shouts;
+		try {
+			localStorage.setItem('shoutbox_entries', JSON.stringify(shouts));
+		} catch (e) {
+			console.warn("Could not save shoutbox entries to localStorage.", e);
+		}
 	}
 
 	function renderShouts() {
