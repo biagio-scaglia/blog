@@ -8,12 +8,13 @@ import CameraIcon from './icons/CameraIcon.astro';
 import GuestbookIcon from './icons/GuestbookIcon.astro';
 import JoystickIcon from './icons/JoystickIcon.astro';
 import CDIcon from './icons/CDIcon.astro';
+import HeartIcon from './icons/HeartIcon.astro';
 
 interface Props {
 	title: string;
 	theme?: 'windows' | 'pink' | 'blue' | 'green' | 'yellow' | 'purple' | 'rainbow';
 	style?: string;
-	icon?: 'computer' | 'folder' | 'floppy' | 'notepad' | 'globe' | 'camera' | 'guestbook' | 'joystick' | 'cd';
+	icon?: 'computer' | 'folder' | 'floppy' | 'notepad' | 'globe' | 'camera' | 'guestbook' | 'joystick' | 'cd' | 'heart';
 }
 
 const { title, theme = 'windows', style = '', icon } = Astro.props;
@@ -31,6 +32,7 @@ const { title, theme = 'windows', style = '', icon } = Astro.props;
 			{icon === 'guestbook' && <GuestbookIcon size={14} class="titlebar-icon" />}
 			{icon === 'joystick' && <JoystickIcon size={14} class="titlebar-icon" />}
 			{icon === 'cd' && <CDIcon size={14} class="titlebar-icon" />}
+			{icon === 'heart' && <HeartIcon size={14} class="titlebar-icon" />}
 			<span class="title-text">{title}</span>
 		</div>
 		<div class="title-controls">

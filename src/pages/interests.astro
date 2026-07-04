@@ -10,6 +10,8 @@ import CDIcon from '../components/icons/CDIcon.astro';
 import FloppyIcon from '../components/icons/FloppyIcon.astro';
 import TVIcon from '../components/icons/TVIcon.astro';
 import BadApplePlayer from '../components/BadApplePlayer.astro';
+import ElaraCompanion from '../components/ElaraCompanion.astro';
+import HeartIcon from '../components/icons/HeartIcon.astro';
 ---
 
 <RetroLayout title={`Gaming & Anime Shrine - ${SITE_TITLE}`} description="Biagio's personal repository of video games and Moe anime.">
@@ -118,7 +120,20 @@ import BadApplePlayer from '../components/BadApplePlayer.astro';
 			</div>
 		</Window>
 
-		<!-- Row 3: Bad Apple ASCII Player -->
+		<!-- Row 3: Elara Desktop Companion -->
+		<Window title="elara_companion.exe ~ [Digital Entity]" theme="purple" icon="heart">
+			<div class="shrine-box">
+				<h2 class="shrine-heading">
+					<HeartIcon size={16} class="shrine-icon" /> Desktop Companion Interface
+				</h2>
+				<p class="elara-intro-text">
+					A small digital entity living between the pixels of this page. Click on her or the dialogue box to interact. She might have something to say about old web, retro games, or anime.
+				</p>
+				<ElaraCompanion />
+			</div>
+		</Window>
+
+		<!-- Row 4: Bad Apple ASCII Player -->
 		<Window title="bad_apple.exe ~ [Gensokyo Terminal]" theme="purple" icon="cd">
 			<div class="shrine-box">
 				<div class="ba-header-banner">
@@ -343,6 +358,16 @@ import BadApplePlayer from '../components/BadApplePlayer.astro';
 				color: $win-blue-light;
 			}
 		}
+	}
+
+	.elara-intro-text {
+		font-family: $font-verdana;
+		font-size: 11px;
+		line-height: 1.6;
+		color: #333;
+		margin-bottom: 12px;
+		padding-bottom: 10px;
+		border-bottom: 1px dashed $win-dark-gray;
 	}
 </style>
 
