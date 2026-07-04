@@ -3,7 +3,16 @@
 ---
 
 <div class="bad-apple-player">
+	<div class="ba-bezel-header">
+		<div class="crt-led-box">
+			<span class="crt-led" id="ba-led"></span>
+			<span class="crt-label">CRT-98 // GENSYO ASCII DISPLAY</span>
+		</div>
+		<span class="ba-codec-tag">30 FPS / HIFI</span>
+	</div>
+
 	<div class="ba-screen">
+		<div class="scanline-overlay"></div>
 		<pre id="ba-ascii-display" class="ba-ascii">Loading frames...</pre>
 	</div>
 
@@ -149,6 +158,8 @@
 		animFrame = requestAnimationFrame(renderLoop);
 	}
 
+	const led = document.getElementById("ba-led");
+
 	function play() {
 		if (framesData.length === 0) return;
 		audio
@@ -157,6 +168,7 @@
 				isPlaying = true;
 				playBtn.classList.add("active");
 				pauseBtn.classList.remove("active");
+				if (led) led.className = "crt-led active";
 				renderLoop();
 			})
 			.catch(() => {
@@ -169,6 +181,7 @@
 		isPlaying = false;
 		playBtn.classList.remove("active");
 		pauseBtn.classList.add("active");
+		if (led) led.className = "crt-led paused";
 		if (animFrame) cancelAnimationFrame(animFrame);
 	}
 
@@ -178,6 +191,7 @@
 		isPlaying = false;
 		playBtn.classList.remove("active");
 		pauseBtn.classList.remove("active");
+		if (led) led.className = "crt-led";
 		if (animFrame) cancelAnimationFrame(animFrame);
 
 		if (framesData.length > 0) {
@@ -239,6 +253,55 @@
 		@include retro-shadow;
 	}
 
+	.ba-bezel-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: #1c1c1c;
+		border: 1px solid #333;
+		padding: 3px 6px;
+		font-family: $font-retro-mono;
+		font-size: 9px;
+		color: #888;
+	}
+
+	.crt-led-box {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.crt-led {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: #440000;
+		border: 1px solid #111;
+		transition: background 0.2s, box-shadow 0.2s;
+
+		&.active {
+			background: #00ff00;
+			box-shadow: 0 0 6px #00ff00;
+		}
+
+		&.paused {
+			background: #ffaa00;
+			box-shadow: 0 0 6px #ffaa00;
+		}
+	}
+
+	.crt-label {
+		color: #aaa;
+		font-size: 8px;
+		letter-spacing: 0.5px;
+	}
+
+	.ba-codec-tag {
+		color: $neon-magenta;
+		font-size: 8px;
+		font-weight: bold;
+	}
+
 	.ba-screen {
 		@include win95-border-inset;
 		background: #000;
@@ -250,6 +313,23 @@
 		width: 100%;
 		max-width: 100%;
 		box-sizing: border-box;
+		position: relative;
+	}
+
+	.scanline-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			rgba(18, 16, 16, 0) 50%, 
+			rgba(0, 0, 0, 0.25) 50%
+		);
+		background-size: 100% 4px;
+		pointer-events: none;
+		z-index: 2;
+		opacity: 0.5;
 	}
 
 	.ba-ascii {

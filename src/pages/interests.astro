@@ -119,14 +119,21 @@ import BadApplePlayer from '../components/BadApplePlayer.astro';
 		</Window>
 
 		<!-- Row 3: Bad Apple ASCII Player -->
-		<Window title="bad_apple.exe" theme="windows" icon="cd">
+		<Window title="bad_apple.exe ~ [Gensokyo Terminal]" theme="purple" icon="cd">
 			<div class="shrine-box">
-				<h2 class="shrine-heading">
-					<TVIcon size={16} class="shrine-icon" /> Bad Apple!! ~ ASCII Render
-				</h2>
+				<div class="ba-header-banner">
+					<h2 class="shrine-heading">
+						<TVIcon size={16} class="shrine-icon" /> Bad Apple!! ~ Real-Time ASCII Render
+					</h2>
+					<div class="ba-tags">
+						<span class="ba-badge badge-purple">★ TOUHOU 04</span>
+						<span class="ba-badge badge-green">30 FPS ASCII</span>
+						<span class="ba-badge badge-yellow">AUDIO SYNC</span>
+					</div>
+				</div>
 				<p class="ba-description">
-					The legendary Touhou PV rendered in real-time ASCII art at 30fps, right here in your browser.
-					Powered by <a href="https://github.com/EmirXK/bad_apple" target="_blank" rel="noopener noreferrer">EmirXK/bad_apple</a>.
+					The legendary Touhou PV (Lotus Land Story / Alstroemeria Records) rendered frame-by-frame in ASCII art at 30fps with audio playback.
+					Original project credit to <a href="https://github.com/EmirXK/bad_apple" target="_blank" rel="noopener noreferrer">EmirXK/bad_apple</a>.
 				</p>
 				<BadApplePlayer />
 			</div>
@@ -277,6 +284,52 @@ import BadApplePlayer from '../components/BadApplePlayer.astro';
 		}
 	}
 
+	.ba-header-banner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 10px;
+
+		.shrine-heading {
+			margin-bottom: 0;
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+	}
+
+	.ba-tags {
+		display: flex;
+		gap: 6px;
+		align-items: center;
+	}
+
+	.ba-badge {
+		font-family: $font-tahoma;
+		font-size: 9px;
+		font-weight: bold;
+		padding: 2px 6px;
+		border-radius: 2px;
+		@include win95-border-outset;
+		color: #000;
+
+		&.badge-purple {
+			background: $pastel-purple;
+			color: #4a148c;
+		}
+
+		&.badge-green {
+			background: $pastel-green;
+			color: #1b5e20;
+		}
+
+		&.badge-yellow {
+			background: $pastel-yellow;
+			color: #f57f17;
+		}
+	}
+
 	.ba-description {
 		font-family: $font-verdana;
 		font-size: 11px;
@@ -292,3 +345,4 @@ import BadApplePlayer from '../components/BadApplePlayer.astro';
 		}
 	}
 </style>
+
