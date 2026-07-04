@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <div class="bad-apple-player">
@@ -12,37 +13,63 @@
 	</div>
 
 	<div class="ba-seek-row">
-		<input type="range" id="ba-seek" class="ba-seek-slider" min="0" max="100" value="0" step="0.1" />
+		<input
+			type="range"
+			id="ba-seek"
+			class="ba-seek-slider"
+			min="0"
+			max="100"
+			value="0"
+			step="0.1"
+		/>
 	</div>
 
 	<div class="ba-controls">
-		<button id="ba-play-btn" class="ba-ctrl-btn" title="Play">&#9654;</button>
-		<button id="ba-pause-btn" class="ba-ctrl-btn" title="Pause">&#9646;&#9646;</button>
-		<button id="ba-stop-btn" class="ba-ctrl-btn" title="Stop">&#9632;</button>
+		<button id="ba-play-btn" class="ba-ctrl-btn" title="Play"
+			>&#9654;</button
+		>
+		<button id="ba-pause-btn" class="ba-ctrl-btn" title="Pause"
+			>&#9646;&#9646;</button
+		>
+		<button id="ba-stop-btn" class="ba-ctrl-btn" title="Stop"
+			>&#9632;</button
+		>
 		<div class="ba-vol-group">
 			<span class="ba-vol-label">VOL</span>
-			<input type="range" id="ba-vol" class="ba-vol-slider" min="0" max="100" value="70" />
+			<input
+				type="range"
+				id="ba-vol"
+				class="ba-vol-slider"
+				min="0"
+				max="100"
+				value="70"
+			/>
 		</div>
 	</div>
 </div>
 
 <audio id="ba-audio" preload="auto">
-	<source src={`${import.meta.env.BASE_URL}bad_apple/bad_apple.mp3`} type="audio/mpeg" />
+	<source
+		src={`${import.meta.env.BASE_URL}bad_apple/bad_apple.mp3`}
+		type="audio/mpeg"
+	/>
 </audio>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-
 <script>
+	import LZString from 'lz-string';
+
 	// ── Bad Apple ASCII Player ──
-	const display = document.getElementById('ba-ascii-display') as HTMLPreElement;
-	const frameCounter = document.getElementById('ba-frame-counter')!;
-	const timeDisplay = document.getElementById('ba-time-display')!;
-	const seekSlider = document.getElementById('ba-seek') as HTMLInputElement;
-	const playBtn = document.getElementById('ba-play-btn')!;
-	const pauseBtn = document.getElementById('ba-pause-btn')!;
-	const stopBtn = document.getElementById('ba-stop-btn')!;
-	const volSlider = document.getElementById('ba-vol') as HTMLInputElement;
-	const audio = document.getElementById('ba-audio') as HTMLAudioElement;
+	const display = document.getElementById(
+		"ba-ascii-display",
+	) as HTMLPreElement;
+	const frameCounter = document.getElementById("ba-frame-counter")!;
+	const timeDisplay = document.getElementById("ba-time-display")!;
+	const seekSlider = document.getElementById("ba-seek") as HTMLInputElement;
+	const playBtn = document.getElementById("ba-play-btn")!;
+	const pauseBtn = document.getElementById("ba-pause-btn")!;
+	const stopBtn = document.getElementById("ba-stop-btn")!;
+	const volSlider = document.getElementById("ba-vol") as HTMLInputElement;
+	const audio = document.getElementById("ba-audio") as HTMLAudioElement;
 
 	let framesData: string[] = [];
 	let animFrame: number | null = null;
@@ -56,36 +83,40 @@
 	function fmtTime(s: number): string {
 		const m = Math.floor(s / 60);
 		const sec = Math.floor(s % 60);
-		return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+		return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 	}
 
 	// Load frame data
-	const basePath = (document.querySelector('meta[name="astro-base"]') as HTMLMetaElement)?.content
-		|| document.querySelector('base')?.getAttribute('href')
-		|| '/blog/';
+	const basePath =
+		(document.querySelector('meta[name="astro-base"]') as HTMLMetaElement)
+			?.content ||
+		document.querySelector("base")?.getAttribute("href") ||
+		"/blog/";
 
 	fetch(`${basePath}bad_apple/framesData.lz`)
-		.then(r => r.text())
-		.then(data => {
-			const LZString = (window as any).LZString;
-			if (!LZString) {
-				display.textContent = 'ERR: LZString not loaded';
+		.then((r) => r.text())
+		.then((data) => {
+			const decompressed = LZString.decompressFromBase64(data);
+			if (!decompressed) {
+				display.textContent = "ERR: Failed to decompress frames";
 				return;
 			}
-			const decompressed = LZString.decompressFromBase64(data);
 			framesData = JSON.parse(decompressed);
-			display.textContent = framesData[0] || '[ READY ]';
+			display.textContent = framesData[0] || "[ READY ]";
 			frameCounter.textContent = `Frame: 0 / ${framesData.length}`;
 			seekSlider.max = String(framesData.length - 1);
 		})
 		.catch(() => {
-			display.textContent = 'ERR: Failed to load frames';
+			display.textContent = "ERR: Failed to load frames";
 		});
 
 	function getCurrentFrame(): number {
 		if (!audio.duration || framesData.length === 0) return 0;
 		const progress = audio.currentTime / audio.duration;
-		return Math.min(Math.floor(progress * framesData.length), framesData.length - 1);
+		return Math.min(
+			Math.floor(progress * framesData.length),
+			framesData.length - 1,
+		);
 	}
 
 	function renderLoop() {
@@ -107,21 +138,24 @@
 
 	function play() {
 		if (framesData.length === 0) return;
-		audio.play().then(() => {
-			isPlaying = true;
-			playBtn.classList.add('active');
-			pauseBtn.classList.remove('active');
-			renderLoop();
-		}).catch(() => {
-			display.textContent = '[ Click to start playback ]';
-		});
+		audio
+			.play()
+			.then(() => {
+				isPlaying = true;
+				playBtn.classList.add("active");
+				pauseBtn.classList.remove("active");
+				renderLoop();
+			})
+			.catch(() => {
+				display.textContent = "[ Click to start playback ]";
+			});
 	}
 
 	function pause() {
 		audio.pause();
 		isPlaying = false;
-		playBtn.classList.remove('active');
-		pauseBtn.classList.add('active');
+		playBtn.classList.remove("active");
+		pauseBtn.classList.add("active");
 		if (animFrame) cancelAnimationFrame(animFrame);
 	}
 
@@ -129,20 +163,20 @@
 		audio.pause();
 		audio.currentTime = 0;
 		isPlaying = false;
-		playBtn.classList.remove('active');
-		pauseBtn.classList.remove('active');
+		playBtn.classList.remove("active");
+		pauseBtn.classList.remove("active");
 		if (animFrame) cancelAnimationFrame(animFrame);
 
 		if (framesData.length > 0) {
 			display.textContent = framesData[0];
-			seekSlider.value = '0';
+			seekSlider.value = "0";
 			frameCounter.textContent = `Frame: 0 / ${framesData.length}`;
 			timeDisplay.textContent = `00:00 / ${fmtTime(audio.duration || 0)}`;
 		}
 	}
 
 	// Seek bar interaction
-	seekSlider.addEventListener('input', () => {
+	seekSlider.addEventListener("input", () => {
 		isSeeking = true;
 		const idx = parseInt(seekSlider.value, 10);
 		if (framesData[idx] !== undefined) {
@@ -156,21 +190,21 @@
 		}
 	});
 
-	seekSlider.addEventListener('change', () => {
+	seekSlider.addEventListener("change", () => {
 		isSeeking = false;
 	});
 
 	// Audio ended
-	audio.addEventListener('ended', () => {
+	audio.addEventListener("ended", () => {
 		stop();
 	});
 
 	// Button events
-	playBtn.addEventListener('click', play);
-	pauseBtn.addEventListener('click', pause);
-	stopBtn.addEventListener('click', stop);
+	playBtn.addEventListener("click", play);
+	pauseBtn.addEventListener("click", pause);
+	stopBtn.addEventListener("click", stop);
 
-	volSlider.addEventListener('input', () => {
+	volSlider.addEventListener("input", () => {
 		audio.volume = parseFloat(volSlider.value) / 100;
 	});
 </script>
@@ -313,7 +347,8 @@
 			color: #fff;
 		}
 
-		&:active, &.active {
+		&:active,
+		&.active {
 			background: #111;
 			color: $neon-green;
 			border-color: #222;
