@@ -55,24 +55,6 @@ import retroDesktop from '../assets/retro_desktop.png';
 		</div>
 	</Window>
 
-	<Window title="site_preview_browser.exe" theme="windows" icon="globe">
-		<div class="preview-browser-box">
-			<div class="browser-address-bar">
-				<span class="address-label">Address:</span>
-				<input type="text" readonly value="https://biagio-scaglia.github.io/" class="address-input" />
-				<a href="https://biagio-scaglia.github.io/blog/" target="_blank" rel="noopener noreferrer" class="address-go-btn">GO ➔</a>
-			</div>
-			<div class="preview-frame-container">
-				<iframe src={import.meta.env.BASE_URL} title="Biagio Cyberspace Live Node Preview" class="preview-iframe" loading="lazy"></iframe>
-				<div class="preview-fallback">
-					<Image src={retroDesktop} alt="Biagio Cyberspace Site Desktop Preview" class="preview-fallback-img" />
-				</div>
-			</div>
-			<p class="preview-caption">
-				<GlobeIcon size={12} class="title-icon" /> Live Astro Node Preview (Root: <code>https://biagio-scaglia.github.io/</code>)
-			</p>
-		</div>
-	</Window>
 
 	<Window title="personal_logs.exe" theme="blue" icon="notepad">
 		<h2 class="section-title"><FolderIcon size={14} class="title-icon" /> Latest Diary Entries</h2>
