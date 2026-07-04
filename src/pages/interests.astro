@@ -9,6 +9,7 @@ import JoystickIcon from '../components/icons/JoystickIcon.astro';
 import CDIcon from '../components/icons/CDIcon.astro';
 import FloppyIcon from '../components/icons/FloppyIcon.astro';
 import TVIcon from '../components/icons/TVIcon.astro';
+import BadApplePlayer from '../components/BadApplePlayer.astro';
 ---
 
 <RetroLayout title={`Gaming & Anime Shrine - ${SITE_TITLE}`} description="Biagio's personal repository of video games and Moe anime.">
@@ -114,6 +115,20 @@ import TVIcon from '../components/icons/TVIcon.astro';
 						<p class="desc">Teatime, cute instruments, and a legendary soundtrack. A masterpiece in character-driven comfort.</p>
 					</li>
 				</ul>
+			</div>
+		</Window>
+
+		<!-- Row 3: Bad Apple ASCII Player -->
+		<Window title="bad_apple.exe" theme="windows" icon="cd">
+			<div class="shrine-box">
+				<h2 class="shrine-heading">
+					<TVIcon size={16} class="shrine-icon" /> Bad Apple!! ~ ASCII Render
+				</h2>
+				<p class="ba-description">
+					The legendary Touhou PV rendered in real-time ASCII art at 30fps, right here in your browser.
+					Powered by <a href="https://github.com/EmirXK/bad_apple" target="_blank" rel="noopener noreferrer">EmirXK/bad_apple</a>.
+				</p>
+				<BadApplePlayer />
 			</div>
 		</Window>
 	</div>
@@ -259,6 +274,21 @@ import TVIcon from '../components/icons/TVIcon.astro';
 			margin: 5px 0 0 0;
 			color: #333333;
 			font-size: 11px;
+		}
+	}
+
+	.ba-description {
+		font-family: $font-verdana;
+		font-size: 11px;
+		line-height: 1.6;
+		color: #333;
+		margin-bottom: 10px;
+
+		a {
+			color: $win-blue;
+			&:hover {
+				color: $win-blue-light;
+			}
 		}
 	}
 </style>

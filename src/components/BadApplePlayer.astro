@@ -1,0 +1,369 @@
+---
+---
+
+<div class="bad-apple-player">
+	<div class="ba-screen">
+		<pre id="ba-ascii-display" class="ba-ascii">Loading frames...</pre>
+	</div>
+
+	<div class="ba-status-bar">
+		<span id="ba-frame-counter" class="ba-frame-info">Frame: 0 / 0</span>
+		<span id="ba-time-display" class="ba-time-info">00:00 / 00:00</span>
+	</div>
+
+	<div class="ba-seek-row">
+		<input type="range" id="ba-seek" class="ba-seek-slider" min="0" max="100" value="0" step="0.1" />
+	</div>
+
+	<div class="ba-controls">
+		<button id="ba-play-btn" class="ba-ctrl-btn" title="Play">&#9654;</button>
+		<button id="ba-pause-btn" class="ba-ctrl-btn" title="Pause">&#9646;&#9646;</button>
+		<button id="ba-stop-btn" class="ba-ctrl-btn" title="Stop">&#9632;</button>
+		<div class="ba-vol-group">
+			<span class="ba-vol-label">VOL</span>
+			<input type="range" id="ba-vol" class="ba-vol-slider" min="0" max="100" value="70" />
+		</div>
+	</div>
+</div>
+
+<audio id="ba-audio" preload="auto">
+	<source src={`${import.meta.env.BASE_URL}bad_apple/bad_apple.mp3`} type="audio/mpeg" />
+</audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+
+<script>
+	// ── Bad Apple ASCII Player ──
+	const display = document.getElementById('ba-ascii-display') as HTMLPreElement;
+	const frameCounter = document.getElementById('ba-frame-counter')!;
+	const timeDisplay = document.getElementById('ba-time-display')!;
+	const seekSlider = document.getElementById('ba-seek') as HTMLInputElement;
+	const playBtn = document.getElementById('ba-play-btn')!;
+	const pauseBtn = document.getElementById('ba-pause-btn')!;
+	const stopBtn = document.getElementById('ba-stop-btn')!;
+	const volSlider = document.getElementById('ba-vol') as HTMLInputElement;
+	const audio = document.getElementById('ba-audio') as HTMLAudioElement;
+
+	let framesData: string[] = [];
+	let animFrame: number | null = null;
+	let isPlaying = false;
+	let isSeeking = false;
+	const FPS = 30;
+
+	audio.volume = 0.7;
+
+	// Format seconds to MM:SS
+	function fmtTime(s: number): string {
+		const m = Math.floor(s / 60);
+		const sec = Math.floor(s % 60);
+		return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+	}
+
+	// Load frame data
+	const basePath = (document.querySelector('meta[name="astro-base"]') as HTMLMetaElement)?.content
+		|| document.querySelector('base')?.getAttribute('href')
+		|| '/blog/';
+
+	fetch(`${basePath}bad_apple/framesData.lz`)
+		.then(r => r.text())
+		.then(data => {
+			const LZString = (window as any).LZString;
+			if (!LZString) {
+				display.textContent = 'ERR: LZString not loaded';
+				return;
+			}
+			const decompressed = LZString.decompressFromBase64(data);
+			framesData = JSON.parse(decompressed);
+			display.textContent = framesData[0] || '[ READY ]';
+			frameCounter.textContent = `Frame: 0 / ${framesData.length}`;
+			seekSlider.max = String(framesData.length - 1);
+		})
+		.catch(() => {
+			display.textContent = 'ERR: Failed to load frames';
+		});
+
+	function getCurrentFrame(): number {
+		if (!audio.duration || framesData.length === 0) return 0;
+		const progress = audio.currentTime / audio.duration;
+		return Math.min(Math.floor(progress * framesData.length), framesData.length - 1);
+	}
+
+	function renderLoop() {
+		if (!isPlaying) return;
+
+		const idx = getCurrentFrame();
+		if (framesData[idx] !== undefined) {
+			display.textContent = framesData[idx];
+		}
+		frameCounter.textContent = `Frame: ${idx} / ${framesData.length}`;
+		timeDisplay.textContent = `${fmtTime(audio.currentTime)} / ${fmtTime(audio.duration || 0)}`;
+
+		if (!isSeeking) {
+			seekSlider.value = String(idx);
+		}
+
+		animFrame = requestAnimationFrame(renderLoop);
+	}
+
+	function play() {
+		if (framesData.length === 0) return;
+		audio.play().then(() => {
+			isPlaying = true;
+			playBtn.classList.add('active');
+			pauseBtn.classList.remove('active');
+			renderLoop();
+		}).catch(() => {
+			display.textContent = '[ Click to start playback ]';
+		});
+	}
+
+	function pause() {
+		audio.pause();
+		isPlaying = false;
+		playBtn.classList.remove('active');
+		pauseBtn.classList.add('active');
+		if (animFrame) cancelAnimationFrame(animFrame);
+	}
+
+	function stop() {
+		audio.pause();
+		audio.currentTime = 0;
+		isPlaying = false;
+		playBtn.classList.remove('active');
+		pauseBtn.classList.remove('active');
+		if (animFrame) cancelAnimationFrame(animFrame);
+
+		if (framesData.length > 0) {
+			display.textContent = framesData[0];
+			seekSlider.value = '0';
+			frameCounter.textContent = `Frame: 0 / ${framesData.length}`;
+			timeDisplay.textContent = `00:00 / ${fmtTime(audio.duration || 0)}`;
+		}
+	}
+
+	// Seek bar interaction
+	seekSlider.addEventListener('input', () => {
+		isSeeking = true;
+		const idx = parseInt(seekSlider.value, 10);
+		if (framesData[idx] !== undefined) {
+			display.textContent = framesData[idx];
+			frameCounter.textContent = `Frame: ${idx} / ${framesData.length}`;
+		}
+		if (audio.duration && framesData.length > 0) {
+			const newTime = (idx / framesData.length) * audio.duration;
+			audio.currentTime = newTime;
+			timeDisplay.textContent = `${fmtTime(newTime)} / ${fmtTime(audio.duration)}`;
+		}
+	});
+
+	seekSlider.addEventListener('change', () => {
+		isSeeking = false;
+	});
+
+	// Audio ended
+	audio.addEventListener('ended', () => {
+		stop();
+	});
+
+	// Button events
+	playBtn.addEventListener('click', play);
+	pauseBtn.addEventListener('click', pause);
+	stopBtn.addEventListener('click', stop);
+
+	volSlider.addEventListener('input', () => {
+		audio.volume = parseFloat(volSlider.value) / 100;
+	});
+</script>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.bad-apple-player {
+		background: #111;
+		border: 2px solid #444;
+		outline: 1px solid #000;
+		padding: 6px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		@include retro-shadow;
+	}
+
+	.ba-screen {
+		@include win95-border-inset;
+		background: #000;
+		padding: 4px;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 180px;
+		max-height: 400px;
+	}
+
+	.ba-ascii {
+		color: #fff;
+		background: #000;
+		font-family: "Courier New", "Courier", monospace;
+		font-size: 4px;
+		line-height: 4.5px;
+		letter-spacing: 0.5px;
+		white-space: pre;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		overflow: hidden;
+		user-select: none;
+
+		@media (min-width: 600px) {
+			font-size: 5px;
+			line-height: 5.5px;
+		}
+
+		@media (min-width: 900px) {
+			font-size: 6px;
+			line-height: 6.5px;
+		}
+	}
+
+	.ba-status-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: #1a1a1a;
+		border: 1px solid #333;
+		padding: 3px 6px;
+		font-family: $font-retro-mono;
+		font-size: 9px;
+	}
+
+	.ba-frame-info {
+		color: $neon-green;
+	}
+
+	.ba-time-info {
+		color: $neon-cyan;
+	}
+
+	.ba-seek-row {
+		padding: 2px 0;
+	}
+
+	.ba-seek-slider {
+		width: 100%;
+		height: 10px;
+		background: #222;
+		outline: none;
+		-webkit-appearance: none;
+		border: 1px solid #333;
+		cursor: pointer;
+
+		&::-webkit-slider-runnable-track {
+			height: 6px;
+			background: linear-gradient(90deg, $neon-green 0%, #004400 100%);
+			border: 1px solid #111;
+		}
+
+		&::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 10px;
+			height: 14px;
+			background: $win-gray;
+			@include win95-border-outset;
+			margin-top: -5px;
+			cursor: pointer;
+		}
+
+		&::-moz-range-track {
+			height: 6px;
+			background: linear-gradient(90deg, $neon-green 0%, #004400 100%);
+			border: 1px solid #111;
+		}
+
+		&::-moz-range-thumb {
+			width: 10px;
+			height: 14px;
+			background: $win-gray;
+			@include win95-border-outset;
+			border-radius: 0;
+			cursor: pointer;
+		}
+	}
+
+	.ba-controls {
+		display: flex;
+		align-items: center;
+		gap: 3px;
+	}
+
+	.ba-ctrl-btn {
+		background: #333;
+		border: 1px solid #555;
+		color: #aaa;
+		font-family: $font-retro-mono;
+		font-size: 11px;
+		padding: 5px 10px;
+		cursor: pointer;
+		user-select: none;
+		flex-shrink: 0;
+		outline: none;
+
+		&:hover {
+			background: #444;
+			color: #fff;
+		}
+
+		&:active, &.active {
+			background: #111;
+			color: $neon-green;
+			border-color: #222;
+		}
+	}
+
+	.ba-vol-group {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		margin-left: auto;
+	}
+
+	.ba-vol-label {
+		color: #666;
+		font-family: $font-retro-mono;
+		font-size: 8px;
+		font-weight: bold;
+	}
+
+	.ba-vol-slider {
+		width: 60px;
+		height: 8px;
+		background: #333;
+		outline: none;
+		-webkit-appearance: none;
+		border: 1px solid #111;
+
+		&::-webkit-slider-runnable-track {
+			background: #333;
+		}
+
+		&::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 8px;
+			height: 10px;
+			background: #888;
+			border: 1px solid #fff;
+		}
+
+		&::-moz-range-track {
+			background: #333;
+		}
+
+		&::-moz-range-thumb {
+			width: 8px;
+			height: 10px;
+			background: #888;
+			border: 1px solid #fff;
+			border-radius: 0;
+		}
+	}
+</style>
