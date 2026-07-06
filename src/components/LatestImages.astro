@@ -31,7 +31,7 @@ import placeholderPic from '../assets/blog-placeholder-about.jpg';
 
 	.latest-images-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 		gap: 12px;
 	}
 
@@ -44,6 +44,17 @@ import placeholderPic from '../assets/blog-placeholder-about.jpg';
 		flex-direction: column;
 		align-items: center;
 		gap: 4px;
+		transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+		&:hover {
+			transform: scale(1.04) rotate(1.5deg);
+			box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.25);
+			border-color: $win-blue;
+
+			.retro-gallery-img {
+				transform: scale(1.08);
+			}
+		}
 	}
 
 	.image-inner {
@@ -62,6 +73,7 @@ import placeholderPic from '../assets/blog-placeholder-about.jpg';
 		height: 100%;
 		object-fit: cover;
 		image-rendering: pixelated;
+		transition: transform 0.15s ease-in-out;
 	}
 
 	.image-caption {
