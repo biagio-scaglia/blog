@@ -70,7 +70,7 @@ const faqSchema = {
 				</tr>
 				<tr>
 					<td><strong>Operating Base:</strong></td>
-					<td>Rome, Italy</td>
+					<td>Bari, Italy</td>
 				</tr>
 				<tr>
 					<td><strong>First Computer:</strong></td>
@@ -395,5 +395,99 @@ const faqSchema = {
 	.title-icon {
 		display: inline-block;
 		vertical-align: middle;
+	}
+
+	.kaomoji-container {
+		font-family: $font-verdana;
+		padding: 5px;
+	}
+
+	.kaomoji-title {
+		font-family: $font-tahoma;
+		font-size: 15px;
+		color: $win-blue;
+		margin: 0 0 8px 0;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.kaomoji-desc {
+		font-size: 11px;
+		color: #444;
+		margin: 0 0 15px 0;
+		line-height: 1.4;
+	}
+
+	.kaomoji-section {
+		margin-bottom: 18px;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	.kaomoji-category {
+		font-family: $font-tahoma;
+		font-size: 12px;
+		font-weight: bold;
+		color: #c71585;
+		margin: 0 0 8px 0;
+		border-bottom: 1px dashed $win-dark-gray;
+		padding-bottom: 2px;
+	}
+
+	.kaomoji-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+
+	.kaomoji-item {
+		font-family: $font-retro-mono;
+		font-size: 11px;
+		background: $win-white;
+		color: $win-text;
+		@include win95-border-outset;
+		padding: 4px 8px;
+		cursor: pointer;
+		user-select: none;
+		white-space: nowrap;
+		display: inline-block;
+
+		&:hover {
+			background: $win-light-gray;
+			color: $win-blue;
+		}
+
+		&:active {
+			border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+			padding: 5px 7px 3px 9px;
+		}
+	}
+
+	.kaomoji-toast {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		background: #ffffcc;
+		color: #000000;
+		border: 1px solid #000000;
+		padding: 6px 12px;
+		font-family: $font-tahoma;
+		font-size: 11px;
+		font-weight: bold;
+		@include retro-shadow;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+		transform: translateY(10px);
+		z-index: 9999;
+
+		&.toast-visible {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
 	}
 </style>

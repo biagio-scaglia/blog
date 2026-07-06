@@ -12,7 +12,7 @@ If you're reading this, it means you somehow stumbled upon my little digital hid
 
 ## Who am I? ᕙ(⇀‸↼‶)ᕗ
 
-My name is **Biagio Scaglia**. I'm a Full Stack Software Developer and UX/UI Designer from Rome, Italy. By day I write code in **React**, **TypeScript**, **.NET**, and **React Native**. By night... well, I also write code, but for my own projects. And sometimes I play video games until 3 AM. And watch anime. And tinker with old hardware. You get the idea.
+My name is **Biagio Scaglia**. I'm a Full Stack Software Developer and UX/UI Designer from Bari, Italy. By day I write code in **React**, **TypeScript**, **.NET**, and **React Native**. By night... well, I also write code, but for my own projects. And sometimes I play video games until 3 AM. And watch anime. And tinker with old hardware. You get the idea.
 
 My main creation is **Vellum - RPG Companion**, a mobile app I designed and built for tabletop RPG players who need a digital character sheet and campaign manager that doesn't feel like a spreadsheet from 2007.
 
