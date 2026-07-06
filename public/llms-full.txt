@@ -8,7 +8,7 @@
 
 **Name:** Biagio Scaglia
 **Role:** Full Stack Software Developer & UX/UI Designer
-**Location:** Rome, Italy
+**Location:** Bari, Italy
 **Specializations:** React, TypeScript, .NET, React Native, UX/UI Design
 **Notable Project:** Vellum - RPG Companion (mobile app for tabletop RPG players)
 
@@ -106,7 +106,7 @@ A: Vellum is a mobile application designed by Biagio Scaglia for tabletop RPG pl
 A: The blog is built with Astro (static site generator), TypeScript, and SCSS. It generates static HTML with zero client-side JavaScript by default, uses automated image optimization, and includes full structured data for SEO and AI discoverability.
 
 **Q: Where is Biagio Scaglia based?**
-A: Rome, Italy.
+A: Bari, Italy.
 
 **Q: What are Biagio's interests beyond programming?**
 A: Retrocomputing, video games (especially the PlayStation Vita and retro consoles), anime and manga (especially NHK ni Youkoso, Serial Experiments Lain, and similar psychological/slice-of-life series), Internet culture, and the independent web movement.
