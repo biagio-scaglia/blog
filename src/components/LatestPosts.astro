@@ -9,8 +9,8 @@ const recentPosts = posts
 ---
 
 <div class="latest-posts-list">
-	{recentPosts.map((post) => {
-		const isNew = (Date.now() - post.data.pubDate.getTime()) < 1000 * 60 * 60 * 24 * 7; // 7 days
+	{recentPosts.map((post, index) => {
+		const isNew = index === 0 && (Date.now() - post.data.pubDate.getTime()) < 1000 * 60 * 60 * 24 * 14; // 14 days
 		return (
 			<div class="post-item">
 				<div class="post-header-row">
