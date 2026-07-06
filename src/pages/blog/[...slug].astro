@@ -83,20 +83,50 @@ const blogPostSchema = {
 	},
 	"keywords": post.data.tags ? post.data.tags.join(', ') : undefined
 };
+
+const categoryThemes = {
+	"Coding": "blue",
+	"Anime": "pink",
+	"Gaming": "purple",
+	"Web Culture": "yellow",
+	"General": "windows"
+};
+const theme = categoryThemes[post.data.category] || "windows";
 ---
 
 <RetroLayout title={`${post.data.title} - Retro-Net`} description={post.data.description} image={coverImage} article={true} publishedDate={post.data.pubDate} modifiedDate={post.data.updatedDate} tags={post.data.tags}>
 	<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostSchema)} />
 	<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
-	<Window title={`view_log.sys - ${post.id}`} theme="windows">
+	<Window title={`notepad.exe - ${post.id}.txt`} theme={theme} icon="notepad">
 		<article class="retro-post">
-			<div class="post-metadata">
-				<span class="post-category">[{post.data.category}]</span>
-				<span class="post-date">
-					📅 Logged on: <FormattedDate date={post.data.pubDate} />
-				</span>
+			<!-- Win95 File Properties Panel -->
+			<div class="properties-panel">
+				<div class="properties-tab-header">
+					<span class="tab active">General</span>
+					<span class="tab">Details</span>
+				</div>
+				<div class="properties-tab-body">
+					<table class="properties-table" width="100%">
+						<tr>
+							<td class="prop-label">📄 File Name:</td>
+							<td class="prop-val">{post.id}.txt</td>
+						</tr>
+						<tr>
+							<td class="prop-label">📁 Category:</td>
+							<td class="prop-val"><span class="cat-pill">{post.data.category}</span></td>
+						</tr>
+						<tr>
+							<td class="prop-label">📅 Logged:</td>
+							<td class="prop-val"><FormattedDate date={post.data.pubDate} /></td>
+						</tr>
+						<tr>
+							<td class="prop-label">⚖️ Est. Size:</td>
+							<td class="prop-val">{(Math.round(post.body.length / 102) / 10 + 0.8).toFixed(1)} KB</td>
+						</tr>
+					</table>
+				</div>
 			</div>
-			
+
 			<h1 class="post-title">{post.data.title}</h1>
 			<hr class="post-divider" />
 
@@ -142,17 +172,22 @@ const blogPostSchema = {
 			<div class="post-navigation-row">
 				<div class="nav-prev">
 					{prev ? (
-						<a href={`${import.meta.env.BASE_URL}blog/${prev.id}/`} class="nav-btn">
-							« Previous Log: {prev.data.title}
+						<a href={`${import.meta.env.BASE_URL}blog/${prev.id}/`} class="nav-btn" title={prev.data.title}>
+							« Prev: {prev.data.title}
 						</a>
 					) : (
 						<span class="nav-btn-disabled">« First Entry</span>
 					)}
 				</div>
+				<div class="nav-up">
+					<a href={`${import.meta.env.BASE_URL}blog`} class="nav-btn">
+						↑ Up One Level
+					</a>
+				</div>
 				<div class="nav-next">
 					{next ? (
-						<a href={`${import.meta.env.BASE_URL}blog/${next.id}/`} class="nav-btn">
-							Next Log: {next.data.title} »
+						<a href={`${import.meta.env.BASE_URL}blog/${next.id}/`} class="nav-btn" title={next.data.title}>
+							Next: {next.data.title} »
 						</a>
 					) : (
 						<span class="nav-btn-disabled">Last Entry »</span>
@@ -322,12 +357,22 @@ const blogPostSchema = {
 	.post-navigation-row {
 		display: flex;
 		justify-content: space-between;
-		gap: 10px;
+		align-items: center;
+		gap: 8px;
 		margin-top: 15px;
 	}
 
-	.nav-prev, .nav-next {
+	.nav-prev, .nav-up, .nav-next {
 		flex: 1;
+		min-width: 0;
+	}
+
+	.nav-prev {
+		text-align: left;
+	}
+
+	.nav-up {
+		text-align: center;
 	}
 
 	.nav-next {
@@ -373,5 +418,82 @@ const blogPostSchema = {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		user-select: none;
+	}
+
+	.properties-panel {
+		background: $win-light-gray;
+		@include win95-border-outset;
+		padding: 8px;
+		margin-bottom: 20px;
+		max-width: 300px;
+		font-family: $font-tahoma;
+		font-size: 11px;
+		box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+	}
+
+	.properties-tab-header {
+		display: flex;
+		gap: 2px;
+		border-bottom: 1px solid $win-dark-gray;
+		padding-bottom: 0px;
+		margin-bottom: 8px;
+
+		.tab {
+			background: $win-light-gray;
+			border: 1px solid $win-dark-gray;
+			border-bottom: none;
+			border-radius: 2px 2px 0 0;
+			padding: 2px 8px;
+			cursor: default;
+			user-select: none;
+			color: #555555;
+
+			&.active {
+				background: $win-light-gray;
+				font-weight: bold;
+				border-color: $win-dark-gray $win-dark-gray transparent $win-dark-gray;
+				margin-bottom: -1px;
+				padding-bottom: 3px;
+				position: relative;
+				z-index: 2;
+				box-shadow: inset 1px 1px 0px #ffffff;
+				color: $win-text;
+			}
+		}
+	}
+
+	.properties-tab-body {
+		background: $win-light-gray;
+		padding: 4px;
+	}
+
+	.properties-table {
+		border-collapse: collapse;
+		font-size: 11px;
+
+		td {
+			padding: 3px 4px;
+			border: none;
+		}
+
+		.prop-label {
+			color: $win-dark-gray;
+			font-weight: normal;
+			width: 80px;
+		}
+
+		.prop-val {
+			color: $win-text;
+			font-weight: bold;
+		}
+
+		.cat-pill {
+			background: #ffffff;
+			border: 1px solid $win-dark-gray;
+			padding: 1px 4px;
+			border-radius: 2px;
+			font-family: $font-tahoma;
+			font-weight: normal;
+		}
 	}
 </style>

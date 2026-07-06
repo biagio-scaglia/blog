@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import RetroLayout from '../../layouts/RetroLayout.astro';
 import Window from '../../components/Window.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -18,34 +18,142 @@ const posts = (await getCollection('blog')).sort(
 		</div>
 	</div>
 
-	<Window title="blog_directory.exe" theme="blue">
-		<div class="blog-dir-header">
-			<h2>📂 diary_logs/</h2>
-			<p>Double click or click a log file to view the entries. Current index contains {posts.length} entries.</p>
+	<Window title="blog_directory.exe ~ [C:\Windows\Desktop\diary_logs]" theme="blue" icon="folder">
+		<!-- Win95 Menu Bar -->
+		<div class="win95-menu-bar">
+			<span class="menu-item">File</span>
+			<span class="menu-item">Edit</span>
+			<span class="menu-item">View</span>
+			<span class="menu-item">Go</span>
+			<span class="menu-item">Favorites</span>
+			<span class="menu-item">Help</span>
 		</div>
 
-		<div class="posts-container">
-			{posts.map((post) => {
-				const year = post.data.pubDate.getFullYear();
-				const month = String(post.data.pubDate.getMonth() + 1).padStart(2, '0');
-				const archiveKey = `${year}-${month}`;
-				
-				return (
-					<div 
-						class="post-wrapper" 
-						data-category={post.data.category || 'General'}
-						data-archive={archiveKey}
-						data-tags={post.data.tags ? post.data.tags.join(',') : ''}
-					>
-						<ArticleCard post={post} />
-					</div>
-				);
-			})}
+		<!-- Win95 Toolbar -->
+		<div class="win95-toolbar">
+			<button class="tool-btn" onclick="window.history.back()"><span class="btn-icon">←</span> Back</button>
+			<a href={`${import.meta.env.BASE_URL}`} class="tool-btn"><span class="btn-icon">↑</span> Up</a>
+			<div class="tool-divider"></div>
+			<button class="tool-btn" id="btn-view-icons"><span class="btn-icon">▒</span> Large Icons</button>
+			<button class="tool-btn active" id="btn-view-details"><span class="btn-icon">≡</span> Details</button>
+		</div>
+
+		<!-- Win95 Address Bar -->
+		<div class="win95-address-bar">
+			<span class="address-label">Address:</span>
+			<div class="address-input-wrapper">
+				<span class="address-folder-icon">📂</span>
+				<input type="text" value={`C:\\Windows\\Desktop\\diary_logs`} readonly class="address-field" />
+			</div>
+		</div>
+
+		<div class="blog-view-container view-details" id="blog-view-container">
+			<!-- View 1: Large Icons Grid -->
+			<div class="posts-grid-icons">
+				{posts.map((post) => {
+					const year = post.data.pubDate.getFullYear();
+					const month = String(post.data.pubDate.getMonth() + 1).padStart(2, '0');
+					const archiveKey = `${year}-${month}`;
+					
+					return (
+						<a 
+							href={`${import.meta.env.BASE_URL}blog/${post.id}/`} 
+							class="icon-post-card post-wrapper"
+							data-category={post.data.category || 'General'}
+							data-archive={archiveKey}
+							data-tags={post.data.tags ? post.data.tags.join(',') : ''}
+						>
+							<div class="icon-wrapper">
+								<span class="file-icon">📄</span>
+							</div>
+							<span class="file-label">{post.data.title}</span>
+							<span class="file-date"><FormattedDate date={post.data.pubDate} /></span>
+						</a>
+					);
+				})}
+			</div>
+
+			<!-- View 2: Details List Table -->
+			<div class="posts-table-details">
+				<table class="details-table">
+					<thead>
+						<tr>
+							<th style="width: 25%;">Name</th>
+							<th style="width: 40%;">Title</th>
+							<th style="width: 15%;">Category</th>
+							<th style="width: 12%;">Date</th>
+							<th style="width: 8%;">Size</th>
+						</tr>
+					</thead>
+					<tbody>
+						{posts.map((post) => {
+							const year = post.data.pubDate.getFullYear();
+							const month = String(post.data.pubDate.getMonth() + 1).padStart(2, '0');
+							const archiveKey = `${year}-${month}`;
+							const sizeEst = Math.round(post.body.length / 102) / 10 + 0.8; // estimate size in KB
+							
+							return (
+								<tr 
+									class="post-wrapper-tr post-wrapper"
+									data-category={post.data.category || 'General'}
+									data-archive={archiveKey}
+									data-tags={post.data.tags ? post.data.tags.join(',') : ''}
+									onclick={`window.location.href='${import.meta.env.BASE_URL}blog/${post.id}/'`}
+								>
+									<td class="name-col">
+										<span class="file-small-icon">📄</span> 
+										<span class="file-name-txt">{post.id}.txt</span>
+									</td>
+									<td class="title-col">
+										<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>{post.data.title}</a>
+									</td>
+									<td>{post.data.category}</td>
+									<td><FormattedDate date={post.data.pubDate} /></td>
+									<td class="size-col">{sizeEst.toFixed(1)} KB</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</Window>
 </RetroLayout>
 
 <script>
+	// Handle view state toggle
+	const container = document.getElementById('blog-view-container');
+	const btnIcons = document.getElementById('btn-view-icons');
+	const btnDetails = document.getElementById('btn-view-details');
+
+	if (btnIcons && btnDetails && container) {
+		btnIcons.addEventListener('click', () => {
+			container.classList.remove('view-details');
+			container.classList.add('view-icons');
+			btnIcons.classList.add('active');
+			btnDetails.classList.remove('active');
+			localStorage.setItem('blog-view-mode', 'icons');
+		});
+
+		btnDetails.addEventListener('click', () => {
+			container.classList.remove('view-icons');
+			container.classList.add('view-details');
+			btnDetails.classList.add('active');
+			btnIcons.classList.remove('active');
+			localStorage.setItem('blog-view-mode', 'details');
+		});
+
+		// Restore preference on load
+		const savedMode = localStorage.getItem('blog-view-mode');
+		if (savedMode === 'icons') {
+			container.classList.remove('view-details');
+			container.classList.add('view-icons');
+			btnIcons.classList.add('active');
+			btnDetails.classList.remove('active');
+		}
+	}
+
+	// Handle filters
 	const params = new URLSearchParams(window.location.search);
 	const category = params.get('category');
 	const tag = params.get('tag');
@@ -86,7 +194,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 
 			if (match) {
-				wrapper.style.display = 'block';
+				wrapper.style.display = wrapper.tagName === 'TR' ? 'table-row' : 'flex';
 			} else {
 				wrapper.style.display = 'none';
 			}
@@ -97,22 +205,117 @@ const posts = (await getCollection('blog')).sort(
 <style lang="scss">
 	@use "../../styles/variables" as *;
 
-	.blog-dir-header {
+	.win95-menu-bar {
 		font-family: $font-tahoma;
-		border-bottom: 2px groove #fff;
-		margin-bottom: 15px;
-		padding-bottom: 8px;
+		font-size: 11px;
+		padding: 2px 4px;
+		border-bottom: 1px solid $win-dark-gray;
+		display: flex;
+		gap: 12px;
+		user-select: none;
+		background: $win-light-gray;
+		margin-bottom: 2px;
 
-		h2 {
-			color: $win-blue;
-			font-size: 16px;
-			margin: 0;
+		.menu-item {
+			cursor: pointer;
+			padding: 2px 6px;
+
+			&:hover {
+				background: #000080;
+				color: #ffffff;
+			}
+		}
+	}
+
+	.win95-toolbar {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		padding: 4px;
+		border-bottom: 1px solid $win-dark-gray;
+		background: $win-light-gray;
+		margin-bottom: 4px;
+
+		.tool-btn {
+			@include win95-border-outset;
+			background: $win-light-gray;
+			color: $win-text;
+			font-family: $font-tahoma;
+			font-size: 11px;
+			padding: 3px 8px;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+			text-decoration: none;
+			outline: none;
+
+			.btn-icon {
+				font-size: 12px;
+				font-weight: bold;
+			}
+
+			&:hover {
+				background: #dfdfdf;
+			}
+
+			&.active {
+				border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+				background: #dfdfdf;
+				box-shadow: inset 1px 1px 0px rgba(0, 0, 0, 0.1);
+			}
+
+			&:active {
+				border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+			}
 		}
 
-		p {
+		.tool-divider {
+			width: 2px;
+			height: 18px;
+			background: $win-dark-gray;
+			border-right: 1px solid #ffffff;
+			margin: 0 4px;
+		}
+	}
+
+	.win95-address-bar {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 4px 6px;
+		background: $win-light-gray;
+		border-bottom: 2px groove #ffffff;
+		margin-bottom: 12px;
+		font-family: $font-tahoma;
+		font-size: 11px;
+
+		.address-label {
+			color: $win-dark-gray;
+			font-weight: bold;
+		}
+
+		.address-input-wrapper {
+			flex-grow: 1;
+			display: flex;
+			align-items: center;
+			background: #ffffff;
+			@include win95-border-inset;
+			padding: 2px 4px;
+		}
+
+		.address-folder-icon {
+			margin-right: 4px;
+		}
+
+		.address-field {
+			border: none;
+			outline: none;
+			width: 100%;
+			font-family: $font-retro-mono;
 			font-size: 11px;
-			color: #555;
-			margin: 4px 0 0 0;
+			background: transparent;
+			color: $win-text;
 		}
 	}
 
@@ -147,8 +350,166 @@ const posts = (await getCollection('blog')).sort(
 		}
 	}
 
-	.posts-container {
+	/* Toggled layout structures */
+	.blog-view-container {
+		&.view-details {
+			.posts-grid-icons {
+				display: none;
+			}
+			.posts-table-details {
+				display: block;
+			}
+		}
+
+		&.view-icons {
+			.posts-grid-icons {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+				gap: 16px;
+				padding: 10px;
+				background: #ffffff;
+				@include win95-border-inset;
+				min-height: 300px;
+			}
+			.posts-table-details {
+				display: none;
+			}
+		}
+	}
+
+	/* View mode: Large Icons */
+	.icon-post-card {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 8px;
+		border: 1px dashed transparent;
+		text-decoration: none;
+		color: $win-text;
+		transition: all 0.05s ease;
+
+		&:hover {
+			background: rgba(0, 0, 128, 0.08);
+			border-color: #000080;
+			
+			.file-label {
+				background: #000080;
+				color: #ffffff;
+			}
+		}
+
+		.icon-wrapper {
+			font-size: 32px;
+			margin-bottom: 4px;
+			filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25));
+		}
+
+		.file-label {
+			font-family: $font-tahoma;
+			font-size: 11px;
+			line-height: 1.2;
+			padding: 1px 3px;
+			margin-bottom: 2px;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			word-break: break-word;
+		}
+
+		.file-date {
+			font-size: 9px;
+			color: $win-dark-gray;
+		}
+	}
+
+	/* View mode: Details Table */
+	.posts-table-details {
+		background: #ffffff;
+		@include win95-border-inset;
+		min-height: 300px;
+	}
+
+	.details-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-family: $font-tahoma;
+		font-size: 11px;
+
+		th {
+			background: $win-light-gray;
+			@include win95-border-outset;
+			padding: 3px 6px;
+			font-weight: bold;
+			text-align: left;
+			user-select: none;
+			border-bottom: 1px solid $win-dark-gray;
+		}
+
+		tr:not(:first-child) {
+			border-bottom: 1px solid #f0f0f0;
+		}
+
+		tr.post-wrapper-tr {
+			cursor: pointer;
+			background: #ffffff;
+
+			&:hover {
+				background: #000080 !important;
+				color: #ffffff;
+
+				td {
+					color: #ffffff;
+					a {
+						color: #ffffff;
+					}
+				}
+				
+				.file-name-txt {
+					color: #ffffff;
+				}
+			}
+
+			td {
+				padding: 5px 8px;
+				vertical-align: middle;
+				color: $win-text;
+
+				a {
+					color: #0000ee;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		.name-col {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			font-weight: bold;
+		}
+
+		.file-small-icon {
+			font-size: 14px;
+		}
+
+		.file-name-txt {
+			color: #333333;
+		}
+
+		.title-col {
+			font-weight: normal;
+		}
+
+		.size-col {
+			font-family: $font-retro-mono;
+			text-align: right;
+		}
 	}
 </style>
