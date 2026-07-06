@@ -23,6 +23,20 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 				<label for="gb-msg">Message:</label>
 				<textarea id="gb-msg" rows="3" required placeholder="Cool site! :-)"></textarea>
 			</div>
+			<!-- Quick Emoticon Inserter -->
+			<div class="emoticon-picker-row">
+				<span class="picker-label">Insert Kaomoji:</span>
+				<div class="emoticon-shortcuts">
+					<button type="button" class="insert-emo-btn">:-)</button>
+					<button type="button" class="insert-emo-btn">;-)</button>
+					<button type="button" class="insert-emo-btn">:-D</button>
+					<button type="button" class="insert-emo-btn">:-P</button>
+					<button type="button" class="insert-emo-btn">(◕‿◕)</button>
+					<button type="button" class="insert-emo-btn">(*^▽^*)</button>
+					<button type="button" class="insert-emo-btn">(T_T)</button>
+					<button type="button" class="insert-emo-btn">(>_<)</button>
+				</div>
+			</div>
 			<div class="form-actions">
 				<input type="submit" value="Submit Message!" />
 				<button type="reset">Clear Form</button>
@@ -161,6 +175,24 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 		});
 	}
 
+	// Bind Quick Emoticon Pickers
+	const emoBtns = document.querySelectorAll('.insert-emo-btn');
+	const msgInput = document.getElementById('gb-msg') as HTMLTextAreaElement | null;
+	
+	emoBtns.forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			if (!msgInput) return;
+			const textToInsert = btn.textContent || '';
+			const startPos = msgInput.selectionStart;
+			const endPos = msgInput.selectionEnd;
+			msgInput.value = msgInput.value.substring(0, startPos) + textToInsert + msgInput.value.substring(endPos);
+			msgInput.focus();
+			msgInput.selectionStart = startPos + textToInsert.length;
+			msgInput.selectionEnd = startPos + textToInsert.length;
+		});
+	});
+ 
 	// Initial load and render
 	renderEntries();
 </script>
@@ -231,7 +263,13 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 	.entry-card {
 		background: #ffffff;
 		@include win95-border-inset;
-		padding: 8px 12px;
+		padding: 10px 14px;
+		transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.15);
+		}
 	}
 
 	.entry-meta {
@@ -256,5 +294,56 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 		font-family: $font-verdana;
 		font-size: 12px;
 		line-height: 1.4;
+	}
+
+	.emoticon-picker-row {
+		display: flex;
+		align-items: center;
+		margin-left: 100px;
+		margin-top: -2px;
+		margin-bottom: 6px;
+		gap: 8px;
+		
+		@media (max-width: 500px) {
+			margin-left: 0;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 4px;
+		}
+
+		.picker-label {
+			font-family: $font-tahoma;
+			font-size: 10px;
+			color: $win-dark-gray;
+			font-weight: bold;
+			user-select: none;
+		}
+
+		.emoticon-shortcuts {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+		}
+
+		.insert-emo-btn {
+			font-family: $font-retro-mono;
+			font-size: 10px;
+			padding: 1px 4px;
+			background: $win-gray;
+			color: $win-text;
+			@include win95-border-outset;
+			cursor: pointer;
+			border-radius: 0;
+			outline: none;
+
+			&:hover {
+				background: $win-light-gray;
+			}
+
+			&:active {
+				border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+				padding: 2px 3px 0px 5px;
+			}
+		}
 	}
 </style>
