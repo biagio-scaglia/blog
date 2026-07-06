@@ -3,24 +3,25 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
 	title: string;
 	description: string;
-	image?: string;
+	image?: ImageMetadata;
 	article?: boolean;
 	publishedDate?: Date;
 	modifiedDate?: Date;
 	tags?: string[];
 }
 
-const { title, description, article, publishedDate, modifiedDate, tags } = Astro.props;
+const { title, description, image, article, publishedDate, modifiedDate, tags } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} article={article} publishedDate={publishedDate} modifiedDate={modifiedDate} tags={tags} />
+		<BaseHead title={title} description={description} image={image} article={article} publishedDate={publishedDate} modifiedDate={modifiedDate} tags={tags} />
 	</head>
 	<body>
 		<div class="retro-container" id="top">

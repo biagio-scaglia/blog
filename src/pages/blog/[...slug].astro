@@ -85,7 +85,7 @@ const blogPostSchema = {
 };
 ---
 
-<RetroLayout title={`${post.data.title} - Retro-Net`} description={post.data.description} article={true} publishedDate={post.data.pubDate} modifiedDate={post.data.updatedDate} tags={post.data.tags}>
+<RetroLayout title={`${post.data.title} - Retro-Net`} description={post.data.description} image={coverImage} article={true} publishedDate={post.data.pubDate} modifiedDate={post.data.updatedDate} tags={post.data.tags}>
 	<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostSchema)} />
 	<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 	<Window title={`view_log.sys - ${post.id}`} theme="windows">
