@@ -201,6 +201,7 @@ const currentDay = 2; // July 2nd, 2026
 				color: #ff0000;
 				font-weight: bold;
 				outline: 1px dashed #ff0000;
+				animation: blink-today 1.5s step-start infinite;
 
 				&:hover {
 					background: #ffff00;
@@ -208,6 +209,14 @@ const currentDay = 2; // July 2nd, 2026
 					outline: 1px solid #ff0000;
 				}
 			}
+		}
+	}
+
+	@keyframes blink-today {
+		50% {
+			background: $win-blue;
+			color: $win-white;
+			outline-color: $win-white;
 		}
 	}
 
@@ -223,14 +232,41 @@ const currentDay = 2; // July 2nd, 2026
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 2px;
 		font-family: $font-verdana;
 		font-size: 11px;
 
 		li {
 			display: flex;
 			align-items: center;
-			gap: 4px;
+			gap: 6px;
+			padding: 3px 6px;
+			transition: all 0.05s ease;
+			border-radius: 1px;
+
+			a {
+				color: #0000ee;
+				text-decoration: none;
+				flex-grow: 1;
+			}
+
+			&:hover {
+				background: #000080;
+				color: #ffffff;
+				
+				a {
+					color: #ffffff;
+					text-decoration: none;
+				}
+				
+				.cat-count {
+					color: #a0c0ff;
+				}
+				
+				.cat-icon {
+					filter: brightness(0) invert(1);
+				}
+			}
 		}
 	}
 
@@ -291,6 +327,7 @@ const currentDay = 2; // July 2nd, 2026
 
 	.cat-icon, .link-icon {
 		flex-shrink: 0;
+		transition: filter 0.05s ease;
 	}
 
 	.links-list {
@@ -299,32 +336,40 @@ const currentDay = 2; // July 2nd, 2026
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 2px;
 		font-family: $font-verdana;
 		font-size: 11px;
 
 		li {
-			border-bottom: 1px dotted #eee;
-			padding-bottom: 4px;
-
-			&:last-child {
-				border-bottom: none;
-				padding-bottom: 0;
-			}
-		}
-
-		a {
-			color: #0000ee;
-			text-decoration: none;
+			padding: 3px 6px;
+			transition: all 0.05s ease;
+			border-radius: 1px;
 			display: flex;
 			align-items: center;
-			gap: 6px;
-			transition: transform 0.1s steps(2);
+
+			a {
+				color: #0000ee;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				width: 100%;
+				transition: transform 0.1s steps(2);
+			}
 
 			&:hover {
-				text-decoration: underline;
-				color: #ff0000;
-				transform: translateX(3px);
+				background: #000080;
+				color: #ffffff;
+
+				a {
+					color: #ffffff;
+					text-decoration: none;
+					transform: translateX(3px);
+				}
+
+				.link-icon {
+					filter: brightness(0) invert(1);
+				}
 			}
 		}
 	}

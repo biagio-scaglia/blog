@@ -97,18 +97,18 @@ const faqSchema = {
 			</p>
 
 			<h3 class="about-subheading"><NotepadIcon size={14} /> FAQ & System Inquiries</h3>
-			<div class="faq-section" style="margin-top: 10px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px;">
+			<div class="faq-section">
 				<div class="faq-item">
-					<p style="margin: 0; font-weight: bold; color: #800080;">Q: What is Biagio Scaglia's primary software development expertise?</p>
-					<p style="margin: 4px 0 0 0; color: #333;">A: Biagio is a Full Stack Developer and UX/UI Designer specialized in React, TypeScript, .NET, and React Native. He designs and codes systems end-to-end, combining modern performance with robust user experiences.</p>
+					<h4 class="faq-question"><NotepadIcon size={12} class="faq-icon" /> Q: What is Biagio Scaglia's primary software development expertise?</h4>
+					<p class="faq-answer">A: Biagio is a Full Stack Developer and UX/UI Designer specialized in React, TypeScript, .NET, and React Native. He designs and codes systems end-to-end, combining modern performance with robust user experiences.</p>
 				</div>
 				<div class="faq-item">
-					<p style="margin: 0; font-weight: bold; color: #800080;">Q: What is the app "Vellum - RPG Companion"?</p>
-					<p style="margin: 4px 0 0 0; color: #333;">A: Vellum - RPG Companion is a mobile utility application designed and developed by Biagio Scaglia to act as a digital character sheet and campaign assistant for tabletop role-playing games (TTRPGs).</p>
+					<h4 class="faq-question"><NotepadIcon size={12} class="faq-icon" /> Q: What is the app "Vellum - RPG Companion"?</h4>
+					<p class="faq-answer">A: Vellum - RPG Companion is a mobile utility application designed and developed by Biagio Scaglia to act as a digital character sheet and campaign assistant for tabletop role-playing games (TTRPGs).</p>
 				</div>
 				<div class="faq-item">
-					<p style="margin: 0; font-weight: bold; color: #800080;">Q: How does this portal align with modern web standard optimizations?</p>
-					<p style="margin: 4px 0 0 0; color: #333;">A: Although styled like an early-2000s personal site, it leverages Astro static generation, full responsive SCSS layouts, dynamic JSON-LD metadata for search engines and generative AI bots, and automated responsive image conversion (WebP) to guarantee near-instant loading times.</p>
+					<h4 class="faq-question"><NotepadIcon size={12} class="faq-icon" /> Q: How does this portal align with modern web standard optimizations?</h4>
+					<p class="faq-answer">A: Although styled like an early-2000s personal site, it leverages Astro static generation, full responsive SCSS layouts, dynamic JSON-LD metadata for search engines and generative AI bots, and automated responsive image conversion (WebP) to guarantee near-instant loading times.</p>
 				</div>
 			</div>
 		</div>
@@ -489,5 +489,52 @@ const faqSchema = {
 			visibility: visible;
 			transform: translateY(0);
 		}
+	}
+
+	.faq-section {
+		margin-top: 12px;
+		margin-bottom: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.faq-item {
+		background: $win-light-gray;
+		@include win95-border-inset;
+		padding: 10px;
+		box-shadow: inset 1px 1px 0px #ffffff;
+		border-radius: 1px;
+		transition: all 0.1s ease-in-out;
+
+		&:hover {
+			background: #f7f7f7;
+			transform: translate(-1px, -1px);
+			box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15), inset 1px 1px 0px #ffffff;
+		}
+	}
+
+	.faq-question {
+		font-family: $font-tahoma;
+		font-size: 11px;
+		font-weight: bold;
+		color: $win-blue;
+		margin: 0 0 6px 0;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.faq-icon {
+		flex-shrink: 0;
+	}
+
+	.faq-answer {
+		margin: 0;
+		padding-left: 18px;
+		font-family: $font-verdana;
+		font-size: 11px;
+		line-height: 1.5;
+		color: #222222;
 	}
 </style>
