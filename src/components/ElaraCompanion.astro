@@ -25,6 +25,17 @@ import elaraImg from '../assets/elara.png';
 			<span class="vn-text" id="vn-text"></span>
 			<span class="vn-cursor" id="vn-cursor">▌</span>
 		</div>
+
+		<!-- VN Option Choices -->
+		<div class="vn-choices" id="vn-choices">
+			<button class="choice-btn" data-pool="nostalgia">💾 Nostalgia</button>
+			<button class="choice-btn" data-pool="gaming">🎮 Gaming</button>
+			<button class="choice-btn" data-pool="anime">🌸 Anime</button>
+			<button class="choice-btn" data-pool="coding">💻 Coding</button>
+			<button class="choice-btn" data-pool="philosophical">✨ Philosophy</button>
+			<button class="choice-btn" data-pool="random">🎲 Random</button>
+		</div>
+
 		<div class="vn-indicator" id="vn-indicator">▼</div>
 		<div class="vn-controls">
 			<button class="vn-btn" id="vn-btn-next">Next</button>
@@ -325,6 +336,7 @@ import elaraImg from '../assets/elara.png';
 		vnText.textContent = '';
 		if (vnCursor) vnCursor.style.display = 'inline';
 		if (vnIndicator) vnIndicator.style.opacity = '0';
+		hideChoices();
 
 		let i = 0;
 		function tick() {
@@ -338,6 +350,7 @@ import elaraImg from '../assets/elara.png';
 				state.isTyping = false;
 				if (vnCursor) vnCursor.style.display = 'none';
 				if (vnIndicator) vnIndicator.style.opacity = '1';
+				showChoices();
 				onComplete();
 			}
 		}
@@ -353,6 +366,7 @@ import elaraImg from '../assets/elara.png';
 		if (vnCursor) vnCursor.style.display = 'none';
 		if (vnIndicator) vnIndicator.style.opacity = '1';
 		state.isTyping = false;
+		showChoices();
 	}
 
 	let currentDialogueText = '';
@@ -452,6 +466,20 @@ import elaraImg from '../assets/elara.png';
 		}
 	}
 
+	function showChoices() {
+		const choices = $('vn-choices');
+		if (choices) {
+			choices.classList.add('choices-visible');
+		}
+	}
+
+	function hideChoices() {
+		const choices = $('vn-choices');
+		if (choices) {
+			choices.classList.remove('choices-visible');
+		}
+	}
+
 	function init() {
 		try {
 			const stored = sessionStorage.getItem('elara_clicks');
@@ -479,7 +507,7 @@ import elaraImg from '../assets/elara.png';
 		if (vnBox) {
 			vnBox.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
-				if (target.closest('.vn-controls') || target.closest('.vn-nameplate')) return;
+				if (target.closest('.vn-controls') || target.closest('.vn-nameplate') || target.closest('.vn-choices')) return;
 				handleBoxClick();
 			});
 		}
@@ -488,6 +516,20 @@ import elaraImg from '../assets/elara.png';
 		if (btnAuto) btnAuto.addEventListener('click', (e) => { e.stopPropagation(); toggleAutoMode(); });
 		if (btnLog) btnLog.addEventListener('click', (e) => { e.stopPropagation(); toggleLog(); });
 		if (logClose) logClose.addEventListener('click', (e) => { e.stopPropagation(); toggleLog(); });
+
+		const choiceBtns = document.querySelectorAll('.choice-btn');
+		choiceBtns.forEach((btn) => {
+			btn.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const pool = (btn as HTMLElement).dataset.pool;
+				if (pool === 'random') {
+					triggerRandomDialogue();
+				} else if (pool) {
+					const dialogue = getUniqueDialogue(pool);
+					if (dialogue) showDialogue(dialogue);
+				}
+			});
+		});
 
 		setMood('neutral');
 		const greeting = getRandomFrom(DIALOGUES.greeting);
@@ -636,6 +678,65 @@ import elaraImg from '../assets/elara.png';
 		position: relative;
 		border-color: #e0d0f0 #9a7abf #9a7abf #e0d0f0;
 		cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M10 2l3 0 0 12 3 0 0-7 2 0 0 7 1 0 0-6 2 0 0 6 1 0 0-5 2 0 0 9-1 0 0 2-1 0 0 1-1 0 0 1-7 0 0-1-3 0 0-1-1 0 0-5-2 0 0-3 2 0 0-3z' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>") 10 2, pointer;
+	}
+
+	.vn-choices {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 24px;
+		background: rgba(250, 245, 255, 0.96);
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 6px;
+		padding: 18px 12px 6px 12px;
+		z-index: 4;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.2s ease, visibility 0.2s ease;
+
+		&.choices-visible {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		@media (max-width: 600px) {
+			grid-template-columns: repeat(2, 1fr);
+			padding: 14px 8px 4px 8px;
+			gap: 4px;
+		}
+	}
+
+	.choice-btn {
+		@include win95-border-outset;
+		background: #f3e5f5;
+		color: #4a1070;
+		font-family: $font-tahoma;
+		font-size: 10px;
+		font-weight: bold;
+		padding: 4px 6px;
+		cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M10 2l3 0 0 12 3 0 0-7 2 0 0 7 1 0 0-6 2 0 0 6 1 0 0-5 2 0 0 9-1 0 0 2-1 0 0 1-1 0 0 1-7 0 0-1-3 0 0-1-1 0 0-5-2 0 0-3 2 0 0-3z' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>") 10 2, pointer;
+		border-color: #ffffff #9a7abf #9a7abf #ffffff;
+		outline: none;
+		border-radius: 0;
+		user-select: none;
+		text-align: center;
+		transition: background 0.1s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+
+		&:hover {
+			background: #e8d5f0;
+			color: #2a0050;
+		}
+
+		&:active {
+			border-color: #9a7abf #ffffff #ffffff #9a7abf;
+			padding: 5px 5px 3px 7px;
+		}
 	}
 
 	.vn-nameplate {
