@@ -6,9 +6,7 @@ category: "Gaming"
 tags: ["touhou", "action-rpg", "nintendo-switch", "review", "xseed"]
 ---
 
-There is a long-standing tradition of *Touhou Project* fan games taking ZUN's rich cast of characters and dropping them into completely different genres. We've seen Touhou racing games, Touhou deckbuilders, and Touhou roguelikes. But one of the most successful adaptations is **Touhou Scarlet Curiosity** (developed by the talented circle *Ankake Spa* and published by *XSEED Games* / *Phoenixx*). 
-
-I recently spent a couple of long nights curled up on the couch with my Nintendo Switch, running around Gensokyo as Remilia Scarlet and Sakuya Izayoi. Here is my weblog review!
+There is a long-standing, beautiful tradition within the *Touhou Project* fan community of taking ZUN's iconic cast of characters and dropping them into completely different genres. Over the years, we've seen everything from Touhou-themed kart racers to deckbuilding card games and roguelike dungeon crawlers. Yet, few adaptations feel quite as natural and polished as **Touhou Scarlet Curiosity** (developed by the talented indie circle *Ankake Spa* and brought to consoles via *XSEED Games* / *Phoenixx*). I recently spent a couple of long, quiet nights curled up on the couch with my Nintendo Switch, running through the colorful lands of Gensokyo as Remilia Scarlet and Sakuya Izayoi. It was a nostalgic trip that reminded me of classic early-2000s action RPGs like the *Ys* series, blended with the frantic energy of a traditional bullet hell.
 
 <fieldset style="border: 2px solid #808080; padding: 12px; margin: 18px 0; background: #dfdfdf; box-shadow: 2px 2px 0px #fff inset, -2px -2px 0px #808080 inset;">
   <legend style="font-family: 'Tahoma'; font-weight: bold; color: #000080; padding: 0 6px;">🎮 SYSTEM FILE: info.cfg</legend>
@@ -38,47 +36,16 @@ I recently spent a couple of long nights curled up on the couch with my Nintendo
 
 ---
 
-## The Premise: Remilia's Boredom
+The setup for the adventure is wonderfully lighthearted and fits the universe perfectly. Remilia Scarlet, the head vampire of the Scarlet Devil Mansion, is bored out of her mind. When she spots a newspaper story about a mysterious giant monster causing havoc in Gensokyo, she sets out to track it down, accompanied by her faithful, knife-throwing maid Sakuya. Depending on who you choose at the start, the gameplay style shifts significantly. Remilia relies on fast, floaty movement, sweeping claw combos, and magical blood spells that can decimate groups of foes. Sakuya, on the other hand, plays as a technical, ground-based fighter who uses time-manipulation to pause threats, teleport, and throw infinite waves of daggers. The dialogue is full of cute, fan-pleasing banter, and seeing these two interact with other classic characters like Cirno or Reimu is a constant treat.
 
-The plot is delightfully simple: **Remilia Scarlet**, the immortal vampire head of the Scarlet Devil Mansion, is bored out of her mind. She's so desperate for excitement that when she reads a newspaper article about a giant monster threatening Gensokyo, she decides to track it down. 
+What makes *Scarlet Curiosity* particularly stand out is how beautifully it portrays Gensokyo. Every location—from the sun-dappled paths of the Misty Lake to the dark, towering trees of the Bamboo Forest of the Lost—feels vibrant and alive. The Switch port handles the colorful, painterly aesthetics very well, giving the grass, ancient stone ruins, and foliage a soft, fairy-tale watercolor look. It is a relaxing game to explore, with light platforming elements that keep the level progression engaging without ever becoming frustrating.
 
-Depending on who you choose to play, the adventure differs:
-* **Remilia** is floaty, fast, and uses powerful claw attacks and magical blood spells.
-* **Sakuya** is a ground-based technical fighter who controls time, teleports, and throws hundreds of knives.
+For those who love action RPGs but have always been intimidated by Touhou’s traditional, screen-filling bullet hell difficulty, this game serves as an exceptionally cozy and accessible gateway. Combat feels fluid and satisfying. As you defeat foes and level up, you unlock a vast array of unique active skills. The system lets you equip up to three skills at once, allowing for fun experimentation. You can easily chain together Sakuya’s time-slow bubble with a massive circle of daggers, or use Remilia’s blood spears to pin enemies before diving in for a final impact. 
 
-Seeing their interactions with other classic Touhou characters (like Rumia, Cirno, and Reimu) is pure joy. The dialogue is lighthearted and carries that authentic indie doujin charm.
+Where the game truly achieves greatness, though, is in its boss fights. These encounters translate ZUN's danmaku roots into a 3D isometric space. Bosses don't just attack you directly; they summon massive, glowing geometric patterns of projectiles. The camera angles tilt slightly to give you a better view, forcing you to double-jump, dash, and squeeze through tight corridors of neon bullets. Dodging these hazards in real-time while waiting for the perfect window to strike is exhilarating. It's all accompanied by a phenomenal, high-energy soundtrack filled with rock and electronic arrangements of classic Touhou themes that will keep you bobbing your head as you fight.
 
----
+However, the experience is not without its minor flaws. The biggest drawback lies in the repetitiveness of the standard enemies. While the boss battles are highly creative and memorable, the regular monsters scattered throughout the stages can feel incredibly copy-pasted. You will find yourself hacking through the same generic fairies, crows, and sunflowers in almost every dungeon. They rarely present a threat and end up feeling more like simple speed bumps than actual combat challenges.
 
-## The Bright Spots (What I Loved) ヽ(〃v〃)ﾉ
-
-### 1. Beautiful, Colorful Environments
-From the misty lake paths to the bamboo forest of the lost, the game features incredibly vibrant environments. The Switch port does a wonderful job of displaying these colorful palettes. The watercolor-like textures on the grass, ruins, and trees make it feel like walking through an interactive anime fairy tale.
-
-### 2. A Great Entry Point for Action RPGs
-If you've always been intimidated by Touhou's legendary difficulty but love the characters and lore, this game is the perfect bridge. It is very accessible, offering light platforming, easy combat combos, and generous checkpoint systems. It's a game you can play to relax after work.
-
-### 3. Deep Skill Sets and Many Moves
-As you level up, you unlock a library of special skills. You can equip up to three active skills at once. Chaining Sakuya's time-stop with a massive knife spread, or Remilia's spear throws with a diving kick, makes the combat feel dynamic and customized to your playstyle.
-
-### 4. Fantastic Danmaku Boss Fights
-This is where the game shines. Bosses don't just swing swords; they shoot concentric circles, waves, and patterns of glowing spheres. The camera shifts slightly, and you have to double-jump, dash, and weave through a 3D bullet hell. It captures the true spirit of Touhou in an Action-RPG perspective.
-
-### 5. High-Energy Soundtrack
-Ankake Spa games are famous for their musical arrangements, and the OST here is phenomenal. The fast-paced guitars, electronic beats, and classic melodies will have you humming along as you clear dungeons.
-
----
-
-## The Downside: Copy-Paste Foes (´；д；`)
-
-If there's one major flaw, it's the **enemy variety**. While the bosses are complex and unique, the standard mobs in the stages are very repetitive. You will fight the same generic fairies, crows, and sunflowers in almost every level. They don't offer much of a challenge and tend to feel like simple speed bumps between bosses.
-
----
-
-## Final Verdict
-
-**Touhou Scarlet Curiosity** is a beautiful, lighthearted love letter to the Touhou universe. Despite the repetitive minor enemies, the excellent boss design, outstanding soundtrack, and sheer charm of Remilia and Sakuya make it a must-play for any fan of Gensokyo. 
-
-If you want a cozy, action-packed ARPG for your Switch, this one gets a solid recommendation from me!
+Even with the repetitive common enemies, *Touhou Scarlet Curiosity* is a highly entertaining and polished indie love letter. The combination of wonderful boss encounters, a stellar soundtrack, and the genuine charm of Remilia and Sakuya makes it a fantastic addition to any Switch library. It's a cozy, fast-paced adventure that gets a warm recommendation from my end.
 
 **My Rating: 4 / 5 Stars** (★★★★☆)
