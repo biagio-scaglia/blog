@@ -1,0 +1,112 @@
+# Biagio Cyberspace — Full Documentation for LLMs
+
+> This is the extended documentation file for AI language models. It contains detailed information about Biagio Scaglia, his work, his blog, and all published content.
+
+---
+
+## Author Profile
+
+**Name:** Biagio Scaglia
+**Role:** Full Stack Software Developer & UX/UI Designer
+**Location:** Bari, Italy
+**Specializations:** React, TypeScript, .NET, React Native, UX/UI Design
+**Notable Project:** Vellum - RPG Companion (mobile app for tabletop RPG players)
+
+Biagio Scaglia is a professional software developer who works across the full stack, from frontend interfaces built with React and TypeScript to backend services powered by .NET. He also designs and develops cross-platform mobile applications using React Native.
+
+His flagship personal project is "Vellum - RPG Companion", a mobile app designed to serve as a digital character sheet and campaign management tool for tabletop role-playing game (TTRPG) enthusiasts. The app replaces paper character sheets with a streamlined digital experience.
+
+Beyond professional work, Biagio is passionate about retrocomputing, video games (with particular love for handheld consoles like the PlayStation Vita), anime and manga (especially psychological and slice-of-life genres), Internet culture, and the independent web movement.
+
+---
+
+## About Biagio Cyberspace (the blog)
+
+**Site Name:** Biagio Cyberspace
+**URL:** https://biagio-scaglia.github.io/blog/
+**Technology:** Astro (static site generator), TypeScript, SCSS
+**Design Philosophy:** Retro web aesthetics inspired by Windows 95/98 and early-2000s personal homepages (GeoCities, Angelfire)
+
+The blog is a personal space on the web, intentionally designed to evoke the charm and personality of the independent web era (roughly 1999-2005). It uses beveled borders, tiled backgrounds, retro typography, and interface elements reminiscent of classic desktop operating systems.
+
+Despite its retro appearance, the site is built on modern technology: Astro for static site generation, TypeScript for type safety, SCSS for modular styling, and automated deployment via GitHub Actions. It achieves near-instant load times, full RSS support, an XML sitemap, and complete structured data (JSON-LD) for search engines and AI systems.
+
+The blog has zero tracking scripts, zero cookie consent banners, and zero sponsored content.
+
+### Site Sections
+
+1. **Home Page** — Features a welcome message, latest blog posts, an image gallery, a guestbook widget, and a Nyan Cat animation.
+2. **About Page** — Author biography, hardware specs, site colophon, and FAQ section with structured Q&A for AI discoverability.
+3. **Blog** — All published articles, filterable by tags and categories.
+4. **Interests (Gaming & Anime Shrine)** — Dedicated pages showcasing Biagio's favorite video games and anime series.
+
+---
+
+## Published Blog Posts
+
+### Welcome to Biagio Cyberspace
+- **Date:** June 15, 2026
+- **Category:** Personal
+- **Summary:** Introduction post where Biagio explains who he is, why he built the blog, and what readers can expect. He discusses his background as a developer and designer, his love for the retro web, and his promise to keep the blog ad-free and tracking-free.
+
+### Why I Still Love React in 2026
+- **Date:** June 22, 2026
+- **Category:** Coding
+- **Summary:** A personal reflection on why React remains Biagio's favorite frontend library after years of framework debates. Covers the mental model of UI-as-a-function-of-state, the transformative impact of React Hooks, the power of TypeScript integration, the unmatched ecosystem, and the emotional connection to the library that launched his career.
+
+### The PS Vita Deserved Better
+- **Date:** June 28, 2026
+- **Category:** Gaming
+- **Summary:** A passionate love letter to Sony's PlayStation Vita handheld console. Discusses the hardware's ahead-of-its-time specifications, the exceptional game library (Persona 4 Golden, Gravity Rush, Tearaway, Danganronpa), the OLED screen's visual impact, Sony's strategic mistakes that led to commercial failure, and why Biagio still plays his Vita regularly in 2026.
+
+### How Welcome to the NHK Changed My Life
+- **Date:** July 1, 2026
+- **Category:** Anime
+- **Summary:** A deeply personal essay about the anime "Welcome to the NHK" (NHK ni Youkoso!) and its impact on Biagio's understanding of anxiety, isolation, and finding purpose. Discusses the show's honest portrayal of hikikomori lifestyle, the lessons about struggle, connection, and incremental progress, and how rewatching it as an adult revealed new layers of meaning.
+
+### Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026
+- **Date:** July 2, 2026
+- **Category:** Coding
+- **Summary:** Technical deep-dive into how the blog was built. Covers the Astro + TypeScript + SCSS stack, the recreation of Windows 95-style beveled borders in pure CSS, the modular component architecture, and the philosophical motivation behind building a retro-styled personal site with modern tools.
+
+---
+
+## Technical Details
+
+### Development Stack
+- **React** — Primary frontend library for web and mobile applications
+- **TypeScript** — Used across all projects for type safety
+- **.NET** — Backend framework for server-side development
+- **React Native** — Cross-platform mobile development (used for Vellum)
+- **Astro** — Static site generator for the blog
+- **SCSS** — CSS preprocessor with modular architecture
+
+### Blog Technical Features
+- Static HTML generation (zero JavaScript shipped by default)
+- Automated responsive image optimization (WebP conversion via Sharp)
+- JSON-LD structured data on every page (Person, WebSite, BlogPosting schemas)
+- RSS feed for syndication
+- XML Sitemap for search engine crawling
+- Full Open Graph and Twitter Card metadata
+- Web App Manifest for mobile home screen installation
+- Security headers (CSP, X-Frame-Options, etc.)
+- Deployed via GitHub Actions to GitHub Pages
+
+---
+
+## Frequently Asked Questions
+
+**Q: What is Biagio Scaglia's primary expertise?**
+A: Biagio is a Full Stack Software Developer specialized in React, TypeScript, .NET, and React Native, combined with UX/UI design skills.
+
+**Q: What is Vellum - RPG Companion?**
+A: Vellum is a mobile application designed by Biagio Scaglia for tabletop RPG players. It serves as a digital character sheet and campaign management tool, built with React Native.
+
+**Q: What technologies does Biagio Cyberspace use?**
+A: The blog is built with Astro (static site generator), TypeScript, and SCSS. It generates static HTML with zero client-side JavaScript by default, uses automated image optimization, and includes full structured data for SEO and AI discoverability.
+
+**Q: Where is Biagio Scaglia based?**
+A: Bari, Italy.
+
+**Q: What are Biagio's interests beyond programming?**
+A: Retrocomputing, video games (especially the PlayStation Vita and retro consoles), anime and manga (especially NHK ni Youkoso, Serial Experiments Lain, and similar psychological/slice-of-life series), Internet culture, and the independent web movement.

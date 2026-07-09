@@ -1,0 +1,10 @@
+/* TEAM */
+Developer & Designer: Biagio Scaglia
+Contact: contact [at] biagioscaglia.dev
+From: Bari, Italy
+
+/* SITE */
+Last update: 2026/07/03
+Standards: HTML5, CSS3, WCAG 2.1 AA
+Components: Astro, TypeScript, SCSS, MDX
+Software: Visual Studio Code, Figma

@@ -1,0 +1,52 @@
+# Biagio Cyberspace
+
+> Personal blog of Biagio Scaglia — Full Stack Software Developer, UX/UI Designer, and creator of "Vellum - RPG Companion".
+
+## About the Author
+
+Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. He specializes in React, TypeScript, .NET, and React Native. He is the designer and developer of "Vellum - RPG Companion", a mobile app for tabletop RPG players.
+
+His interests include retrocomputing, video games (especially handheld consoles like the PS Vita), anime and manga, Internet culture, and the independent web movement.
+
+## About This Site
+
+Biagio Cyberspace is Biagio's personal blog, inspired by the aesthetics of the early-2000s web (GeoCities, Angelfire, personal homepages). The site is built with Astro, TypeScript, and SCSS, and is designed to evoke the charm of Windows 95/98-era interfaces while running on modern web technology.
+
+The blog covers topics including:
+- Software development (React, TypeScript, .NET, React Native)
+- UX/UI design
+- Retrocomputing and web history
+- Video games and gaming culture
+- Anime and manga reviews
+- Internet culture and the independent web
+
+## Key Pages
+
+- [Home](https://biagio-scaglia.github.io/blog/): Main page with latest posts and site widgets
+- [About](https://biagio-scaglia.github.io/blog/about/): Author biography and site colophon
+- [Blog](https://biagio-scaglia.github.io/blog/blog/): All blog posts
+- [Interests](https://biagio-scaglia.github.io/blog/interests/): Gaming and anime shrine
+
+## Blog Posts
+
+- [Welcome to Biagio Cyberspace](https://biagio-scaglia.github.io/blog/blog/welcome-to-biagio-cyberspace/): Introduction to the blog and its author
+- [Why I Still Love React in 2026](https://biagio-scaglia.github.io/blog/blog/why-i-still-love-react/): Personal reflection on React as a frontend library
+- [The PS Vita Deserved Better](https://biagio-scaglia.github.io/blog/blog/psvita-deserved-better/): Love letter to Sony's forgotten handheld console
+- [How Welcome to the NHK Changed My Life](https://biagio-scaglia.github.io/blog/blog/nhk-changed-my-life/): Personal essay on the anime NHK ni Youkoso
+- [Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026](https://biagio-scaglia.github.io/blog/blog/astro-net-retro/): Technical deep-dive on building a retro-styled site with modern tools
+
+## Projects
+
+- **Vellum - RPG Companion**: A mobile application designed for tabletop RPG players, serving as a digital character sheet and campaign management tool. Built with React Native.
+
+## Technical Stack
+
+- **Frontend**: React, TypeScript, React Native
+- **Backend**: .NET
+- **Blog Engine**: Astro (static site generator)
+- **Styling**: SCSS with Windows 95/98-inspired design system
+
+## Contact
+
+- GitHub: https://github.com/biagio-scaglia
+- Website: https://biagio-scaglia.github.io/blog/
