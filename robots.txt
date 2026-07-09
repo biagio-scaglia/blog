@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://biagio-scaglia.github.io/blog/sitemap-index.xml
+Sitemap: https://biagiocyberspace.it/sitemap-index.xml
 
 # AI Crawlers - Welcome! This site is happy to be indexed by AI.
 User-agent: GPTBot

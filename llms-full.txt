@@ -23,7 +23,7 @@ Beyond professional work, Biagio is passionate about retrocomputing, video games
 ## About Biagio Cyberspace (the blog)
 
 **Site Name:** Biagio Cyberspace
-**URL:** https://biagio-scaglia.github.io/blog/
+**URL:** https://biagiocyberspace.it/
 **Technology:** Astro (static site generator), TypeScript, SCSS
 **Design Philosophy:** Retro web aesthetics inspired by Windows 95/98 and early-2000s personal homepages (GeoCities, Angelfire)
 
