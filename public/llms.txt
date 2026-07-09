@@ -22,18 +22,18 @@ The blog covers topics including:
 
 ## Key Pages
 
-- [Home](https://biagio-scaglia.github.io/blog/): Main page with latest posts and site widgets
-- [About](https://biagio-scaglia.github.io/blog/about/): Author biography and site colophon
-- [Blog](https://biagio-scaglia.github.io/blog/blog/): All blog posts
-- [Interests](https://biagio-scaglia.github.io/blog/interests/): Gaming and anime shrine
+- [Home](https://biagiocyberspace.it/): Main page with latest posts and site widgets
+- [About](https://biagiocyberspace.it/about/): Author biography and site colophon
+- [Blog](https://biagiocyberspace.it/blog/): All blog posts
+- [Interests](https://biagiocyberspace.it/interests/): Gaming and anime shrine
 
 ## Blog Posts
 
-- [Welcome to Biagio Cyberspace](https://biagio-scaglia.github.io/blog/blog/welcome-to-biagio-cyberspace/): Introduction to the blog and its author
-- [Why I Still Love React in 2026](https://biagio-scaglia.github.io/blog/blog/why-i-still-love-react/): Personal reflection on React as a frontend library
-- [The PS Vita Deserved Better](https://biagio-scaglia.github.io/blog/blog/psvita-deserved-better/): Love letter to Sony's forgotten handheld console
-- [How Welcome to the NHK Changed My Life](https://biagio-scaglia.github.io/blog/blog/nhk-changed-my-life/): Personal essay on the anime NHK ni Youkoso
-- [Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026](https://biagio-scaglia.github.io/blog/blog/astro-net-retro/): Technical deep-dive on building a retro-styled site with modern tools
+- [Welcome to Biagio Cyberspace](https://biagiocyberspace.it/blog/welcome-to-biagio-cyberspace/): Introduction to the blog and its author
+- [Why I Still Love React in 2026](https://biagiocyberspace.it/blog/why-i-still-love-react/): Personal reflection on React as a frontend library
+- [The PS Vita Deserved Better](https://biagiocyberspace.it/blog/psvita-deserved-better/): Love letter to Sony's forgotten handheld console
+- [How Welcome to the NHK Changed My Life](https://biagiocyberspace.it/blog/nhk-changed-my-life/): Personal essay on the anime NHK ni Youkoso
+- [Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026](https://biagiocyberspace.it/blog/astro-net-retro/): Technical deep-dive on building a retro-styled site with modern tools
 
 ## Projects
 
@@ -49,4 +49,4 @@ The blog covers topics including:
 ## Contact
 
 - GitHub: https://github.com/biagio-scaglia
-- Website: https://biagio-scaglia.github.io/blog/
+- Website: https://biagiocyberspace.it/

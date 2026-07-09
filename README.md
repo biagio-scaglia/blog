@@ -2,7 +2,7 @@
 
 A personal blog built with [Astro](https://astro.build), inspired by the charm of the independent web of the late '90s and early 2000s. This is Biagio Scaglia's small corner of the Internet — a place created out of passion, curiosity, and a love for sharing, not to chase numbers or algorithms.
 
-**Live:** [biagio-scaglia.github.io/blog](https://biagio-scaglia.github.io/blog/)
+**Live:** [biagiocyberspace.it](https://biagiocyberspace.it/)
 
 ## ✨ Features
 

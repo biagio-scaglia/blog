@@ -5,7 +5,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 export async function GET(context) {
 	const posts = await getCollection('blog');
 	const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-	const siteUrl = context.site ? context.site.toString().replace(/\/$/, '') : 'https://biagio-scaglia.github.io/blog';
+	const siteUrl = context.site ? context.site.toString().replace(/\/$/, '') : 'https://biagiocyberspace.it';
 
 	return rss({
 		title: SITE_TITLE,
