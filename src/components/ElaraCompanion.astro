@@ -284,9 +284,9 @@ import elaraImg from '../assets/elara.png';
 	}
 
 	function getUniqueDialogue(pool: string): {text: string, mood: string} | null {
-		const entries = (DIALOGUES as any)[pool];
+		const entries = (DIALOGUES as any)[pool] as Array<{text: string, mood: string}> | undefined;
 		if (!entries) return null;
-		const available = entries.filter((d: any) => !state.usedDialogues.has(pool + ':' + d.text));
+		const available: Array<{text: string, mood: string}> = entries.filter((d: any) => !state.usedDialogues.has(pool + ':' + d.text));
 		if (available.length === 0) {
 			entries.forEach((d: any) => state.usedDialogues.delete(pool + ':' + d.text));
 			return getRandomFrom(entries);
@@ -331,9 +331,9 @@ import elaraImg from '../assets/elara.png';
 		const vnCursor = $('vn-cursor');
 		const vnIndicator = $('vn-indicator');
 		if (!vnText) return;
-
+		const vnTextVal = vnText;
 		state.isTyping = true;
-		vnText.textContent = '';
+		vnTextVal.textContent = '';
 		if (vnCursor) vnCursor.style.display = 'inline';
 		if (vnIndicator) vnIndicator.style.opacity = '0';
 		hideChoices();
@@ -341,7 +341,7 @@ import elaraImg from '../assets/elara.png';
 		let i = 0;
 		function tick() {
 			if (i < text.length) {
-				vnText.textContent += text[i];
+				vnTextVal.textContent += text[i];
 				i++;
 				const delay = text[i - 1] === '.' || text[i - 1] === '!' || text[i - 1] === '?' ? speed * 4 :
 				              text[i - 1] === ',' ? speed * 2 : speed;

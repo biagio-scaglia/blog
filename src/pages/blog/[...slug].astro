@@ -84,14 +84,14 @@ const blogPostSchema = {
 	"keywords": post.data.tags ? post.data.tags.join(', ') : undefined
 };
 
-const categoryThemes = {
+const categoryThemes: Record<string, string> = {
 	"Coding": "blue",
 	"Anime": "pink",
 	"Gaming": "purple",
 	"Web Culture": "yellow",
 	"General": "windows"
 };
-const theme = categoryThemes[post.data.category] || "windows";
+const theme = (categoryThemes[post.data.category || "General"] || "windows") as "windows" | "pink" | "blue" | "green" | "yellow" | "purple" | "rainbow";
 ---
 
 <RetroLayout title={`${post.data.title} - Retro-Net`} description={post.data.description} image={coverImage} article={true} publishedDate={post.data.pubDate} modifiedDate={post.data.updatedDate} tags={post.data.tags}>
@@ -121,7 +121,7 @@ const theme = categoryThemes[post.data.category] || "windows";
 						</tr>
 						<tr>
 							<td class="prop-label">⚖️ Est. Size:</td>
-							<td class="prop-val">{(Math.round(post.body.length / 102) / 10 + 0.8).toFixed(1)} KB</td>
+							<td class="prop-val">{(Math.round((post.body?.length || 0) / 102) / 10 + 0.8).toFixed(1)} KB</td>
 						</tr>
 					</table>
 				</div>
