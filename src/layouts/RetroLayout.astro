@@ -97,14 +97,42 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 				}
 			});
 
-			// Scrolling browser tab title marquee
+			// Scrolling browser tab title marquee (only when page is focused/visible)
 			(function() {
 				const originalTitle = document.title;
 				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier... ";
-				setInterval(() => {
-					titleText = titleText.substring(1) + titleText.substring(0, 1);
-					document.title = titleText;
-				}, 350);
+				let titleInterval: any = null;
+
+				function startMarquee() {
+					if (titleInterval) return;
+					titleInterval = setInterval(() => {
+						titleText = titleText.substring(1) + titleText.substring(0, 1);
+						document.title = titleText;
+					}, 350);
+				}
+
+				function stopMarquee() {
+					if (titleInterval) {
+						clearInterval(titleInterval);
+						titleInterval = null;
+					}
+					document.title = originalTitle;
+				}
+
+				function handleVisibilityOrFocus() {
+					if (document.hasFocus() && document.visibilityState === 'visible') {
+						startMarquee();
+					} else {
+						stopMarquee();
+					}
+				}
+
+				window.addEventListener('focus', handleVisibilityOrFocus);
+				window.addEventListener('blur', handleVisibilityOrFocus);
+				document.addEventListener('visibilitychange', handleVisibilityOrFocus);
+
+				// Initial trigger
+				handleVisibilityOrFocus();
 			})();
 		</script>
 	</body>
