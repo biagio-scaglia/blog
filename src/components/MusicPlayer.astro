@@ -239,6 +239,26 @@
 	// Initialize time display
 	updateTrackInfo();
 	updateVisualizer(false);
+
+	// Pause synth when tab is hidden to save CPU and prevent stuttering
+	document.addEventListener('visibilitychange', () => {
+		if (document.visibilityState === 'visible') {
+			if (isPlaying) {
+				startSynth();
+				startPlaybackTimer();
+				updateVisualizer(true);
+				if (audioCtx && audioCtx.state === 'suspended') {
+					audioCtx.resume();
+				}
+			}
+		} else {
+			if (isPlaying) {
+				stopSynth();
+				stopPlaybackTimer();
+				updateVisualizer(false);
+			}
+		}
+	});
 </script>
 
 <style lang="scss">

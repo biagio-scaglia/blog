@@ -60,6 +60,8 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 		message: string;
 		date: string;
 		color: string;
+		email?: string;
+		site?: string;
 	}
 
 	const defaultEntries: GuestbookEntry[] = [
@@ -67,19 +69,22 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 			name: "KawaiiGamer99",
 			message: "OMG such a cute website! (*^▽^*) I love the Win95 theme and the music selection. Added you to my favorite links! Peace! ~~~",
 			date: "2026-07-01 14:22",
-			color: "#ff00ff"
+			color: "#ff00ff",
+			site: "https://biagiocyberspace.it"
 		},
 		{
 			name: "Cyber_Neo_2000",
 			message: "Excellent personal archive, admin. The load speeds are lightning fast. Can you tell me what compiler you used? Keep surfin' the net! B-)",
 			date: "2026-06-28 03:45",
-			color: "#0000ff"
+			color: "#0000ff",
+			site: "https://github.com/biagio-scaglia"
 		},
 		{
 			name: "RetroWanderer",
 			message: "Wow, this really brings me back. Reminds me of my old fansite from 2002. Neat stuff! Checking out your blog posts now. :-)",
 			date: "2026-06-25 18:10",
-			color: "#008000"
+			color: "#008000",
+			email: "wanderer@geocities.com"
 		}
 	];
 
@@ -117,17 +122,30 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 	function renderEntries() {
 		if (!entriesList) return;
 		const entries = loadEntries();
-		entriesList.innerHTML = entries.map(entry => `
-			<div class="entry-card">
-				<div class="entry-meta">
-					<span class="entry-name" style="color: ${entry.color}">${escapeHtml(entry.name)}</span>
-					<span class="entry-date">(${entry.date})</span>
+		entriesList.innerHTML = entries.map(entry => {
+			const escapedName = escapeHtml(entry.name);
+			const nameSpan = entry.site 
+				? `<a href="${escapeHtml(entry.site)}" target="_blank" rel="noopener noreferrer" class="entry-site-link" style="color: ${entry.color}">${escapedName}</a>`
+				: escapedName;
+			const emailIcon = entry.email
+				? `<a href="mailto:${escapeHtml(entry.email)}" class="entry-email-link" title="Send email to ${escapedName}">✉</a>`
+				: '';
+
+			return `
+				<div class="entry-card">
+					<div class="entry-meta">
+						<span class="entry-name" style="color: ${entry.color}">
+							${nameSpan}
+							${emailIcon}
+						</span>
+						<span class="entry-date">(${entry.date})</span>
+					</div>
+					<div class="entry-body">
+						${escapeHtml(entry.message)}
+					</div>
 				</div>
-				<div class="entry-body">
-					${escapeHtml(entry.message)}
-				</div>
-			</div>
-		`).join('');
+			`;
+		}).join('');
 	}
 
 	function escapeHtml(str: string): string {
@@ -147,11 +165,15 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 			e.preventDefault();
 			const nameInput = document.getElementById('gb-name') as HTMLInputElement | null;
 			const msgInput = document.getElementById('gb-msg') as HTMLTextAreaElement | null;
+			const emailInput = document.getElementById('gb-email') as HTMLInputElement | null;
+			const siteInput = document.getElementById('gb-site') as HTMLInputElement | null;
 
 			if (!nameInput || !msgInput) return;
 
 			const name = nameInput.value.trim();
 			const message = msgInput.value.trim();
+			const email = emailInput ? emailInput.value.trim() : "";
+			const site = siteInput ? siteInput.value.trim() : "";
 
 			if (!name || !message) return;
 
@@ -163,7 +185,9 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 				name,
 				message,
 				date: formattedDate,
-				color: randomColor
+				color: randomColor,
+				...(email ? { email } : {}),
+				...(site ? { site } : {})
 			};
 
 			const entries = loadEntries();
@@ -344,6 +368,29 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 				border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
 				padding: 2px 3px 0px 5px;
 			}
+		}
+	}
+
+	.entry-site-link {
+		text-decoration: underline;
+		cursor: pointer;
+
+		&:hover {
+			filter: brightness(1.2);
+			text-decoration: underline;
+		}
+	}
+
+	.entry-email-link {
+		margin-left: 5px;
+		font-size: 13px;
+		text-decoration: none;
+		display: inline-block;
+		vertical-align: middle;
+
+		&:hover {
+			text-decoration: underline;
+			filter: brightness(1.2);
 		}
 	}
 </style>
