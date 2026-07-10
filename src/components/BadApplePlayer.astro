@@ -95,11 +95,7 @@
 	}
 
 	// Load frame data
-	const basePath =
-		(document.querySelector('meta[name="astro-base"]') as HTMLMetaElement)
-			?.content ||
-		document.querySelector("base")?.getAttribute("href") ||
-		"/blog/";
+	const basePath = import.meta.env.BASE_URL;
 
 	function adjustAsciiFontSize() {
 		if (!display || !display.parentElement) return;

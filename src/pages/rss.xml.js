@@ -35,7 +35,7 @@ export async function GET(context) {
 				title: post.data.title,
 				description: post.data.description,
 				pubDate: post.data.pubDate,
-				link: `/blog/blog/${post.id}/`,
+				link: `${import.meta.env.BASE_URL}blog/${post.id}/`,
 				customData: `<enclosure url="${absoluteImageUrl}" length="0" type="image/png" />
 					<media:content url="${absoluteImageUrl}" medium="image" type="image/png" />`
 			};
