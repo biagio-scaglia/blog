@@ -12,7 +12,7 @@ import { SITE_TITLE } from '../consts';
 	
 	<div class="code-banner">
 		<!-- Starry background layer -->
-		<div class="stars-layer">
+		<div class="stars-layer" aria-hidden="true">
 			<div class="star s-1" style="top: 15%; left: 10%;"></div>
 			<div class="star s-2" style="top: 25%; left: 30%;"></div>
 			<div class="star s-3" style="top: 10%; left: 75%;"></div>
@@ -24,7 +24,7 @@ import { SITE_TITLE } from '../consts';
 		</div>
 
 		<!-- Pixel Art decorative SVG elements -->
-		<div class="banner-decorations">
+		<div class="banner-decorations" aria-hidden="true">
 			<!-- Rocket ship (top-left) -->
 			<svg class="decor-item rocket" width="48" height="48" viewBox="0 0 16 16" style="image-rendering: pixelated; shape-rendering: crispEdges;">
 				<path d="M0 6h2v4H0zm2 1h2v2H2z" fill="#ff0000" />
@@ -67,25 +67,25 @@ import { SITE_TITLE } from '../consts';
 		<!-- Banner Text -->
 		<div class="banner-text-box">
 			<span class="banner-welcome">WELCOME TO...</span>
-			<h1 class="banner-title">BIAGIO CYBERSPACE</h1>
+			<span class="banner-title" role="presentation">BIAGIO CYBERSPACE</span>
 			<span class="banner-subtitle">EXPLORE THE VIRTUAL FRONTIER | SITE SINCE 2004</span>
 		</div>
 	</div>
 
-	<marquee class="welcome-marquee" scrollamount="4">
+	<marquee class="welcome-marquee" scrollamount="4" aria-label="Site announcement">
 		★★★ Welcome to the galactic web logs of Biagio Cyberspace! Last updated: July 2026. Optimized for Netscape Navigator 4.0 and 800x600 resolution. ★★★
 	</marquee>
-	<div class="header-menu">
+	<nav class="header-menu" aria-label="Main navigation">
 		<a href={import.meta.env.BASE_URL}>[ Home Page ]</a>
-		<span class="divider">|</span>
+		<span class="divider" aria-hidden="true">|</span>
 		<a href={`${import.meta.env.BASE_URL}blog`}>[ Blog Directory ]</a>
-		<span class="divider">|</span>
+		<span class="divider" aria-hidden="true">|</span>
 		<a href={`${import.meta.env.BASE_URL}interests`}>[ Interests ]</a>
-		<span class="divider">|</span>
+		<span class="divider" aria-hidden="true">|</span>
 		<a href={`${import.meta.env.BASE_URL}about`}>[ About Me ]</a>
-		<span class="divider">|</span>
-		<a href={`${import.meta.env.BASE_URL}rss.xml`} target="_blank">[ RSS Syndicate ]</a>
-	</div>
+		<span class="divider" aria-hidden="true">|</span>
+		<a href={`${import.meta.env.BASE_URL}rss.xml`} target="_blank" rel="noopener noreferrer">[ RSS Syndicate ]</a>
+	</nav>
 </header>
 
 <style lang="scss">
@@ -262,7 +262,7 @@ import { SITE_TITLE } from '../consts';
 		margin-bottom: 6px;
 	}
 
-	.header-menu {
+	nav.header-menu {
 		@include win95-border-inset;
 		background: $win-white;
 		padding: 8px;

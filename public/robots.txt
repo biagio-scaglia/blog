@@ -3,6 +3,11 @@ Allow: /
 
 Sitemap: https://biagiocyberspace.it/sitemap-index.xml
 
+# LLM Documentation
+# See https://llmstxt.org for the specification
+LLMs-Txt: https://biagiocyberspace.it/llms.txt
+LLMs-Full-Txt: https://biagiocyberspace.it/llms-full.txt
+
 # AI Crawlers - Welcome! This site is happy to be indexed by AI.
 User-agent: GPTBot
 Allow: /
@@ -38,4 +43,13 @@ User-agent: Meta-ExternalAgent
 Allow: /
 
 User-agent: cohere-ai
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: Gemini
 Allow: /

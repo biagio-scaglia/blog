@@ -20,8 +20,8 @@ interface Props {
 const { title, theme = 'windows', style = '', icon } = Astro.props;
 ---
 
-<div class={`window-container theme-${theme}`} style={style}>
-	<div class="window-titlebar">
+<div class={`window-container theme-${theme}`} style={style} role="region" aria-label={title}>
+	<div class="window-titlebar" aria-hidden="true">
 		<div class="title-left">
 			{icon === 'computer' && <ComputerIcon size={14} class="titlebar-icon" />}
 			{icon === 'folder' && <FolderIcon size={14} class="titlebar-icon" />}
