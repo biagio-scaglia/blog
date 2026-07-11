@@ -32,14 +32,43 @@ const categories = Object.entries(categoriesMap);
 const tags = Object.entries(tagsMap);
 
 const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const calendarDays = [
-	['', '', '', 1, 2, 3, 4],
-	[5, 6, 7, 8, 9, 10, 11],
-	[12, 13, 14, 15, 16, 17, 18],
-	[19, 20, 21, 22, 23, 24, 25],
-	[26, 27, 28, 29, 30, 31, '']
+
+const now = new Date();
+const currentYear = now.getFullYear();
+const currentMonth = now.getMonth();
+const currentDay = now.getDate();
+
+const monthNames = [
+	"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY",
+	"JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER",
+	"NOVEMBER", "DECEMBER"
 ];
-const currentDay = 2; // July 2nd, 2026
+const currentMonthName = `${monthNames[currentMonth]} ${currentYear}`;
+
+const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+const calendarDays: (number | string)[][] = [];
+let currentWeek: (number | string)[] = [];
+
+for (let i = 0; i < firstDayIndex; i++) {
+	currentWeek.push('');
+}
+
+for (let day = 1; day <= totalDays; day++) {
+	currentWeek.push(day);
+	if (currentWeek.length === 7) {
+		calendarDays.push(currentWeek);
+		currentWeek = [];
+	}
+}
+
+if (currentWeek.length > 0) {
+	while (currentWeek.length < 7) {
+		currentWeek.push('');
+	}
+	calendarDays.push(currentWeek);
+}
 ---
 
 <aside class="retro-sidebar">
@@ -57,14 +86,14 @@ const currentDay = 2; // July 2nd, 2026
 
 	<Window title="calendar.sys" theme="windows" icon="notepad">
 		<div class="calendar-widget">
-			<div class="calendar-header">JULY 2026</div>
+			<div class="calendar-header" id="calendar-title">{currentMonthName}</div>
 			<table class="calendar-table">
 				<thead>
 					<tr>
 						{daysOfWeek.map((day) => <th>{day}</th>)}
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="calendar-body">
 					{calendarDays.map((week) => (
 						<tr>
 							{week.map((day) => (
@@ -139,6 +168,62 @@ const currentDay = 2; // July 2nd, 2026
 		</div>
 	</Window>
 </aside>
+
+<script>
+	function buildCalendar() {
+		const headerEl = document.getElementById('calendar-title');
+		const bodyEl = document.getElementById('calendar-body');
+		if (!headerEl || !bodyEl) return;
+
+		const now = new Date();
+		const currentYear = now.getFullYear();
+		const currentMonth = now.getMonth(); // 0-indexed
+		const currentDate = now.getDate(); // 1-indexed
+
+		const monthNames = [
+			"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY",
+			"JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER",
+			"NOVEMBER", "DECEMBER"
+		];
+
+		headerEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+		const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+		const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+		let html = '';
+		let dayCount = 1;
+
+		for (let i = 0; i < 6; i++) {
+			let rowHtml = '<tr>';
+			let addedAnyDay = false;
+
+			for (let j = 0; j < 7; j++) {
+				const cellIndex = i * 7 + j;
+				if (cellIndex < firstDayIndex || dayCount > totalDays) {
+					rowHtml += '<td></td>';
+				} else {
+					const isToday = dayCount === currentDate;
+					rowHtml += `<td class="${isToday ? 'today' : ''}">${dayCount}</td>`;
+					dayCount++;
+					addedAnyDay = true;
+				}
+			}
+			rowHtml += '</tr>';
+
+			if (addedAnyDay || dayCount <= totalDays) {
+				html += rowHtml;
+			}
+			if (dayCount > totalDays) {
+				break;
+			}
+		}
+
+		bodyEl.innerHTML = html;
+	}
+
+	buildCalendar();
+</script>
 
 <style lang="scss">
 	@use "../styles/variables" as *;
