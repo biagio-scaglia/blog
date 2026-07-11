@@ -266,7 +266,7 @@ if (currentWeek.length > 0) {
 			border-bottom: 1px solid $win-gray;
 		}
 
-		td {
+		:global(td) {
 			padding: 3px 0;
 			width: 14.28%;
 			transition: all 0.05s steps(2);
@@ -280,7 +280,7 @@ if (currentWeek.length > 0) {
 				}
 			}
 
-			&.today {
+			&:global(.today) {
 				background: $neon-yellow;
 				color: #ff0000;
 				font-weight: bold;

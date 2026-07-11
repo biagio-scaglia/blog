@@ -97,14 +97,15 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 				}
 			});
 
-			// Scrolling browser tab title marquee (only when page is focused/visible)
+			// Scrolling browser tab title marquee (only after user interaction, never for crawlers)
 			(function() {
 				const originalTitle = document.title;
 				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier... ";
 				let titleInterval: any = null;
+				let userHasInteracted = false;
 
 				function startMarquee() {
-					if (titleInterval) return;
+					if (titleInterval || !userHasInteracted) return;
 					titleInterval = setInterval(() => {
 						titleText = titleText.substring(1) + titleText.substring(0, 1);
 						document.title = titleText;
@@ -127,12 +128,25 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 					}
 				}
 
+				function onFirstInteraction() {
+					if (userHasInteracted) return;
+					userHasInteracted = true;
+					// Remove listeners once triggered
+					window.removeEventListener('click', onFirstInteraction);
+					window.removeEventListener('keydown', onFirstInteraction);
+					window.removeEventListener('scroll', onFirstInteraction);
+					// Small delay to avoid title flash on accidental triggers
+					setTimeout(() => handleVisibilityOrFocus(), 500);
+				}
+
 				window.addEventListener('focus', handleVisibilityOrFocus);
 				window.addEventListener('blur', handleVisibilityOrFocus);
 				document.addEventListener('visibilitychange', handleVisibilityOrFocus);
 
-				// Initial trigger
-				handleVisibilityOrFocus();
+				// Gate marquee behind user interaction so crawlers never see it
+				window.addEventListener('click', onFirstInteraction);
+				window.addEventListener('keydown', onFirstInteraction);
+				window.addEventListener('scroll', onFirstInteraction);
 			})();
 		</script>
 	</body>
