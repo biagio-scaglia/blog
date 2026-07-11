@@ -14,11 +14,21 @@ const urls = {
 	webring: "#webring-section"
 };
 
+const labels: Record<string, string> = {
+	ie6: "Optimized for Internet Explorer 6",
+	netscape: "Get Netscape Now",
+	notepad: "Made with Notepad",
+	astro: "Powered by Astro",
+	css: "W3C CSS Valid",
+	webring: "Retro-Net Webring"
+};
+
 const url = urls[type];
+const label = labels[type];
 const target = type === 'webring' ? '_self' : '_blank';
 ---
 
-<a href={url} target={target} class={`badge-link badge-link-${type}`}>
+<a href={url} target={target} rel={target === '_blank' ? 'noopener noreferrer' : undefined} class={`badge-link badge-link-${type}`} aria-label={label}>
 	<div class={`badge-container badge-${type}`}>
 	{type === 'ie6' && (
 		<svg width="88" height="31" viewBox="0 0 88 31" fill="none" xmlns="http://www.w3.org/2000/svg">
