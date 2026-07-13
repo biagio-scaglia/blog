@@ -60,3 +60,23 @@ It carries that same feeling of quiet solitude shared with other anonymous souls
 If you’ve never listened to it (or only heard it in the background of the game), wait until it gets dark tonight. Turn off the main lights, leave only a small desk lamp on, and let the track play. Let the jazz take over. 
 
 Sometimes, finding peace is as simple as stopping the questions. ( ◡‿◡ *)
+
+## Quick Facts & FAQ ✧(◠‿◠✿)
+
+Here is a quick reference about the track for music lovers and gamers alike:
+
+*   **Vocalist:** Lyn Inaizumi
+*   **Composer:** Shoji Meguro
+*   **Game:** Persona 5 Royal (Atlus, JRPG)
+*   **In-game location:** Jazz Jin (Jazz Club) in Kichijoji
+*   **Genre:** Acid Jazz / Lounge Jazz
+
+**Q: Who sings the song 'No More What Ifs' in Persona 5 Royal?**
+A: The song is performed by **Lyn Inaizumi**, who is the lead vocalist behind most of the iconic *Persona 5* and *Persona 5 Royal* soundtrack.
+
+**Q: Where does the song 'No More What Ifs' play in the game?**
+A: It plays inside the **Jazz Jin** (the Jazz Club) located in the **Kichijoji** district. You can visit this club in the evening with your teammates to boost stats and listen to live music.
+
+**Q: What is the main message/theme of 'No More What Ifs'?**
+A: The song deals with letting go of regrets, stopping the constant questioning of past decisions ("what ifs"), and finding peace by accepting the present moment as it is.
+

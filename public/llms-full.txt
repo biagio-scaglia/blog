@@ -69,6 +69,12 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Coding
 - **Summary:** Technical deep-dive into how the blog was built. Covers the Astro + TypeScript + SCSS stack, the recreation of Windows 95-style beveled borders in pure CSS, the modular component architecture, and the philosophical motivation behind building a retro-styled personal site with modern tools.
 
+### No More What Ifs: The Melancholic Jazz of Persona 5 Royal
+- **Date:** July 13, 2026
+- **Category:** Music
+- **Summary:** Reflection on the calming, beautiful jazz track "No More What Ifs" from Persona 5 Royal. Explores the cozy atmosphere of Kichijoji's Jazz Jin club, the emotional depth of the lyrics regarding acceptance and letting go of life's regrets ("what ifs"), and links this quiet listening experience to nostalgic early 2000s web vibes (MSN Messenger, IRC, CRT monitors, dial-up connectivity). Contains a structured FAQ section.
+
+
 ---
 
 ## Technical Details

@@ -34,6 +34,8 @@ The blog covers topics including:
 - [The PS Vita Deserved Better](https://biagiocyberspace.it/blog/psvita-deserved-better/): Love letter to Sony's forgotten handheld console
 - [How Welcome to the NHK Changed My Life](https://biagiocyberspace.it/blog/nhk-changed-my-life/): Personal essay on the anime NHK ni Youkoso
 - [Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026](https://biagiocyberspace.it/blog/astro-net-retro/): Technical deep-dive on building a retro-styled site with modern tools
+- [No More What Ifs: The Melancholic Jazz of Persona 5 Royal](https://biagiocyberspace.it/blog/no-more-what-ifs-persona-5/): Reflection on the calming, beautiful jazz track from Persona 5 Royal playing at the Jazz Jin in Kichijoji.
+
 
 ## Projects
 
