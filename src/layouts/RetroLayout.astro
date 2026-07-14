@@ -99,6 +99,12 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 
 			// Scrolling browser tab title marquee (only after user interaction, never for crawlers)
 			(function() {
+				if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+
+				// Prevent marquee for search engine bots, web crawlers, and auditing tools (preserves static titles for SEO)
+				const isCrawler = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|lighthouse|chrome-lighthouse|speedcurve|headless/i.test(navigator.userAgent);
+				if (isCrawler) return;
+
 				const originalTitle = document.title;
 				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier... ";
 				let titleInterval: any = null;

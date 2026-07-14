@@ -21,11 +21,12 @@ The blog covers topics including:
 - Internet culture and the independent web
 
 ## Key Pages
-
+ 
 - [Home](https://biagiocyberspace.it/): Main page with latest posts and site widgets
 - [About](https://biagiocyberspace.it/about/): Author biography and site colophon
 - [Blog](https://biagiocyberspace.it/blog/): All blog posts
 - [Interests](https://biagiocyberspace.it/interests/): Gaming and anime shrine
+- [Contributors](https://biagiocyberspace.it/contributors/): Special thanks and trust network members
 
 ## Blog Posts
 
@@ -35,6 +36,7 @@ The blog covers topics including:
 - [How Welcome to the NHK Changed My Life](https://biagiocyberspace.it/blog/nhk-changed-my-life/): Personal essay on the anime NHK ni Youkoso
 - [Biagio Cyberspace: How I Rebuilt the 2003 Web in 2026](https://biagiocyberspace.it/blog/astro-net-retro/): Technical deep-dive on building a retro-styled site with modern tools
 - [No More What Ifs: The Melancholic Jazz of Persona 5 Royal](https://biagiocyberspace.it/blog/no-more-what-ifs-persona-5/): Reflection on the calming, beautiful jazz track from Persona 5 Royal playing at the Jazz Jin in Kichijoji.
+- [OS-Tans: When the Internet Turned Operating Systems into Anime Mascots](https://biagiocyberspace.it/blog/os-tans-and-the-glory-of-windows-2000/): A nostalgic look at the 2chan/Futaba Channel OS-tan phenomenon and Windows 2000 Pro (2K-tan).
 
 
 ## Projects

@@ -39,6 +39,7 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 2. **About Page** — Author biography, hardware specs, site colophon, and FAQ section with structured Q&A for AI discoverability.
 3. **Blog** — All published articles, filterable by tags and categories.
 4. **Interests (Gaming & Anime Shrine)** — Dedicated pages showcasing Biagio's favorite video games and anime series.
+5. **Contributors** — Special thanks page dedicated to FDeveloper and trust network members supporting the site.
 
 ---
 
@@ -74,6 +75,10 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Music
 - **Summary:** Reflection on the calming, beautiful jazz track "No More What Ifs" from Persona 5 Royal. Explores the cozy atmosphere of Kichijoji's Jazz Jin club, the emotional depth of the lyrics regarding acceptance and letting go of life's regrets ("what ifs"), and links this quiet listening experience to nostalgic early 2000s web vibes (MSN Messenger, IRC, CRT monitors, dial-up connectivity). Contains a structured FAQ section.
 
+### OS-Tans: When the Internet Turned Operating Systems into Anime Mascots
+- **Date:** July 14, 2026
+- **Category:** Web Culture
+- **Summary:** An exploration of the early-2000s Japanese web phenomenon from Futaba Channel (2chan) where operating systems were personified as anime-style mascot characters. Focuses on the contrast between the unstable Windows ME-tan and the highly stable, elegant Windows 2000 Pro (2K-tan), complete with structured facts and details.
 
 ---
 

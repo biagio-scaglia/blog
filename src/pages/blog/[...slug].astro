@@ -4,6 +4,10 @@ import RetroLayout from '../../layouts/RetroLayout.astro';
 import Window from '../../components/Window.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
+import NotepadIcon from '../../components/icons/NotepadIcon.astro';
+import FolderIcon from '../../components/icons/FolderIcon.astro';
+import CalendarIcon from '../../components/icons/CalendarIcon.astro';
+import ScaleIcon from '../../components/icons/ScaleIcon.astro';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).sort(
@@ -108,19 +112,39 @@ const theme = (categoryThemes[post.data.category || "General"] || "windows") as 
 				<div class="properties-tab-body">
 					<table class="properties-table" width="100%">
 						<tr>
-							<td class="prop-label">📄 File Name:</td>
+							<td class="prop-label">
+								<span class="prop-label-inner">
+									<NotepadIcon size={14} />
+									<span>File Name:</span>
+								</span>
+							</td>
 							<td class="prop-val">{post.id}.txt</td>
 						</tr>
 						<tr>
-							<td class="prop-label">📁 Category:</td>
+							<td class="prop-label">
+								<span class="prop-label-inner">
+									<FolderIcon size={14} />
+									<span>Category:</span>
+								</span>
+							</td>
 							<td class="prop-val"><span class="cat-pill">{post.data.category}</span></td>
 						</tr>
 						<tr>
-							<td class="prop-label">📅 Logged:</td>
+							<td class="prop-label">
+								<span class="prop-label-inner">
+									<CalendarIcon size={14} />
+									<span>Logged:</span>
+								</span>
+							</td>
 							<td class="prop-val"><FormattedDate date={post.data.pubDate} /></td>
 						</tr>
 						<tr>
-							<td class="prop-label">⚖️ Est. Size:</td>
+							<td class="prop-label">
+								<span class="prop-label-inner">
+									<ScaleIcon size={14} />
+									<span>Est. Size:</span>
+								</span>
+							</td>
 							<td class="prop-val">{(Math.round((post.body?.length || 0) / 102) / 10 + 0.8).toFixed(1)} KB</td>
 						</tr>
 					</table>
@@ -479,7 +503,13 @@ const theme = (categoryThemes[post.data.category || "General"] || "windows") as 
 		.prop-label {
 			color: $win-dark-gray;
 			font-weight: normal;
-			width: 80px;
+			width: 95px;
+		}
+
+		.prop-label-inner {
+			display: flex;
+			align-items: center;
+			gap: 4px;
 		}
 
 		.prop-val {

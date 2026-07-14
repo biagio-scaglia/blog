@@ -1,0 +1,28 @@
+---
+interface Props {
+	size?: number;
+	class?: string;
+}
+const { size = 16, class: className } = Astro.props;
+---
+<svg 
+	xmlns="http://www.w3.org/2000/svg" 
+	viewBox="0 0 16 16" 
+	width={size} 
+	height={size} 
+	class={className}
+	style="image-rendering: pixelated; shape-rendering: crispEdges; display: inline-block; vertical-align: middle;"
+>
+	<!-- Central pillar -->
+	<rect x="7" y="2" width="2" height="11" fill="#7f7f7f" stroke="#000000" stroke-width="0.5" />
+	<!-- Base plate -->
+	<rect x="4" y="13" width="8" height="2" fill="#7f7f7f" stroke="#000000" stroke-width="0.5" />
+	<!-- Crossbeam -->
+	<rect x="2" y="4" width="12" height="1" fill="#bfbf00" stroke="#000000" stroke-width="0.5" />
+	<!-- Left hanger -->
+	<line x1="3" y1="5" x2="3" y2="8" stroke="#000000" stroke-width="1" />
+	<path d="M1 8h4l-2 2z" fill="#ffaa00" stroke="#000000" stroke-width="0.5" />
+	<!-- Right hanger -->
+	<line x1="13" y1="5" x2="13" y2="8" stroke="#000000" stroke-width="1" />
+	<path d="M11 8h4l-2 2z" fill="#ffaa00" stroke="#000000" stroke-width="0.5" />
+</svg>
