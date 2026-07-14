@@ -29,7 +29,10 @@ posts.forEach((post) => {
 });
 
 const categories = Object.entries(categoriesMap);
-const tags = Object.entries(tagsMap);
+const tags = Object.entries(tagsMap)
+	.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+	.slice(0, 15)
+	.sort((a, b) => a[0].localeCompare(b[0]));
 
 const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
