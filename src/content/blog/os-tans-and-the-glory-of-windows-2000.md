@@ -100,5 +100,14 @@ A: **XP-tan** and **2K-tan** are generally considered the most popular and widel
 **Q: Did Microsoft ever make OS-tans official?**
 A: Microsoft never officially adopted the original OS-tans (which were strictly fan-made), but they did draw inspiration from the trend years later by creating official anime mascots for regional marketing campaigns, such as Madobe Nanami for Windows 7.
 
+<div style="background: #dfdfdf; border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff; padding: 6px; margin: 1.5rem auto; max-width: 320px; box-shadow: 2px 2px 0px rgba(0,0,0,0.2); text-align: center;">
+  <div style="background: #ffffff; border: 1px solid #808080; padding: 4px; margin-bottom: 6px; display: flex; justify-content: center; align-items: center;">
+
+![Madobe Nanami](../../assets/madobe%20nanami.jpg)
+
+  </div>
+  <span style="font-family: 'Tahoma', sans-serif; font-size: 11px; font-weight: bold; color: #555555; display: block;">Madobe Nanami (Official Windows 7 Mascot) ✧(◠‿◠✿)</span>
+</div>
+
 **Q: What is "Trouble Windows"?**
 A: It is a series of famous fan-made Flash animations from the early 2000s that showcased the daily, chaotic lives of the Windows sisters living together in a house, highlighting their operating system bugs and quirks.
