@@ -272,6 +272,21 @@ const faqSchema = {
 			<div class="kaomoji-toast" id="kaomoji-toast">Copied!</div>
 		</div>
 	</Window>
+
+	<Window title="privacy_policy.txt ~ [GDPR Statement]" theme="windows" icon="notepad">
+		<div class="privacy-container" id="privacy">
+			<h2 class="privacy-title"><NotepadIcon size={16} /> Privacy & Cookie Policy</h2>
+			<p>
+				In accordance with the General Data Protection Regulation (GDPR) and the ePrivacy Directive, here is the clear, human-readable statement regarding this personal database:
+			</p>
+			<ul class="privacy-list">
+				<li><strong>No Cookies:</strong> This website does not use cookies. There is no tracking, no analytics (such as Google Analytics), and no advertising networks.</li>
+				<li><strong>Guestbook Data:</strong> The names, emails, and messages you submit to the guestbook are stored strictly locally in your browser's local storage (<code>localStorage</code>). No guestbook data is sent to, or stored on, any server.</li>
+				<li><strong>Server Logs:</strong> The hosting provider (GitHub Pages) may temporarily collect basic traffic metadata (like your IP address) for security audits and performance logging.</li>
+				<li><strong>Correspondence:</strong> If you contact me directly via email, your email address will only be used to respond to your query and will never be shared.</li>
+			</ul>
+		</div>
+	</Window>
 </RetroLayout>
 
 <script>
@@ -534,5 +549,33 @@ const faqSchema = {
 		font-size: 11px;
 		line-height: 1.5;
 		color: #222222;
+	}
+
+	.privacy-container {
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.5;
+		padding: 5px;
+	}
+
+	.privacy-title {
+		font-family: $font-tahoma;
+		font-size: 16px;
+		color: $win-blue;
+		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.privacy-list {
+		margin-top: 10px;
+		margin-left: 20px;
+		margin-bottom: 12px;
+		list-style-type: square;
+
+		li {
+			margin-bottom: 6px;
+		}
 	}
 </style>
