@@ -101,7 +101,7 @@ A: **XP-tan** and **2K-tan** are generally considered the most popular and widel
 A: Microsoft never officially adopted the original OS-tans (which were strictly fan-made), but they did draw inspiration from the trend years later by creating official anime mascots for regional marketing campaigns, such as Madobe Nanami for Windows 7.
 
 <div style="background: #dfdfdf; border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff; padding: 6px; margin: 1.5rem auto; max-width: 320px; box-shadow: 2px 2px 0px rgba(0,0,0,0.2); text-align: center;">
-  <div style="background: #ffffff; border: 1px solid #808080; padding: 4px; margin-bottom: 6px; display: flex; justify-content: center; align-items: center;">
+  <div style="background: #ffffff; border: 1px solid #808080; padding: 4px; margin-bottom: 6px; display: block;">
 
 ![Madobe Nanami](../../assets/madobe%20nanami.jpg)
 
