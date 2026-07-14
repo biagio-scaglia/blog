@@ -224,6 +224,10 @@ import NotepadIcon from './icons/NotepadIcon.astro';
 <style lang="scss">
 	@use "../styles/variables" as *;
 
+	:global(.window-body:has(.guestbook-container)) {
+		background: $win-light-gray !important;
+	}
+
 	.guestbook-container {
 		background: $win-light-gray;
 	}
