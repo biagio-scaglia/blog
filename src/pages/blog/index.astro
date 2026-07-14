@@ -4,6 +4,7 @@ import RetroLayout from '../../layouts/RetroLayout.astro';
 import Window from '../../components/Window.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_TITLE } from '../../consts';
+import NotepadIcon from '../../components/icons/NotepadIcon.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -64,7 +65,7 @@ const posts = (await getCollection('blog')).sort(
 							data-tags={post.data.tags ? post.data.tags.join(',') : ''}
 						>
 							<div class="icon-wrapper">
-								<span class="file-icon">📄</span>
+								<NotepadIcon size={32} />
 							</div>
 							<span class="file-label">{post.data.title}</span>
 							<span class="file-date"><FormattedDate date={post.data.pubDate} /></span>
@@ -101,7 +102,7 @@ const posts = (await getCollection('blog')).sort(
 									onclick={`window.location.href='${import.meta.env.BASE_URL}blog/${post.id}/'`}
 								>
 									<td class="name-col">
-										<span class="file-small-icon">📄</span> 
+										<NotepadIcon size={14} /> 
 										<span class="file-name-txt">{post.id}.txt</span>
 									</td>
 									<td class="title-col">
