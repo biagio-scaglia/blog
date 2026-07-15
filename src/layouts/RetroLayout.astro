@@ -106,10 +106,10 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 				if (isCrawler) return;
 
 				const originalTitle = document.title;
-				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier... ";
+				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier… ";
 				let titleInterval: any = null;
 				let userHasInteracted = false;
-
+				
 				function startMarquee() {
 					if (titleInterval || !userHasInteracted) return;
 					titleInterval = setInterval(() => {
@@ -117,7 +117,7 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 						document.title = titleText;
 					}, 350);
 				}
-
+				
 				function stopMarquee() {
 					if (titleInterval) {
 						clearInterval(titleInterval);
@@ -180,5 +180,26 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+	}
+
+	@media (max-width: 768px) {
+		.layout-table {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			border-spacing: 0;
+		}
+
+		.layout-table > tbody,
+		.layout-table > tbody > tr,
+		.sidebar-cell,
+		.content-cell {
+			display: block;
+			width: 100% !important;
+		}
+
+		.sidebar-cell {
+			margin-bottom: 15px;
+		}
 	}
 </style>

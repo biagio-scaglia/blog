@@ -58,9 +58,6 @@ const { title, theme = 'windows', style = '', icon } = Astro.props;
 		display: flex;
 		flex-direction: column;
 
-		&:hover .titlebar-icon {
-			animation: wobble-icon 0.6s ease;
-		}
 	}
 
 	.window-titlebar {
@@ -98,12 +95,6 @@ const { title, theme = 'windows', style = '', icon } = Astro.props;
 	.title-controls {
 		display: flex;
 		gap: 2px;
-	}
-
-	@keyframes wobble-icon {
-		0%, 100% { transform: rotate(0deg); }
-		25% { transform: rotate(-8deg); }
-		75% { transform: rotate(8deg); }
 	}
 
 	.control-btn {
