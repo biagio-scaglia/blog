@@ -1,5 +1,5 @@
 ---
-title: "No More What Ifs: The Melancholic Jazz of Persona 5 Royal that Smells Like Rain and Calm ☕"
+title: "No More What Ifs: The Melancholic Jazz of Persona 5 Royal that Smells Like Rain and Calm (旦~)"
 description: "An intimate reflection on one of the most hidden and beautiful tracks in Persona 5 Royal. That jazz club in Kichijoji, the rain outside, and the peace of finally stopping the 'what ifs'."
 pubDate: "Jul 13 2026"
 category: "Music"

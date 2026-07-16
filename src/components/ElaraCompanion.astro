@@ -1,6 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import elaraImg from '../assets/elara.png';
+import FloppyIcon from './icons/FloppyIcon.astro';
+import JoystickIcon from './icons/JoystickIcon.astro';
+import CDIcon from './icons/CDIcon.astro';
+import ComputerIcon from './icons/ComputerIcon.astro';
+import ScaleIcon from './icons/ScaleIcon.astro';
+import GlobeIcon from './icons/GlobeIcon.astro';
 ---
 
 <div class="elara-companion" id="elara-companion">
@@ -28,12 +34,12 @@ import elaraImg from '../assets/elara.png';
 
 		<!-- VN Option Choices -->
 		<div class="vn-choices" id="vn-choices">
-			<button class="choice-btn" data-pool="nostalgia">💾 Nostalgia</button>
-			<button class="choice-btn" data-pool="gaming">🎮 Gaming</button>
-			<button class="choice-btn" data-pool="anime">🌸 Anime</button>
-			<button class="choice-btn" data-pool="coding">💻 Coding</button>
-			<button class="choice-btn" data-pool="philosophical">✨ Philosophy</button>
-			<button class="choice-btn" data-pool="random">🎲 Random</button>
+			<button class="choice-btn" data-pool="nostalgia"><FloppyIcon size={12} /> Nostalgia</button>
+			<button class="choice-btn" data-pool="gaming"><JoystickIcon size={12} /> Gaming</button>
+			<button class="choice-btn" data-pool="anime"><CDIcon size={12} /> Anime</button>
+			<button class="choice-btn" data-pool="coding"><ComputerIcon size={12} /> Coding</button>
+			<button class="choice-btn" data-pool="philosophical"><ScaleIcon size={12} /> Philosophy</button>
+			<button class="choice-btn" data-pool="random"><GlobeIcon size={12} /> Random</button>
 		</div>
 
 		<div class="vn-indicator" id="vn-indicator">▼</div>
