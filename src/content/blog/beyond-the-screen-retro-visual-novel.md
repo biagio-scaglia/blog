@@ -10,7 +10,7 @@ For the past few months, when I wasn't writing React code or working on my RPG a
 
 It’s called **Oltre lo Schermo** (translated as *Beyond the Screen*), a retro visual novel experience that explores the heavy, quiet spaces of modern social isolation, digital dependency, and the terrifying, beautiful process of seeking real-world human connection (；⌣_⌣)
 
-The story follows a twenty-year-old protagonist whose life is completely contained within the luminescent glow of CRT monitors. His days are a continuous loop of anime, manga, video games, and electronic music. The virtual world is safe, comfortable, and predictable. But one day, an unexpected notification breaks the routine: a childhood friend, Sara, reappears via an old school photo and invites him to meet up in person. 
+The story follows a twenty-year-old protagonist whose life is completely contained within the luminescent glow of CRT monitors. His days are a continuous loop of anime, manga, video games, and electronic music. The virtual world is safe, comfortable, and predictable. But one day, an unexpected notification breaks the routine: an old childhood friend reappears via an old school photo and invites him to meet up in person. 
 
 Accepting that invitation and stepping outside is the ultimate goal—but getting there is the real challenge.
 
