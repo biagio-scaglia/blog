@@ -8,7 +8,7 @@ tags: ["travel", "nuremberg", "mental-health", "comfort-zone", "anxiety", "first
 
 For a very long time, my entire life has had a radius of about a few kilometers. 
 
-I live in Bari, a place where the sea is always there to remind you of where the land ends. But for me, the real boundary wasn't the coast—it was the door of my room. As a programmer and designer, my life is built around micro-routines. The gentle hum of the PC fan, the predictable glow of my monitors, the comfort of knowing exactly where every object in my room belongs. 
+I live in Bari, a place where the sea is always there to remind you of where the land ends. But for me, the real boundary wasn't the coast; it was the door of my room. As a programmer and designer, my life is built around micro-routines. The gentle hum of the PC fan, the predictable glow of my monitors, the comfort of knowing exactly where every object in my room belongs. 
 
 To me, the world outside was something to be consumed through a screen. I'd spend hours browsing vintage Japanese personal homepages, reading travel logs from the early 2000s, or clicking through random blogs in a webring. It felt like traveling, but without the friction. Without the fear.
 
@@ -20,7 +20,7 @@ Destination: **Nuremberg, Germany**. And honestly? It was terrifying (；⌣_⌣
 
 In the days leading up to the flight, the anxiety was a constant, low-frequency hum in the back of my mind. It felt like a compile error that I couldn't debug. My brain kept asking: *Why are you doing this? You have everything you need right here. Why leave the safety of the loop?*
 
-Getting to the airport felt like watching a movie of myself from a third-person perspective. I felt like an imposter. Everyone else seemed to know how to travel—they had the right luggage, they moved through security with practiced ease, they belonged. I felt like an NPC that had wandered out of its designated zone.
+Getting to the airport felt like watching a movie of myself from a third-person perspective. I felt like an imposter. Everyone else seemed to know how to travel; they had the right luggage, they moved through security with practiced ease, they belonged. I felt like an NPC that had wandered out of its designated zone.
 
 ```
 +------------------------------------------------------+
@@ -34,7 +34,7 @@ Getting to the airport felt like watching a movie of myself from a third-person 
 
 When the plane took off and the Italian coastline shrivelled into a thin line below the clouds, a strange sense of grief washed over me. I was leaving the only country I had ever known, the only language I spoke fluently, the only air I knew how to breathe.
 
-## Lost in Translation and Space (-_-_-)
+## Lost in Translation and Space (；⌣_⌣)
 
 I won't give you a tourist guide of Nuremberg. I won't write about the castle, the historic churches, or the museum exhibits. You can find all of that on Wikipedia, and to be honest, I didn't experience the city as a tourist. I experienced it as a ghost.
 
@@ -60,7 +60,7 @@ Every interaction reminded me of how far I was from my shell.
 
 I spent a lot of time just walking, letting the cold German wind hit my face. It's a different kind of cold than the damp winter air of Bari. It felt clean, but sharp. I looked at the old timber-framed houses, the dark stone walls, and the gray sky. It was beautiful, but it was a heavy, melancholic beauty. I felt completely detached, like a single pixel that had drifted to the wrong coordinates on a screen.
 
-## The Quiet of the Hotel Room (´-ω-`)
+## The Quiet of the Hotel Room (︶︹︶)
 
 The hardest part of travel isn't the walking; it's the stopping. 
 
@@ -88,4 +88,4 @@ It was lonely, it was melancholic, and it was hard. But it was the first time I 
 
 Until the next departure, wherever the coordinates lead (◡‿◡✿)
 
-— Biagio
+Biagio
