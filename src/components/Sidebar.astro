@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Window from './Window.astro';
 import MoodWidget from './MoodWidget.astro';
-import OneSignalSubscription from './OneSignalSubscription.astro';
 import MusicPlayer from './MusicPlayer.astro';
 import ArchiveWidget from './ArchiveWidget.astro';
 import Badge88x31 from './Badge88x31.astro';
@@ -78,10 +77,6 @@ if (currentWeek.length > 0) {
 <aside class="retro-sidebar">
 	<Window title="webmaster.exe" theme="windows" icon="computer">
 		<MoodWidget />
-	</Window>
-
-	<Window title="alert_config.sys" theme="windows" icon="computer">
-		<OneSignalSubscription />
 	</Window>
 
 	<Window title="shoutbox.txt" theme="windows" icon="notepad">
