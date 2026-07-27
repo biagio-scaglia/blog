@@ -55,6 +55,7 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 		const subscribeBtn = document.getElementById('onesignal-subscribe-btn') as HTMLButtonElement | null;
 
 		if (!ONESIGNAL_APP_ID) {
+			console.warn("[OneSignal Alerts] App ID is not configured in consts.ts");
 			if (statusText && subscribeBtn) {
 				statusText.textContent = "Offline (No App ID)";
 				statusText.className = "state-value error";
@@ -69,14 +70,18 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 		const statusTextEl = statusText as HTMLElement;
 		const subscribeBtnEl = subscribeBtn as HTMLButtonElement;
 
-		function initWidget() {
-			const OS = (window as any).OneSignal;
-			if (!OS) return;
+		console.log("[OneSignal Alerts] Widget scripts loaded. Queuing setup handler...");
+
+		// Safely queue setup via deferred load array to execute after init completion
+		const OSDeferred = (window as any).OneSignalDeferred = (window as any).OneSignalDeferred || [];
+		OSDeferred.push(async function(OS: any) {
+			console.log("[OneSignal Alerts] SDK successfully initialized. Binding widget controls...");
 
 			function updateUI() {
 				try {
 					const isOptedIn = OS.User?.PushSubscription?.optedIn;
 					const permission = Notification.permission;
+					console.log("[OneSignal Alerts] State update - Permission:", permission, "OptedIn:", isOptedIn);
 
 					if (permission === 'denied') {
 						statusTextEl.textContent = "Blocked by Browser";
@@ -95,6 +100,7 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 						subscribeBtnEl.disabled = false;
 					}
 				} catch (e) {
+					console.error("[OneSignal Alerts] UI status check failed:", e);
 					statusTextEl.textContent = "Unsupported";
 					statusTextEl.className = "state-value error";
 					subscribeBtnEl.textContent = "Not Supported";
@@ -104,6 +110,7 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 
 			// Validate standard browser notification support
 			if (!('Notification' in window)) {
+				console.warn("[OneSignal Alerts] Native Notification API is missing in this browser");
 				statusTextEl.textContent = "Unsupported";
 				statusTextEl.className = "state-value error";
 				subscribeBtnEl.textContent = "Not Supported";
@@ -117,49 +124,41 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 			// Event handler for permission changes
 			if (OS.Notifications) {
 				OS.Notifications.addEventListener("permissionChange", () => {
+					console.log("[OneSignal Alerts] Native permission state change triggered");
 					updateUI();
 				});
 			}
 
 			// Attach toggle click handler
 			subscribeBtnEl.addEventListener('click', async () => {
+				console.log("[OneSignal Alerts] Click handler registered. Toggling subscription state...");
 				try {
 					const isOptedIn = OS.User?.PushSubscription?.optedIn;
 					if (isOptedIn) {
+						console.log("[OneSignal Alerts] Opting out of push subscriptions...");
 						await OS.User?.PushSubscription?.optOut();
+						console.log("[OneSignal Alerts] Opt-out complete");
 						updateUI();
 					} else {
+						console.log("[OneSignal Alerts] Opting into push subscriptions...");
 						if (Notification.permission === 'default') {
-							await OS.Notifications?.requestPermission();
+							console.log("[OneSignal Alerts] Browser permission is default. Prompting native dialog...");
+							const result = await OS.Notifications?.requestPermission();
+							console.log("[OneSignal Alerts] Native dialog response:", result);
 						}
-						await OS.User?.PushSubscription?.optIn();
 						
-						// Add a tiny delay to allow subscription creation before updating UI
+						console.log("[OneSignal Alerts] Executing opt-in registration...");
+						await OS.User?.PushSubscription?.optIn();
+						console.log("[OneSignal Alerts] Opt-in complete");
+						
+						// Add a tiny delay to allow subscription registration to complete
 						setTimeout(updateUI, 800);
 					}
 				} catch (e) {
-					console.error("OneSignal subscription toggle failed", e);
+					console.error("[OneSignal Alerts] Registration action encountered an error:", e);
 				}
 			});
-		}
-
-		// Polling interval to await OneSignal asynchronous script inject completion
-		let checks = 0;
-		const checkInterval = setInterval(() => {
-			const OS = (window as any).OneSignal;
-			if (OS && OS.Notifications) {
-				clearInterval(checkInterval);
-				initWidget();
-			} else {
-				checks++;
-				if (checks > 100) { // Fail-safe timeout after 10 seconds
-					clearInterval(checkInterval);
-					statusTextEl.textContent = "Connection Timeout";
-					statusTextEl.className = "state-value error";
-					subscribeBtnEl.textContent = "Failed to load SDK";
-				}
-			}
-		}, 100);
+		});
 	});
 </script>
 
