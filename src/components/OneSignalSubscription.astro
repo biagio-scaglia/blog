@@ -36,13 +36,18 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 
 		window.OneSignalDeferred = window.OneSignalDeferred || [];
 		window.OneSignalDeferred.push(async function(OneSignal) {
-			await OneSignal.init({
-				appId: appId,
-				allowLocalhostAsSecureOrigin: true, // Enable for local testing
-				notifyButton: {
-					enable: false, // We build our own retro custom sidebar UI
-				},
-			});
+			try {
+				await OneSignal.init({
+					appId: appId,
+					allowLocalhostAsSecureOrigin: true, // Enable for local testing
+					notifyButton: {
+						enable: false, // We build our own retro custom sidebar UI
+					},
+				});
+			} catch (err) {
+				console.error("[OneSignal Alerts] Initialization failed:", err);
+				window.__onesignalInitError = err;
+			}
 		});
 	}
 </script>
@@ -75,11 +80,20 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 		// Safely queue setup via deferred load array to execute after init completion
 		const OSDeferred = (window as any).OneSignalDeferred = (window as any).OneSignalDeferred || [];
 		OSDeferred.push(async function(OS: any) {
-			console.log("[OneSignal Alerts] SDK successfully initialized. Binding widget controls...");
+			console.log("[OneSignal Alerts] SDK callback executing. Checking init status...");
+
+			if ((window as any).__onesignalInitError) {
+				console.warn("[OneSignal Alerts] OneSignal is not configured or failed initialization.");
+				statusTextEl.textContent = "Web Push Unconfigured";
+				statusTextEl.className = "state-value error";
+				subscribeBtnEl.textContent = "App Not Configured";
+				subscribeBtnEl.disabled = true;
+				return;
+			}
 
 			function updateUI() {
 				try {
-					const isOptedIn = OS.User?.PushSubscription?.optedIn;
+					const isOptedIn = OS?.User?.PushSubscription?.optedIn;
 					const permission = Notification.permission;
 					console.log("[OneSignal Alerts] State update - Permission:", permission, "OptedIn:", isOptedIn);
 
@@ -122,13 +136,13 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 			updateUI();
 
 			// Event handler for permission & subscription changes
-			if (OS.Notifications) {
+			if (OS?.Notifications) {
 				OS.Notifications.addEventListener("permissionChange", () => {
 					console.log("[OneSignal Alerts] Native permission state change triggered");
 					updateUI();
 				});
 			}
-			if (OS.User?.PushSubscription) {
+			if (OS?.User?.PushSubscription) {
 				OS.User.PushSubscription.addEventListener("change", () => {
 					console.log("[OneSignal Alerts] PushSubscription state change triggered");
 					updateUI();
@@ -141,19 +155,19 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 
 			// Attach toggle click handler
 			subscribeBtnEl.addEventListener('click', async () => {
-				console.log("[OneSignal Alerts] Button clicked. OptedIn:", OS.User?.PushSubscription?.optedIn);
+				console.log("[OneSignal Alerts] Button clicked. OptedIn:", OS?.User?.PushSubscription?.optedIn);
 				try {
-					const isOptedIn = OS.User?.PushSubscription?.optedIn;
+					const isOptedIn = OS?.User?.PushSubscription?.optedIn;
 					if (isOptedIn) {
 						console.log("[OneSignal Alerts] Opting out of push subscriptions...");
-						await OS.User?.PushSubscription?.optOut();
+						await OS?.User?.PushSubscription?.optOut();
 						console.log("[OneSignal Alerts] Opt-out complete");
 						updateUI();
 					} else {
 						console.log("[OneSignal Alerts] Opting into push subscriptions...");
 						subscribeBtnEl.disabled = true;
 						subscribeBtnEl.textContent = "Requesting...";
-						await OS.User?.PushSubscription?.optIn();
+						await OS?.User?.PushSubscription?.optIn();
 						console.log("[OneSignal Alerts] Opt-in complete");
 						updateUI();
 					}
