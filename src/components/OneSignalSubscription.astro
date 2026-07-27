@@ -121,17 +121,27 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 			// Initial UI state render
 			updateUI();
 
-			// Event handler for permission changes
+			// Event handler for permission & subscription changes
 			if (OS.Notifications) {
 				OS.Notifications.addEventListener("permissionChange", () => {
 					console.log("[OneSignal Alerts] Native permission state change triggered");
 					updateUI();
 				});
 			}
+			if (OS.User?.PushSubscription) {
+				OS.User.PushSubscription.addEventListener("change", () => {
+					console.log("[OneSignal Alerts] PushSubscription state change triggered");
+					updateUI();
+				});
+			}
+
+			// Prevent binding multiple click handlers
+			if (subscribeBtnEl.dataset.bound) return;
+			subscribeBtnEl.dataset.bound = "true";
 
 			// Attach toggle click handler
 			subscribeBtnEl.addEventListener('click', async () => {
-				console.log("[OneSignal Alerts] Click handler registered. Toggling subscription state...");
+				console.log("[OneSignal Alerts] Button clicked. OptedIn:", OS.User?.PushSubscription?.optedIn);
 				try {
 					const isOptedIn = OS.User?.PushSubscription?.optedIn;
 					if (isOptedIn) {
@@ -141,21 +151,15 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 						updateUI();
 					} else {
 						console.log("[OneSignal Alerts] Opting into push subscriptions...");
-						if (Notification.permission === 'default') {
-							console.log("[OneSignal Alerts] Browser permission is default. Prompting native dialog...");
-							const result = await OS.Notifications?.requestPermission();
-							console.log("[OneSignal Alerts] Native dialog response:", result);
-						}
-						
-						console.log("[OneSignal Alerts] Executing opt-in registration...");
+						subscribeBtnEl.disabled = true;
+						subscribeBtnEl.textContent = "Requesting...";
 						await OS.User?.PushSubscription?.optIn();
 						console.log("[OneSignal Alerts] Opt-in complete");
-						
-						// Add a tiny delay to allow subscription registration to complete
-						setTimeout(updateUI, 800);
+						updateUI();
 					}
 				} catch (e) {
 					console.error("[OneSignal Alerts] Registration action encountered an error:", e);
+					updateUI();
 				}
 			});
 		});
