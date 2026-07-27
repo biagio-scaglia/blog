@@ -34,10 +34,11 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 		script.defer = true;
 		document.head.appendChild(script);
 
-		window.OneSignal = window.OneSignal || [];
-		window.OneSignal.push(function() {
-			window.OneSignal.init({
+		window.OneSignalDeferred = window.OneSignalDeferred || [];
+		window.OneSignalDeferred.push(async function(OneSignal) {
+			await OneSignal.init({
 				appId: appId,
+				allowLocalhostAsSecureOrigin: true, // Enable for local testing
 				notifyButton: {
 					enable: false, // We build our own retro custom sidebar UI
 				},
@@ -110,21 +111,19 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 				return;
 			}
 
-			// Wait for OneSignal to execute configuration block
-			OS.push(() => {
-				updateUI();
+			// Initial UI state render
+			updateUI();
 
-				// Event handler for permission changes
-				if (OS.Notifications) {
-					OS.Notifications.addEventListener("permissionChange", () => {
-						updateUI();
-					});
-				}
-			});
+			// Event handler for permission changes
+			if (OS.Notifications) {
+				OS.Notifications.addEventListener("permissionChange", () => {
+					updateUI();
+				});
+			}
 
 			// Attach toggle click handler
-			subscribeBtnEl.addEventListener('click', () => {
-				OS.push(async () => {
+			subscribeBtnEl.addEventListener('click', async () => {
+				try {
 					const isOptedIn = OS.User?.PushSubscription?.optedIn;
 					if (isOptedIn) {
 						await OS.User?.PushSubscription?.optOut();
@@ -138,14 +137,17 @@ import GlobeIcon from './icons/GlobeIcon.astro';
 						// Add a tiny delay to allow subscription creation before updating UI
 						setTimeout(updateUI, 800);
 					}
-				});
+				} catch (e) {
+					console.error("OneSignal subscription toggle failed", e);
+				}
 			});
 		}
 
 		// Polling interval to await OneSignal asynchronous script inject completion
 		let checks = 0;
 		const checkInterval = setInterval(() => {
-			if ((window as any).OneSignal && (window as any).OneSignal.push) {
+			const OS = (window as any).OneSignal;
+			if (OS && OS.Notifications) {
 				clearInterval(checkInterval);
 				initWidget();
 			} else {
