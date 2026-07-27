@@ -1,0 +1,274 @@
+---
+import { ONESIGNAL_APP_ID } from '../consts';
+import GlobeIcon from './icons/GlobeIcon.astro';
+---
+
+<div class="onesignal-widget">
+	<div class="connection-status-panel">
+		<div class="status-header">
+			<GlobeIcon size={12} class="globe-status-icon" />
+			<span class="status-lbl">Desktop Alerts Settings</span>
+		</div>
+		<div class="status-body">
+			<p class="status-desc">
+				Receive a real-time pop-up alert on your desktop or phone when Biagio publishes a new entry.
+			</p>
+			<div class="status-state-box">
+				<span class="state-label">Connection:</span>
+				<span id="onesignal-status-text" class="state-value loading">Initializing...</span>
+			</div>
+			<div class="actions-row">
+				<button id="onesignal-subscribe-btn" class="retro-subscribe-btn" disabled>
+					Connecting...
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script is:inline define:vars={{ appId: ONESIGNAL_APP_ID }}>
+	// Asynchronously load the OneSignal SDK client-side library if App ID is configured
+	if (appId) {
+		const script = document.createElement('script');
+		script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+		script.defer = true;
+		document.head.appendChild(script);
+
+		window.OneSignal = window.OneSignal || [];
+		window.OneSignal.push(function() {
+			window.OneSignal.init({
+				appId: appId,
+				notifyButton: {
+					enable: false, // We build our own retro custom sidebar UI
+				},
+			});
+		});
+	}
+</script>
+
+<script>
+	import { ONESIGNAL_APP_ID } from '../consts';
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const statusText = document.getElementById('onesignal-status-text');
+		const subscribeBtn = document.getElementById('onesignal-subscribe-btn') as HTMLButtonElement | null;
+
+		if (!ONESIGNAL_APP_ID) {
+			if (statusText && subscribeBtn) {
+				statusText.textContent = "Offline (No App ID)";
+				statusText.className = "state-value error";
+				subscribeBtn.textContent = "No App ID Configured";
+				subscribeBtn.disabled = true;
+			}
+			return;
+		}
+
+		if (!statusText || !subscribeBtn) return;
+
+		const statusTextEl = statusText as HTMLElement;
+		const subscribeBtnEl = subscribeBtn as HTMLButtonElement;
+
+		function initWidget() {
+			const OS = (window as any).OneSignal;
+			if (!OS) return;
+
+			function updateUI() {
+				try {
+					const isOptedIn = OS.User?.PushSubscription?.optedIn;
+					const permission = Notification.permission;
+
+					if (permission === 'denied') {
+						statusTextEl.textContent = "Blocked by Browser";
+						statusTextEl.className = "state-value error";
+						subscribeBtnEl.textContent = "Alerts Blocked";
+						subscribeBtnEl.disabled = true;
+					} else if (isOptedIn) {
+						statusTextEl.textContent = "Connected ✓";
+						statusTextEl.className = "state-value active";
+						subscribeBtnEl.textContent = "Disable Alerts";
+						subscribeBtnEl.disabled = false;
+					} else {
+						statusTextEl.textContent = "Disconnected";
+						statusTextEl.className = "state-value inactive";
+						subscribeBtnEl.textContent = "Enable Alerts";
+						subscribeBtnEl.disabled = false;
+					}
+				} catch (e) {
+					statusTextEl.textContent = "Unsupported";
+					statusTextEl.className = "state-value error";
+					subscribeBtnEl.textContent = "Not Supported";
+					subscribeBtnEl.disabled = true;
+				}
+			}
+
+			// Validate standard browser notification support
+			if (!('Notification' in window)) {
+				statusTextEl.textContent = "Unsupported";
+				statusTextEl.className = "state-value error";
+				subscribeBtnEl.textContent = "Not Supported";
+				subscribeBtnEl.disabled = true;
+				return;
+			}
+
+			// Wait for OneSignal to execute configuration block
+			OS.push(() => {
+				updateUI();
+
+				// Event handler for permission changes
+				if (OS.Notifications) {
+					OS.Notifications.addEventListener("permissionChange", () => {
+						updateUI();
+					});
+				}
+			});
+
+			// Attach toggle click handler
+			subscribeBtnEl.addEventListener('click', () => {
+				OS.push(async () => {
+					const isOptedIn = OS.User?.PushSubscription?.optedIn;
+					if (isOptedIn) {
+						await OS.User?.PushSubscription?.optOut();
+						updateUI();
+					} else {
+						if (Notification.permission === 'default') {
+							await OS.Notifications?.requestPermission();
+						}
+						await OS.User?.PushSubscription?.optIn();
+						
+						// Add a tiny delay to allow subscription creation before updating UI
+						setTimeout(updateUI, 800);
+					}
+				});
+			});
+		}
+
+		// Polling interval to await OneSignal asynchronous script inject completion
+		let checks = 0;
+		const checkInterval = setInterval(() => {
+			if ((window as any).OneSignal && (window as any).OneSignal.push) {
+				clearInterval(checkInterval);
+				initWidget();
+			} else {
+				checks++;
+				if (checks > 100) { // Fail-safe timeout after 10 seconds
+					clearInterval(checkInterval);
+					statusTextEl.textContent = "Connection Timeout";
+					statusTextEl.className = "state-value error";
+					subscribeBtnEl.textContent = "Failed to load SDK";
+				}
+			}
+		}, 100);
+	});
+</script>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.onesignal-widget {
+		width: 100%;
+		font-family: $font-verdana;
+		font-size: 11px;
+	}
+
+	.connection-status-panel {
+		background: #ffffff;
+		@include win95-border-inset;
+		padding: 6px;
+	}
+
+	.status-header {
+		background: $win-blue;
+		color: $win-white;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 3px 6px;
+		font-family: $font-tahoma;
+		font-weight: bold;
+		font-size: 10px;
+		margin-bottom: 8px;
+	}
+
+	.globe-status-icon {
+		filter: brightness(0) invert(1);
+	}
+
+	.status-desc {
+		color: #333333;
+		margin: 0 0 8px 0;
+		line-height: 1.3;
+	}
+
+	.status-state-box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: $win-light-gray;
+		border: 1px solid $win-dark-gray;
+		padding: 4px 8px;
+		font-family: $font-retro-mono;
+		font-size: 10px;
+		font-weight: bold;
+		margin-bottom: 8px;
+	}
+
+	.state-label {
+		color: $win-dark-gray;
+	}
+
+	.state-value {
+		padding: 1px 4px;
+		border-radius: 1px;
+
+		&.loading {
+			color: #555555;
+		}
+
+		&.active {
+			background: #e2f0cb;
+			color: #388e3c;
+			outline: 1px solid #388e3c;
+		}
+
+		&.inactive {
+			color: $win-dark-gray;
+		}
+
+		&.error {
+			background: #fdd8d8;
+			color: #d32f2f;
+			outline: 1px dashed #d32f2f;
+		}
+	}
+
+	.actions-row {
+		display: flex;
+		justify-content: center;
+	}
+
+	.retro-subscribe-btn {
+		@include win95-border-outset;
+		background: $win-gray;
+		color: $win-text;
+		font-family: $font-verdana;
+		font-size: 11px;
+		font-weight: bold;
+		padding: 4px 12px;
+		cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M10 2l3 0 0 12 3 0 0-7 2 0 0 7 1 0 0-6 2 0 0 6 1 0 0-5 2 0 0 9-1 0 0 2-1 0 0 1-1 0 0 1-7 0 0-1-3 0 0-1-1 0 0-5-2 0 0-3 2 0 0-3z' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>") 10 2, pointer;
+		outline: none;
+		border-radius: 0;
+		width: 100%;
+		text-align: center;
+		user-select: none;
+
+		&:active:not(:disabled) {
+			border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+			padding: 5px 11px 3px 13px;
+		}
+
+		&:disabled {
+			color: $win-dark-gray;
+			cursor: default;
+		}
+	}
+</style>
