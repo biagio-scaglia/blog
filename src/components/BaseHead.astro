@@ -15,7 +15,12 @@ interface Props {
 	tags?: string[];
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Ensure pathname ends with a slash to maintain consistency with the sitemap
+let pathname = Astro.url.pathname;
+if (!pathname.endsWith('/') && !pathname.split('/').pop()?.includes('.')) {
+	pathname += '/';
+}
+const canonicalURL = new URL(pathname, Astro.site);
 const { title, description, image = FallbackImage, article = false, publishedDate, modifiedDate, tags = [] } = Astro.props;
 
 const siteUrl = Astro.site ? Astro.site.toString() : 'https://biagiocyberspace.it/';

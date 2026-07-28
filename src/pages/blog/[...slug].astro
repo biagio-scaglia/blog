@@ -29,7 +29,12 @@ const { Content } = await render(post);
 const coverImage = post.data.cover || post.data.heroImage;
 const galleryImages = post.data.gallery || [];
 
-const postUrl = new URL(Astro.url.pathname, Astro.site || 'https://biagiocyberspace.it').toString();
+// Ensure pathname ends with a slash to maintain consistency with the sitemap
+let postPathname = Astro.url.pathname;
+if (!postPathname.endsWith('/') && !postPathname.split('/').pop()?.includes('.')) {
+	postPathname += '/';
+}
+const postUrl = new URL(postPathname, Astro.site || 'https://biagiocyberspace.it').toString();
 const authorId = Astro.site ? `${Astro.site.toString()}#person` : 'https://biagiocyberspace.it#person';
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://biagiocyberspace.it';
@@ -187,7 +192,7 @@ const theme = (categoryThemes[post.data.category || "General"] || "windows") as 
 
 			<div class="post-tags-list">
 				{post.data.tags.map((tag: string) => (
-					<a href={`${import.meta.env.BASE_URL}blog?tag=${tag}`} class="tag-badge">#{tag}</a>
+					<a href={`${import.meta.env.BASE_URL}blog/?tag=${tag}`} class="tag-badge">#{tag}</a>
 				))}
 			</div>
 
@@ -204,7 +209,7 @@ const theme = (categoryThemes[post.data.category || "General"] || "windows") as 
 					)}
 				</div>
 				<div class="nav-up">
-					<a href={`${import.meta.env.BASE_URL}blog`} class="nav-btn">
+					<a href={`${import.meta.env.BASE_URL}blog/`} class="nav-btn">
 						↑ Up One Level
 					</a>
 				</div>

@@ -5,6 +5,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
 	site: 'https://biagiocyberspace.it',
 	base: '/',
+	trailingSlash: 'always',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

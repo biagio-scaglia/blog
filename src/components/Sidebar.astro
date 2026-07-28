@@ -121,7 +121,7 @@ if (currentWeek.length > 0) {
 				{categories.map(([cat, count]) => (
 					<li>
 						<FolderIcon size={12} class="cat-icon" />
-						<a href={`${import.meta.env.BASE_URL}blog?category=${cat}`}>{cat}</a>
+						<a href={`${import.meta.env.BASE_URL}blog/?category=${cat}`}>{cat}</a>
 						<span class="cat-count">({count})</span>
 					</li>
 				))}
@@ -134,7 +134,7 @@ if (currentWeek.length > 0) {
 			{tags.map(([tag, count]) => {
 				const size = 9 + Math.min(count * 2, 8);
 				return (
-					<a href={`${import.meta.env.BASE_URL}blog?tag=${tag}`} style={`font-size: ${size}px;`} class="tag-link">
+					<a href={`${import.meta.env.BASE_URL}blog/?tag=${tag}`} style={`font-size: ${size}px;`} class="tag-link">
 						#{tag}
 					</a>
 				);
