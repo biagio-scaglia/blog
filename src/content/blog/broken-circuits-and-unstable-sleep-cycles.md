@@ -1,12 +1,12 @@
 ---
 title: "Broken Circuits and Unstable Sleep Cycles: The Webmaster's Night Log (￣_￣|||)"
-description: "An introspective reflection on chronic insomnia, racing thoughts at 3 AM, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer."
+description: "An introspective reflection on chronic insomnia, racing thoughts, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer."
 pubDate: "Jul 28 2026"
 category: "Personal"
 tags: ["sleep-deprivation", "insomnia", "mental-health", "personal", "late-night-thoughts"]
 ---
 
-It’s 3:00 AM. 
+It’s just one of those periods. 
 
 The main system is shut down. The monitors are cold, black screens reflecting nothing but the dim streetlights outside my window. But inside my head, the CPU is running at 100% load. A background process I didn't start is running in an infinite loop, parsing every conversation I’ve had this week, compiling every regret, and rendering worst-case scenarios for the future.
 
@@ -14,7 +14,7 @@ Sleep shouldn't be this hard to compute, and yet here I am. (ー_ー)
 
 For a programmer, sleep is supposed to be the garbage collector. It’s when the variables are cleared, the memory leak of daily interactions is patched, and the system resets. But lately, my garbage collector has been failing. I lie in bed, staring at the ceiling, waiting for a shutdown command that never comes.
 
-## The 3 AM Blue Screen of the Mind (￣_￣|||)
+## The Late-Night Blue Screen of the Mind (￣_￣|||)
 
 When you can't sleep, the silence of the night doesn't feel peaceful—it feels heavy. 
 
