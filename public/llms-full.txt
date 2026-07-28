@@ -100,6 +100,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Personal
 - **Summary:** An introspective personal reflection on traveling outside of Italy for the first time. Covers overcoming crippling travel anxiety, navigating foreign surroundings, and learning to face social anxiety in Nuremberg with the support of a trusted friend.
 
+### Broken Circuits and Unstable Sleep Cycles: The Webmaster's Night Log
+- **Date:** July 28, 2026
+- **Category:** Personal
+- **Summary:** An introspective reflection on chronic insomnia, racing thoughts at 3 AM, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer.
+
 ---
 
 ## Technical Details

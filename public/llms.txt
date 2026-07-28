@@ -41,6 +41,7 @@ The blog covers topics including:
 - [OS-Tans: When the Internet Turned Operating Systems into Anime Mascots](https://biagiocyberspace.it/blog/os-tans-and-the-glory-of-windows-2000/): A nostalgic look at the 2chan/Futaba Channel OS-tan phenomenon and Windows 2000 Pro (2K-tan).
 - [Beyond the Screen: Building a Retro Windows XP Visual Novel with Zero AI](https://biagiocyberspace.it/blog/beyond-the-screen-retro-visual-novel/): A deep-dive into building Oltre lo Schermo, an indie retro visual novel exploring isolation and mental health, built with Ren'Py.
 - [Exiting the Shell: A Melancholy Journey to Nuremberg](https://biagiocyberspace.it/blog/first-time-leaving-italy-nuremberg/): Reflection on overcoming travel anxiety, leaving Italy for the first time, and facing social anxiety with the support of a trusted friend.
+- [Broken Circuits and Unstable Sleep Cycles: The Webmaster's Night Log](https://biagiocyberspace.it/blog/broken-circuits-and-unstable-sleep-cycles/): An introspective reflection on chronic insomnia, racing thoughts at 3 AM, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer.
 
 
 ## Projects
