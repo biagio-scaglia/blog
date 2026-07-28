@@ -8,7 +8,7 @@ tags: ["sleep-deprivation", "insomnia", "mental-health", "personal", "late-night
 
 It’s just one of those periods. 
 
-The main system is shut down. The monitors are cold, black screens reflecting nothing but the dim streetlights outside my window. But inside my head, the CPU is running at 100% load. A background process I didn't start is running in an infinite loop, parsing every conversation I’ve had this week, compiling every regret, and rendering worst-case scenarios for the future.
+The main system is shut down. The monitors are cold, black screens reflecting nothing but the dim streetlights outside my window. But inside my head, the CPU is running at 100% load. A background process I didn't start is running in an infinite loop, parsing every conversation I’ve had this week, compiling every regret, whispering that maybe I’m just a bad person, and rendering worst-case scenarios for the future.
 
 Sleep shouldn't be this hard to compute, and yet here I am. (ー_ー)
 
