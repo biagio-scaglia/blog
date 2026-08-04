@@ -105,6 +105,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Personal
 - **Summary:** An introspective reflection on chronic insomnia, racing thoughts, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer.
 
+### Midnight Tides and Temperature Shocks: A Night at the Beach
+- **Date:** August 2, 2026
+- **Category:** Personal
+- **Summary:** A personal reflection on spending a beautiful night at the beach on August 2nd—starry skies, a midnight swim, the biting cold of the sea breeze, and the harsh morning heat.
+
 ---
 
 ## Technical Details
