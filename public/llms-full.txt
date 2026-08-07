@@ -110,6 +110,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Personal
 - **Summary:** A personal reflection on spending a beautiful night at the beach on August 2nd—starry skies, a midnight swim, the biting cold of the sea breeze, and the harsh morning heat.
 
+### Compiling Sanity: When Code is the Only Escape
+- **Date:** August 7, 2026
+- **Category:** Personal
+- **Summary:** A deeply personal reflection on going through a rough patch, dealing with racing thoughts, and how programming and web development have become the only distraction that keeps the webmaster's mind anchored.
+
 ---
 
 ## Technical Details
