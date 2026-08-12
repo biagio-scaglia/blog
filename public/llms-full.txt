@@ -115,6 +115,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Personal
 - **Summary:** A deeply personal reflection on going through a rough patch, dealing with racing thoughts, and how programming and web development have become the only distraction that keeps the webmaster's mind anchored.
 
+### Moon Inferno: My Custom React Framework is Online!
+- **Date:** August 12, 2026
+- **Category:** Coding
+- **Summary:** Announcing Moon Inferno, a lightweight, custom React framework designed for compiling ultra-fast static websites. Explores the motivation behind building it, its architecture, and links to the GitHub repository and live demo.
+
 ---
 
 ## Technical Details
