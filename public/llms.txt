@@ -44,7 +44,7 @@ The blog covers topics including:
 - [Broken Circuits and Unstable Sleep Cycles: The Webmaster's Night Log](https://biagiocyberspace.it/blog/broken-circuits-and-unstable-sleep-cycles/): An introspective reflection on chronic insomnia, racing thoughts, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer.
 - [Midnight Tides and Temperature Shocks: A Night at the Beach](https://biagiocyberspace.it/blog/midnight-tides-and-temperature-shocks/): A personal reflection on spending a beautiful night at the beach on August 2nd—starry skies, a midnight swim, the biting cold of the sea breeze, and the harsh morning heat.
 - [Compiling Sanity: When Code is the Only Escape](https://biagiocyberspace.it/blog/compiling-sanity-when-code-is-the-only-distraction/): A deeply personal reflection on going through a rough patch, dealing with racing thoughts, and how programming and web development have become the only distraction that keeps my mind anchored.
-- [Moon Inferno: My Custom React Framework is Online!](https://biagiocyberspace.it/blog/moon-inferno-react-framework-is-online/): Announcing Moon Inferno, a lightweight, custom React framework designed for compiling ultra-fast static websites. Exploring the GitHub repository and live demo.
+- [Moon Inferno: My Custom React UI Framework is Online!](https://biagiocyberspace.it/blog/moon-inferno-react-framework-is-online/): Announcing Moon-Inferno, an accessibility-first React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art web applications. Exploring the GitHub repository and live demo.
 
 
 ## Projects

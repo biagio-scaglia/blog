@@ -1,77 +1,99 @@
 ---
-title: "Moon Inferno: My Custom React Framework is Online! (★´∀｀★)"
-description: "Announcing Moon Inferno, a lightweight, custom React framework designed for compiling ultra-fast static websites. Exploring the GitHub repository and live demo."
+title: "Moon Inferno: My Custom React UI Framework is Online! (★´∀｀★)"
+description: "Announcing Moon-Inferno, an accessibility-first React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art web applications."
 pubDate: "Aug 12 2026"
 category: "Coding"
-tags: ["react", "moon-inferno", "framework", "webdev", "open-source", "javascript"]
+tags: ["react", "moon-inferno", "design-system", "webdev", "open-source", "accessibility"]
 ---
 
-I am extremely excited to share that after weeks of late-night terminal sessions, empty coffee cups, and infinite compile-debug loops, my custom React framework is officially online! 
+I am extremely excited to share that after weeks of late-night terminal sessions, empty coffee cups, and infinite compile-debug loops, my custom UI framework is officially online! 
 
-It is called **Moon Inferno** (a name inspired by classic cyber-anime and retro-gaming aesthetics), and you can check it out right now:
+It is called **Moon-Inferno** (a name inspired by classic cyber-anime and retro-gaming aesthetics), and you can check out the official documentation and demos right now:
 
-- **Live Demo:** [biagio-scaglia.github.io/moon-inferno/](https://biagio-scaglia.github.io/moon-inferno/)
+- **Live Demo & Docs:** [biagio-scaglia.github.io/moon-inferno/](https://biagio-scaglia.github.io/moon-inferno/)
 - **GitHub Repository:** [github.com/biagio-scaglia/moon-inferno](https://github.com/biagio-scaglia/moon-inferno)
 
-Let's dive into why I built this, how it works, and why I think the web needs a return to lightweight simplicity. d(^_^)b
+Let's dive into the core philosophy behind the framework, how to get started, and some of the cool components I've built. d(^_^)b
 
-## Why Build Yet Another React Framework? (ー_ー)
+## The Philosophy: Retro Style, Modern Accessibility (ー_ー)
 
-In 2026, the modern frontend landscape is flooded with massive, complex meta-frameworks. They are powerful, but they bring massive bundle sizes, complex hydration logs, and server-side setup overhead that feels completely unnecessary for personal sites, portfolios, or documentation nodes. 
+Back in the early 2000s, the web had *character*. We had animated GIFs, CRT scanline effects, retro layouts, and experimental designs. But let's be honest: those pages were a nightmare for accessibility. 
 
-Back in the early 2000s, we built pages with raw HTML, CSS, and maybe a dash of PHP or Perl. They loaded instantly, run on anything, and were easy to understand.
+I wanted to build a UI framework that reclaims that expressive, retro aesthetic without sacrificing modern standards. 
 
-I wanted that exact same lightweight output, but with the modern developer experience of component-based design. 
-
-**Moon Inferno** is a static-site compiler for React. It allows you to write standard, modular React components using JSX, but instead of shipping a massive JavaScript bundle to the browser, it compiles everything down to pure, semantic, static HTML and vanilla CSS. 
-
-Zero client-side JS bloat by default. Just fast, clean pages. 
+**Moon-Inferno** is an accessibility-first React UI library and design system. Every component is built from the ground up to be **WCAG 2.1 AA Compliant**. That means you get:
+- High-contrast focus rings (`:focus-visible`) for all interactive elements.
+- Full keyboard traversal and navigation patterns (supporting arrows, PageUp/Down, Home/End, and Escape).
+- Complete WAI-ARIA roles and attributes.
+- Reduced motion safety for users who prefer static pages.
 
 ```
-     [ Moon Inferno Compiler Output ]
+       [ Moon-Inferno System Info ]
      ┌───────────────────────────────┐
-     │ Source: React + JSX + TS      │
-     │ Compilation: Static HTML/CSS  │
-     │ Client-Side JS: 0 KB (Clean!) │
-     │ Status: online_and_serving    │
+     │ Framework: React + TypeScript │
+     │ Theme Modes: Inferno, Terminal│
+     │ Accessibility: WCAG 2.1 AA    │
+     │ Icon Count: 34 Custom Vectors │
      └───────────────────────────────┘
 ```
 
-## How It Works (◡‿◡✿)
+## Getting Started (◡‿◡✿)
 
-Writing pages in Moon Inferno is designed to be incredibly simple and familiar if you already know React. Here is a basic example of a page component:
+Moon-Inferno is managed as a clean monorepo divided into four lightweight packages. To install the ecosystem in your React project, run:
 
-```jsx
-// index.jsx - A simple page in Moon Inferno
-import { Page, Card } from 'moon-inferno';
-
-export default function Home() {
-	return (
-		<Page title="My Cyber Node">
-			<main class="container">
-				<h1>Welcome to the Net!</h1>
-				<Card theme="blue">
-					<p>This layout is compiled to pure static HTML.</p>
-					<p>No client-side runtime hydration is required.</p>
-				</Card>
-			</main>
-		</Page>
-	);
-}
+```bash
+npm install @moon-inferno/core @moon-inferno/react @moon-inferno/themes @moon-inferno/icons
 ```
 
-Behind the scenes, the builder parses your component tree, extracts your styles, and generates static pages ready to be served from any CDN (like GitHub Pages, Vercel, or Netlify). It gives you the component encapsulation of React without forcing the end-user's device to download a heavy runtime.
+To set up the framework and apply the signature design system, import the styles and set the theme in your main entry point (e.g., `main.tsx`):
 
-## Open Source and Future Plans (★´∀｀★)
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-Moon Inferno is completely open source. The repository is hosted on GitHub under [biagio-scaglia/moon-inferno](https://github.com/biagio-scaglia/moon-inferno). 
+// Import Moon-Inferno styles and theme engine
+import '@moon-inferno/react/styles.css';
+import { setTheme } from '@moon-inferno/themes';
 
-This is still the initial release, and I have plenty of ideas for the future:
-- Custom static asset optimization rules
-- Built-in Markdown and MDX parsing for blogging
-- Vintage layout presets (Win95, GeoCities templates out of the box!)
+// Initialize signature theme ('moon-inferno', 'terminal', or 'y2k')
+setTheme('moon-inferno');
 
-If you want to tinker with it, clone the repo, star it, or open an issue. Let's build a lighter, cleaner, independent web together. 
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+## Experimental Components & Custom FX (★´∀｀★)
+
+The framework comes packed with unique component primitives that make building retro-futuristic UIs incredibly fun:
+
+* **Text Effects & Tickers**:
+  - `<GlitchText text="ERROR_404" as="h1" />` — Cyberpunk glitching title.
+  - `<TypingText text="Booting..." speed={40} cursorChar="█" />` — Retro console typist effect.
+  - `<NeonText text="INFERNO" flicker />` — Glowing cathode neon light.
+  - `<Marquee speed={18} variant="pixel">...</Marquee>` — Classic crawling marquee banner.
+
+* **Containers & Shaders**:
+  - `HoloCard` — A 3D interactive card with cursor-based parallax tilt and holographic glare reflections.
+  - `PixelContainer` — Arcade window container with stepped pixel borders and retro title bars.
+  - `MatrixRain` — An ASCII rain canvas backdrop with adjustable speed and custom colors.
+  - `CRTEffect` — A fullscreen retro scanline shader overlay with flicker animation.
+
+* **Status Beacons & UI Controls**:
+  - `<SignalLight status="online" pulse label="NODE_ONLINE" />` — Simple status indicators (`online`, `warning`, `busy`, `offline`).
+  - `CommandPalette` — Accessible modal Cmd+K search combobox.
+  - Custom themed Buttons, Inputs, Checkboxes, Switches, and Sliders.
+
+## Open Source and Contributions
+
+This is just the beginning for Moon-Inferno. I'm planning on adding more vintage theme presets, more custom iconography to the `@moon-inferno/icons` package, and even more visual shaders.
+
+Check out the code, star the repository, or open a pull request on [GitHub](https://github.com/biagio-scaglia/moon-inferno). 
+
+Let's build a more expressive web. 
 
 See you in the next log! (◡‿◡✿)
 
