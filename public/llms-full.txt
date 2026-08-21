@@ -120,6 +120,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Coding
 - **Summary:** Announcing Moon-Inferno, an accessibility-first React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art web applications. Explores its philosophy, WCAG 2.1 AA compliance, custom styling variables, custom text effects, shaders, and links to the GitHub repository and live demo.
 
+### The Urge to Build: Moon Inferno's Spark and Impostor Shadows
+- **Date:** August 17, 2026
+- **Category:** Personal
+- **Summary:** A personal reflection on the unexpected success of Moon-Inferno, having too many ideas, missing coding during vacation, and dealing with impostor syndrome regarding the main day job.
+
 ### Reconnecting Offline: Lecce, Archery, and a 2km Sea Crossing
 - **Date:** August 21, 2026
 - **Category:** Personal
