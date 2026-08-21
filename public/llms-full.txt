@@ -120,6 +120,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Coding
 - **Summary:** Announcing Moon-Inferno, an accessibility-first React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art web applications. Explores its philosophy, WCAG 2.1 AA compliance, custom styling variables, custom text effects, shaders, and links to the GitHub repository and live demo.
 
+### Reconnecting Offline: Lecce, Archery, and a 2km Sea Crossing
+- **Date:** August 21, 2026
+- **Category:** Personal
+- **Summary:** A personal reflection on stepping away from the IDE to travel across Puglia. Covers visiting friends in Lecce and Foggia, finding an unexpected talent in archery, and swimming 2km to a small offshore island.
+
 ---
 
 ## Technical Details
