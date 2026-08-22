@@ -70,6 +70,16 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Coding
 - **Summary:** Technical deep-dive into how the blog was built. Covers the Astro + TypeScript + SCSS stack, the recreation of Windows 95-style beveled borders in pure CSS, the modular component architecture, and the philosophical motivation behind building a retro-styled personal site with modern tools.
 
+### Anemoia: Nostalgia for a Cyber-Past We Never Lived
+- **Date:** July 6, 2026
+- **Category:** Web Culture
+- **Summary:** An exploration of the concept of "anemoia"—the longing for a past you've never personally experienced. Discusses why early 2000s and late 90s web elements (Netscape, 56k modems, Winamp skins, pixel art wallpapers) evoke a deep sense of nostalgia and comfort for modern web surfers.
+
+### Touhou Scarlet Curiosity Review
+- **Date:** July 9, 2026
+- **Category:** Gaming
+- **Summary:** A personal review of Ankake Spa's action-RPG "Touhou Scarlet Curiosity" on the Nintendo Switch. Focuses on how the game blends classic early-2000s action-RPG style (reminiscent of the Ys series) with frantic bullet hell mechanics and an outstanding soundtrack.
+
 ### No More What Ifs: The Melancholic Jazz of Persona 5 Royal
 - **Date:** July 13, 2026
 - **Category:** Music
@@ -79,6 +89,46 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Date:** July 14, 2026
 - **Category:** Web Culture
 - **Summary:** An exploration of the early-2000s Japanese web phenomenon from Futaba Channel (2chan) where operating systems were personified as anime-style mascot characters. Focuses on the contrast between the unstable Windows ME-tan and the highly stable, elegant Windows 2000 Pro (2K-tan), complete with structured facts and details.
+
+### Beyond the Screen: Building a Retro Windows XP Visual Novel with Zero AI
+- **Date:** July 17, 2026
+- **Category:** Gaming
+- **Summary:** A deep dive into Oltre lo Schermo (Beyond the Screen), an upcoming retro visual novel exploring social isolation (hikikomori) and mental health. Discusses building the project with Ren'Py, crafting custom interfaces using Python and Pillow to mimic Windows XP, and the decision to commit to 100% human-crafted art and writing.
+
+### Exiting the Shell: A Melancholy Journey to Nuremberg
+- **Date:** July 26, 2026
+- **Category:** Personal
+- **Summary:** An introspective personal reflection on traveling outside of Italy for the first time. Covers overcoming crippling travel anxiety, navigating foreign surroundings, and learning to face social anxiety in Nuremberg with the support of a trusted friend.
+
+### Broken Circuits and Unstable Sleep Cycles: The Webmaster's Night Log
+- **Date:** July 28, 2026
+- **Category:** Personal
+- **Summary:** An introspective reflection on chronic insomnia, racing thoughts, and the unstable equilibrium of sleeping too little or sleeping too much in the life of a software developer.
+
+### Midnight Tides and Temperature Shocks: A Night at the Beach
+- **Date:** August 2, 2026
+- **Category:** Personal
+- **Summary:** A personal reflection on spending a beautiful night at the beach on August 2nd—starry skies, a midnight swim, the biting cold of the sea breeze, and the harsh morning heat.
+
+### Compiling Sanity: When Code is the Only Escape
+- **Date:** August 7, 2026
+- **Category:** Personal
+- **Summary:** A deeply personal reflection on going through a rough patch, dealing with racing thoughts, and how programming and web development have become the only distraction that keeps the webmaster's mind anchored.
+
+### Moon Inferno: My Custom React UI Framework is Online!
+- **Date:** August 12, 2026
+- **Category:** Coding
+- **Summary:** Announcing Moon-Inferno, an accessibility-first React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art web applications. Explores its philosophy, WCAG 2.1 AA compliance, custom styling variables, custom text effects, shaders, and links to the GitHub repository and live demo.
+
+### The Urge to Build: Moon Inferno's Spark and Impostor Shadows
+- **Date:** August 17, 2026
+- **Category:** Personal
+- **Summary:** A personal reflection on the unexpected success of Moon-Inferno, having too many ideas, missing coding during vacation, and dealing with impostor syndrome regarding the main day job.
+
+### Reconnecting Offline: Lecce, Archery, and a 2km Sea Crossing
+- **Date:** August 21, 2026
+- **Category:** Personal
+- **Summary:** A personal reflection on stepping away from the IDE to travel across Puglia. Covers visiting friends in Lecce and Foggia, finding an unexpected talent in archery, and swimming 2km to a small offshore island.
 
 ---
 
