@@ -207,3 +207,61 @@ hr {
   white-space: nowrap;
   border: 0;
 }
+
+
+
+/* SFX Sound Toggle Button & Reading Progress Bar */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #ff007f, #00f0ff, #ffcc00);
+  z-index: 999999;
+  width: 0%;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px #00f0ff;
+}
+
+.sfx-toggle-btn {
+  @include win95-border-outset;
+  background: $win-gray;
+  color: $win-text;
+  font-family: $font-tahoma;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  user-select: none;
+  border-radius: 0;
+  outline: none;
+
+  &:hover {
+    background: #dfdfdf;
+  }
+
+  &:active {
+    border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
+  }
+
+  &.muted {
+    background: #ffdddd;
+    color: #cc0000;
+  }
+}
+
+.copy-code-btn {
+  font-family: $font-tahoma;
+  background: $win-gray;
+  @include win95-border-outset;
+  color: $win-text;
+  font-weight: bold;
+  &:hover {
+    background: #000080;
+    color: #ffffff;
+  }
+}

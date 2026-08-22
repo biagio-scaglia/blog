@@ -24,6 +24,7 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 		<BaseHead title={title} description={description} image={image} article={article} publishedDate={publishedDate} modifiedDate={modifiedDate} tags={tags} />
 	</head>
 	<body>
+		<div id="reading-progress-bar" class="reading-progress-bar" aria-hidden="true"></div>
 		<div class="retro-container" id="top">
 			<Header />
 			
@@ -44,116 +45,196 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 		</div>
 
 		<script>
-			// Retro Click Sound using Web Audio API
-			function playClickSound() {
-				try {
-					const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-					const ctx = new AudioContextClass();
+			// Web Audio API Synthesizer with User Gesture Unlock
+			let blogAudioCtx = null;
+			let isAudioMuted = localStorage.getItem('blog_sfx_muted') === 'true';
 
-					// First tick
-					const osc1 = ctx.createOscillator();
-					const gain1 = ctx.createGain();
-					osc1.type = 'sine';
-					osc1.frequency.setValueAtTime(1400, ctx.currentTime);
-					osc1.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.03);
-
-					gain1.gain.setValueAtTime(0.03, ctx.currentTime);
-					gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
-
-					osc1.connect(gain1);
-					gain1.connect(ctx.destination);
-					osc1.start();
-					osc1.stop(ctx.currentTime + 0.04);
-
-					// Second tick (slightly delayed to mimic switch action)
-					setTimeout(() => {
-						const osc2 = ctx.createOscillator();
-						const gain2 = ctx.createGain();
-						osc2.type = 'triangle';
-						osc2.frequency.setValueAtTime(700, ctx.currentTime);
-						osc2.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.02);
-
-						gain2.gain.setValueAtTime(0.015, ctx.currentTime);
-						gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
-
-						osc2.connect(gain2);
-						gain2.connect(ctx.destination);
-						osc2.start();
-						osc2.stop(ctx.currentTime + 0.03);
-					}, 25);
-				} catch (e) {
-					// Browser security blocks audio before interaction, ignore
+			function updateSfxButtonState() {
+				const btn = document.getElementById('sfx-toggle-btn');
+				if (btn) {
+					btn.textContent = isAudioMuted ? '[ 🔇 SFX MUTE ]' : '[ 🔊 SFX ON ]';
+					if (isAudioMuted) {
+						btn.classList.add('muted');
+					} else {
+						btn.classList.remove('muted');
+					}
 				}
 			}
 
-			// Add global click listener
+			function initAudioContext() {
+				if (!blogAudioCtx && typeof window !== 'undefined') {
+					const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+					if (AudioContextClass) {
+						blogAudioCtx = new AudioContextClass();
+					}
+				}
+				if (blogAudioCtx && blogAudioCtx.state === 'suspended') {
+					blogAudioCtx.resume();
+				}
+				return blogAudioCtx;
+			}
+
+			// Unlock audio context on any user interaction
+			const unlockAudio = () => {
+				initAudioContext();
+				window.removeEventListener('pointerdown', unlockAudio);
+				window.removeEventListener('click', unlockAudio);
+				window.removeEventListener('keydown', unlockAudio);
+			};
+			window.addEventListener('pointerdown', unlockAudio);
+			window.addEventListener('click', unlockAudio);
+			window.addEventListener('keydown', unlockAudio);
+
+			function playBlogSound(type = 'click') {
+				if (isAudioMuted) return;
+				const ctx = initAudioContext();
+				if (!ctx) return;
+				const now = ctx.currentTime;
+
+				try {
+					switch (type) {
+						case 'click': {
+							const osc1 = ctx.createOscillator();
+							const gain1 = ctx.createGain();
+							osc1.type = 'sine';
+							osc1.frequency.setValueAtTime(1400, now);
+							osc1.frequency.exponentialRampToValueAtTime(120, now + 0.035);
+							gain1.gain.setValueAtTime(0.08, now);
+							gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+							osc1.connect(gain1);
+							gain1.connect(ctx.destination);
+							osc1.start(now);
+							osc1.stop(now + 0.04);
+							break;
+						}
+						case 'hover': {
+							const osc = ctx.createOscillator();
+							const gain = ctx.createGain();
+							osc.type = 'sine';
+							osc.frequency.setValueAtTime(950, now);
+							gain.gain.setValueAtTime(0.012, now);
+							gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
+							osc.connect(gain);
+							gain.connect(ctx.destination);
+							osc.start(now);
+							osc.stop(now + 0.018);
+							break;
+						}
+						case 'copy': {
+							const osc = ctx.createOscillator();
+							const gain = ctx.createGain();
+							osc.type = 'sine';
+							osc.frequency.setValueAtTime(880, now);
+							osc.frequency.exponentialRampToValueAtTime(1760, now + 0.07);
+							gain.gain.setValueAtTime(0.08, now);
+							gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+							osc.connect(gain);
+							gain.connect(ctx.destination);
+							osc.start(now);
+							osc.stop(now + 0.07);
+							break;
+						}
+						case 'toggle': {
+							const osc = ctx.createOscillator();
+							const gain = ctx.createGain();
+							osc.type = 'triangle';
+							osc.frequency.setValueAtTime(500, now);
+							osc.frequency.exponentialRampToValueAtTime(1000, now + 0.06);
+							gain.gain.setValueAtTime(0.06, now);
+							gain.gain.linearRampToValueAtTime(0.001, now + 0.06);
+							osc.connect(gain);
+							gain.connect(ctx.destination);
+							osc.start(now);
+							osc.stop(now + 0.06);
+							break;
+						}
+					}
+				} catch (e) {}
+			}
+
+			// Add global click sound listener
 			document.addEventListener('click', (event) => {
 				const target = event.target as HTMLElement | null;
 				if (!target) return;
 
-				const clickable = target.closest('a, button, input[type="submit"], input[type="button"], .control-btn, .control-btn-winamp');
+				const sfxBtn = target.closest('#sfx-toggle-btn');
+				if (sfxBtn) {
+					isAudioMuted = !isAudioMuted;
+					localStorage.setItem('blog_sfx_muted', isAudioMuted ? 'true' : 'false');
+					updateSfxButtonState();
+					if (!isAudioMuted) playBlogSound('toggle');
+					return;
+				}
+
+				const clickable = target.closest('a, button, input[type="submit"], input[type="button"], .control-btn, .control-btn-winamp, tr.post-wrapper-tr, .icon-post-card, .tool-btn');
 				if (clickable) {
-					playClickSound();
+					playBlogSound('click');
 				}
 			});
 
-			// Scrolling browser tab title marquee (only after user interaction, never for crawlers)
-			(function() {
-				if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+			// Add hover sound listener
+			let lastHoverTime = 0;
+			document.addEventListener('mouseover', (event) => {
+				const target = event.target as HTMLElement | null;
+				if (!target) return;
+				const now = Date.now();
+				if (now - lastHoverTime < 100) return;
 
-				// Prevent marquee for search engine bots, web crawlers, and auditing tools (preserves static titles for SEO)
-				const isCrawler = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|lighthouse|chrome-lighthouse|speedcurve|headless/i.test(navigator.userAgent);
-				if (isCrawler) return;
-
-				const originalTitle = document.title;
-				let titleText = " ★ " + originalTitle + " ★ Explore the virtual frontier… ";
-				let titleInterval: any = null;
-				let userHasInteracted = false;
-				
-				function startMarquee() {
-					if (titleInterval || !userHasInteracted) return;
-					titleInterval = setInterval(() => {
-						titleText = titleText.substring(1) + titleText.substring(0, 1);
-						document.title = titleText;
-					}, 350);
+				const hoverable = target.closest('.icon-post-card, .post-wrapper-tr, nav.header-menu a, .tool-btn, .sfx-toggle-btn');
+				if (hoverable) {
+					lastHoverTime = now;
+					playBlogSound('hover');
 				}
-				
-				function stopMarquee() {
-					if (titleInterval) {
-						clearInterval(titleInterval);
-						titleInterval = null;
-					}
-					document.title = originalTitle;
+			});
+
+			// Reading Progress Bar Script
+			window.addEventListener('scroll', () => {
+				const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+				const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+				const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+				const progressBar = document.getElementById('reading-progress-bar');
+				if (progressBar) {
+					progressBar.style.width = scrolled + '%';
 				}
+			});
 
-				function handleVisibilityOrFocus() {
-					if (document.hasFocus() && document.visibilityState === 'visible') {
-						startMarquee();
-					} else {
-						stopMarquee();
-					}
-				}
+			// Inject "Copy Code" button into code blocks & initialize SFX button
+			document.addEventListener('DOMContentLoaded', () => {
+				updateSfxButtonState();
+				const preBlocks = document.querySelectorAll('pre');
+				preBlocks.forEach((pre) => {
+					if (pre.querySelector('.copy-code-btn')) return;
+					pre.style.position = 'relative';
 
-				function onFirstInteraction() {
-					if (userHasInteracted) return;
-					userHasInteracted = true;
-					// Remove listeners once triggered
-					window.removeEventListener('click', onFirstInteraction);
-					window.removeEventListener('keydown', onFirstInteraction);
-					window.removeEventListener('scroll', onFirstInteraction);
-					// Small delay to avoid title flash on accidental triggers
-					setTimeout(() => handleVisibilityOrFocus(), 500);
-				}
+					const btn = document.createElement('button');
+					btn.className = 'copy-code-btn';
+					btn.textContent = '[ Copy Code ]';
+					btn.type = 'button';
+					btn.style.position = 'absolute';
+					btn.style.top = '6px';
+					btn.style.right = '6px';
+					btn.style.fontSize = '10px';
+					btn.style.padding = '2px 6px';
+					btn.style.cursor = 'pointer';
+					btn.style.zIndex = '10';
 
-				window.addEventListener('focus', handleVisibilityOrFocus);
-				window.addEventListener('blur', handleVisibilityOrFocus);
-				document.addEventListener('visibilitychange', handleVisibilityOrFocus);
+					btn.addEventListener('click', (e) => {
+						e.stopPropagation();
+						const code = pre.querySelector('code');
+						const text = code ? code.innerText : pre.innerText;
+						navigator.clipboard.writeText(text).then(() => {
+							playBlogSound('copy');
+							btn.textContent = '[ Copied! ]';
+							setTimeout(() => {
+								btn.textContent = '[ Copy Code ]';
+							}, 2000);
+						});
+					});
 
-				// Gate marquee behind user interaction so crawlers never see it
-				window.addEventListener('click', onFirstInteraction);
-				window.addEventListener('keydown', onFirstInteraction);
-				window.addEventListener('scroll', onFirstInteraction);
-			})();
+					pre.appendChild(btn);
+				});
+			});
+
 		</script>
 	</body>
 </html>

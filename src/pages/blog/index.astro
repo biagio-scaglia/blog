@@ -39,12 +39,17 @@ const posts = (await getCollection('blog')).sort(
 			<button class="tool-btn active" id="btn-view-details"><span class="btn-icon">≡</span> Details</button>
 		</div>
 
-		<!-- Win95 Address Bar -->
+		
+		<!-- Win95 Address & Live Search Bar -->
 		<div class="win95-address-bar">
 			<span class="address-label">Address:</span>
 			<div class="address-input-wrapper">
 				<span class="address-folder-icon">📂</span>
-				<input type="text" value={`C:\\Windows\\Desktop\\diary_logs`} readonly class="address-field" />
+				<input type="text" value="C:\Windows\Desktop\diary_logs" readonly class="address-field" />
+			</div>
+			<div class="search-input-wrapper" style="display: flex; align-items: center; background: #ffffff; border: 2px inset #7f9db9; padding: 1px 4px; min-width: 180px;">
+				<span style="font-size: 11px; margin-right: 4px;">🔍</span>
+				<input type="text" id="blog-search-field" placeholder="Filter logs..." style="border: none; outline: none; font-family: monospace; font-size: 11px; width: 100%;" />
 			</div>
 		</div>
 
@@ -164,6 +169,28 @@ const posts = (await getCollection('blog')).sort(
 	const filterTypeSpan = document.getElementById('filter-type');
 	const filterValueSpan = document.getElementById('filter-value');
 	const postWrappers = document.querySelectorAll('.post-wrapper');
+
+	
+	// Instant Search Filter Logic
+	const searchField = document.getElementById('blog-search-field');
+	if (searchField) {
+		searchField.addEventListener('input', (e) => {
+			const query = (e.target.value || '').toLowerCase().trim();
+			postWrappers.forEach((wrapper) => {
+				if (!(wrapper instanceof HTMLElement)) return;
+				const textContent = wrapper.textContent ? wrapper.textContent.toLowerCase() : '';
+				const tags = wrapper.dataset.tags ? wrapper.dataset.tags.toLowerCase() : '';
+				const category = wrapper.dataset.category ? wrapper.dataset.category.toLowerCase() : '';
+				
+				const isMatch = !query || textContent.includes(query) || tags.includes(query) || category.includes(query);
+				if (isMatch) {
+					wrapper.style.display = wrapper.tagName === 'TR' ? 'table-row' : 'flex';
+				} else {
+					wrapper.style.display = 'none';
+				}
+			});
+		});
+	}
 
 	if (category || tag || archive) {
 		if (alertDiv && filterTypeSpan && filterValueSpan) {
