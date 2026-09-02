@@ -130,6 +130,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Personal
 - **Summary:** A personal reflection on stepping away from the IDE to travel across Puglia. Covers visiting friends in Lecce and Foggia, finding an unexpected talent in archery, and swimming 2km to a small offshore island.
 
+### HomuraJS: Rewriting Timelines with a DAG State Engine
+- **Date:** September 2, 2026
+- **Category:** Coding
+- **Summary:** Announcing HomuraJS, a non-destructive time-travel state and DAG history engine for JavaScript, React, Vue, and WordPress. Explores the flaws of linear undo stacks, copy-on-write proxy branching, zero-JS form crash recovery, and the official WordPress.org plugin.
+
 ---
 
 ## Technical Details
