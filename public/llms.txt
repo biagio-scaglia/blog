@@ -52,6 +52,8 @@ The blog covers topics including:
 
 ## Projects
 
+- **HomuraJS**: A non-destructive time-travel state and Directed Acyclic Graph (DAG) history engine for JavaScript, React, Vue, and WordPress. Features copy-on-write proxy branching, structural diffing, and automated form recovery. Live at https://biagio-scaglia.github.io/homura-js/ | GitHub: https://github.com/biagio-scaglia/homura-js | NPM: `@biagioscaglia/homurajs` | WordPress: https://wordpress.org/plugins/homura-time-travel-form-recovery/
+- **Moon-Inferno**: An accessibility-first (WCAG 2.1 AA) React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art applications. Live at https://biagio-scaglia.github.io/moon-inferno/ | GitHub: https://github.com/biagio-scaglia/moon-inferno
 - **Vellum - RPG Companion**: A mobile application designed for tabletop RPG players, serving as a digital character sheet and campaign management tool. Built with React Native.
 
 ## Technical Stack

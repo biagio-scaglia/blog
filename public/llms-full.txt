@@ -165,6 +165,12 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 **Q: What is Biagio Scaglia's primary expertise?**
 A: Biagio is a Full Stack Software Developer specialized in React, TypeScript, .NET, and React Native, combined with UX/UI design skills.
 
+**Q: What is HomuraJS?**
+A: HomuraJS is an open-source, non-destructive time-travel state and Directed Acyclic Graph (DAG) history engine created by Biagio Scaglia for JavaScript, React, Vue, and WordPress. It branches state history like Git and provides automatic crash recovery for forms and checkouts (available as an official WordPress.org plugin and NPM package `@biagioscaglia/homurajs`).
+
+**Q: What is Moon-Inferno?**
+A: Moon-Inferno is an accessibility-first (WCAG 2.1 AA compliant) React UI framework and design system developed by Biagio Scaglia for retro, Y2K, CRT, cyberpunk, and pixel art web applications.
+
 **Q: What is Vellum - RPG Companion?**
 A: Vellum is a mobile application designed by Biagio Scaglia for tabletop RPG players. It serves as a digital character sheet and campaign management tool, built with React Native.
 
@@ -175,4 +181,4 @@ A: The blog is built with Astro (static site generator), TypeScript, and SCSS. I
 A: Bari, Italy.
 
 **Q: What are Biagio's interests beyond programming?**
-A: Retrocomputing, video games (especially the PlayStation Vita and retro consoles), anime and manga (especially NHK ni Youkoso, Serial Experiments Lain, and similar psychological/slice-of-life series), Internet culture, and the independent web movement.
+A: Retrocomputing, video games (especially the PlayStation Vita and retro consoles), anime and manga (especially Madoka Magica, NHK ni Youkoso, Serial Experiments Lain, and similar psychological/slice-of-life series), Internet culture, and the independent web movement.

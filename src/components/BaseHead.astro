@@ -37,15 +37,24 @@ const personSchema = {
 			"jobTitle": "Full Stack Software Developer & UX/UI Designer",
 			"url": siteUrl,
 			"sameAs": [
-				"https://github.com/biagio-scaglia"
+				"https://github.com/biagio-scaglia",
+				"https://www.npmjs.com/~biagioscaglia",
+				"https://wordpress.org/plugins/homura-time-travel-form-recovery/"
 			],
 			"knowsAbout": [
 				"Software Development",
+				"HomuraJS",
+				"Moon-Inferno",
 				"React",
 				"TypeScript",
 				".NET",
 				"React Native",
 				"UX/UI Design",
+				"State Management",
+				"Directed Acyclic Graph (DAG)",
+				"Web Accessibility",
+				"WCAG 2.1 AA",
+				"WordPress Plugin Development",
 				"Retrocomputing",
 				"Tabletop RPGs",
 				"Video Games",
@@ -53,7 +62,7 @@ const personSchema = {
 				"Web Design",
 				"Independent Web"
 			],
-			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. He specializes in React, TypeScript, .NET, and React Native. Creator of the mobile app 'Vellum - RPG Companion'.",
+			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. Creator of the HomuraJS time-travel state engine, Moon-Inferno React UI framework, and the mobile app Vellum - RPG Companion.",
 			"address": {
 				"@type": "PostalAddress",
 				"addressLocality": "Bari",
@@ -71,6 +80,37 @@ const personSchema = {
 			"publisher": {
 				"@id": personId
 			}
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}#homura-js`,
+			"name": "HomuraJS",
+			"description": "Non-destructive time-travel state and Directed Acyclic Graph (DAG) history engine for JavaScript, React, Vue, and WordPress.",
+			"applicationCategory": "DeveloperApplication",
+			"operatingSystem": "All",
+			"author": { "@id": personId },
+			"url": "https://biagio-scaglia.github.io/homura-js/",
+			"codeRepository": "https://github.com/biagio-scaglia/homura-js"
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}#moon-inferno`,
+			"name": "Moon-Inferno",
+			"description": "Accessibility-first (WCAG 2.1 AA) React UI framework and design system for retro, Y2K, CRT, cyberpunk, and pixel art web applications.",
+			"applicationCategory": "DeveloperApplication",
+			"operatingSystem": "All",
+			"author": { "@id": personId },
+			"url": "https://biagio-scaglia.github.io/moon-inferno/",
+			"codeRepository": "https://github.com/biagio-scaglia/moon-inferno"
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}#vellum`,
+			"name": "Vellum - RPG Companion",
+			"description": "A digital companion mobile application for tabletop RPG players and game masters.",
+			"applicationCategory": "GameApplication",
+			"operatingSystem": "Android, iOS",
+			"author": { "@id": personId }
 		}
 	]
 };
@@ -95,6 +135,7 @@ const articleSchema = article
 				"@id": personId
 			},
 			"mainEntityOfPage": canonicalURL.toString(),
+			"inLanguage": "en",
 			"keywords": tags.length > 0 ? tags.join(", ") : undefined
 	  }
 	: null;
