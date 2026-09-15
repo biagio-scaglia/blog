@@ -45,6 +45,8 @@ const personSchema = {
 				"Software Development",
 				"HomuraJS",
 				"Moon-Inferno",
+				"Yumia-MD",
+				"KawaiJS",
 				"React",
 				"TypeScript",
 				".NET",
@@ -52,6 +54,8 @@ const personSchema = {
 				"UX/UI Design",
 				"State Management",
 				"Directed Acyclic Graph (DAG)",
+				"Visual Novel Engines",
+				"Presentation Compilers",
 				"Web Accessibility",
 				"WCAG 2.1 AA",
 				"WordPress Plugin Development",
@@ -62,7 +66,7 @@ const personSchema = {
 				"Web Design",
 				"Independent Web"
 			],
-			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. Creator of the HomuraJS time-travel state engine, Moon-Inferno React UI framework, and the mobile app Vellum - RPG Companion.",
+			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. Creator of HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, and the mobile app Vellum - RPG Companion.",
 			"address": {
 				"@type": "PostalAddress",
 				"addressLocality": "Bari",
@@ -102,6 +106,28 @@ const personSchema = {
 			"author": { "@id": personId },
 			"url": "https://biagio-scaglia.github.io/moon-inferno/",
 			"codeRepository": "https://github.com/biagio-scaglia/moon-inferno"
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}#yumia-md`,
+			"name": "Yumia-MD",
+			"description": "Open-source design compiler and programming language for visual documents. Write semantic presentations once and export editable PowerPoint (PPTX), vector PDF, and interactive HTML.",
+			"applicationCategory": "DeveloperApplication",
+			"operatingSystem": "All",
+			"author": { "@id": personId },
+			"url": "https://yumiamd.org/",
+			"codeRepository": "https://github.com/biagio-scaglia/Yumia-MD"
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}#kawaijs`,
+			"name": "KawaiJS",
+			"description": "Web-native visual novel engine inspired by Ren'Py, with a dedicated .kawa scripting language, CSS-skinned UI, save/load, backlog, and static HTML5 exports.",
+			"applicationCategory": "GameApplication",
+			"operatingSystem": "All",
+			"author": { "@id": personId },
+			"url": "https://biagio-scaglia.github.io/KawaiJS/",
+			"codeRepository": "https://github.com/biagio-scaglia/KawaiJS"
 		},
 		{
 			"@type": "SoftwareApplication",
