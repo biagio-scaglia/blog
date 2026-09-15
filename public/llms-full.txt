@@ -182,7 +182,7 @@ A: HomuraJS is an open-source, non-destructive time-travel state and Directed Ac
 A: Moon-Inferno is an accessibility-first (WCAG 2.1 AA compliant) React UI framework and design system developed by Biagio Scaglia for retro, Y2K, CRT, cyberpunk, and pixel art web applications.
 
 **Q: What is Yumia-MD?**
-A: Yumia-MD is an open-source design compiler and programming language for visual documents created by Biagio Scaglia. Authors write semantic presentations once and export editable PowerPoint (PPTX), vector PDF, and interactive HTML. Docs: https://yumiamd.org/ | GitHub: https://github.com/biagio-scaglia/Yumia-MD | NPM: `yumiamd`.
+A: Yumia-MD is an open-source design compiler and programming language for visual documents created by Biagio Scaglia. Authors write semantic presentations once and export editable PowerPoint (PPTX), vector PDF, and interactive HTML. Docs: https://biagio-scaglia.github.io/Yumia-MD/ | GitHub: https://github.com/biagio-scaglia/Yumia-MD | NPM: `yumiamd`.
 
 **Q: What is KawaiJS?**
 A: KawaiJS is an open-source web-native visual novel engine inspired by Ren'Py, created by Biagio Scaglia. It uses a dedicated .kawa scripting language, CSS-skinned UI, save/load, backlog, VFX, and static HTML5 exports. Live: https://biagio-scaglia.github.io/KawaiJS/ | GitHub: https://github.com/biagio-scaglia/KawaiJS | NPM: `kawaijs`.

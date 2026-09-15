@@ -14,9 +14,8 @@ So I built a compiler for that question.
 
 Today I am releasing **Yumia-MD** (npm: `yumiamd`) — an open-source **programming language for visual documents**. You describe communicative intent; Yumia handles structure, composition, design, and multi-format export to **editable PPTX**, **vector PDF**, and **interactive HTML**.
 
-- **Official docs & playground:** [yumiamd.org](https://yumiamd.org/)
+- **Official docs & playground:** [biagio-scaglia.github.io/Yumia-MD](https://biagio-scaglia.github.io/Yumia-MD/)
 - **Source on GitHub:** [github.com/biagio-scaglia/Yumia-MD](https://github.com/biagio-scaglia/Yumia-MD)
-- **Live demo site:** [biagio-scaglia.github.io/Yumia-MD](https://biagio-scaglia.github.io/Yumia-MD/)
 
 ---
 
