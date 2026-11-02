@@ -88,6 +88,27 @@ const lastUpdatedLabel = latestPost
 			</p>
 		</div>
 	</Window>
+
+	<Window title="dio_hftf.exe ~ [ZA WARUDO]" theme="purple" icon="joystick">
+		<div class="dio-box">
+			<img
+				src={`${import.meta.env.BASE_URL}dio.gif`}
+				alt="Dio Brando idle animation from JoJo's Bizarre Adventure: Heritage for the Future"
+				class="dio-gif"
+				width="180"
+				height="220"
+				loading="lazy"
+			/>
+			<div class="dio-caption">
+				<p class="dio-quote">「無駄無駄無駄無駄！」(￣ー￣)</p>
+				<p class="dio-meta">
+					Sprite dump: <strong>DIO</strong> idle loop from
+					<em>JoJo's Bizarre Adventure: Heritage for the Future</em> (CPS3).
+					Classic arcade menace, now guarding this cyberspace node.
+				</p>
+			</div>
+		</div>
+	</Window>
 </RetroLayout>
 
 <style lang="scss">
@@ -203,7 +224,44 @@ const lastUpdatedLabel = latestPost
 		animation: rainbow-text 4s infinite linear;
 	}
 
+	.dio-box {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		padding: 8px 4px;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
 
+	.dio-gif {
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
+		width: 140px;
+		height: auto;
+		flex-shrink: 0;
+		filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.35));
+	}
+
+	.dio-caption {
+		flex: 1 1 220px;
+		min-width: 0;
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.45;
+	}
+
+	.dio-quote {
+		font-family: $font-tahoma;
+		font-size: 14px;
+		font-weight: bold;
+		color: #660066;
+		margin: 0 0 8px 0;
+	}
+
+	.dio-meta {
+		margin: 0;
+		color: #333;
+	}
 
 	@keyframes rainbow-text {
 		0% { color: #ff3333; }
@@ -213,5 +271,18 @@ const lastUpdatedLabel = latestPost
 		67% { color: #3333ff; }
 		83% { color: #8a33ff; }
 		100% { color: #ff3333; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.nyan-text {
+			animation: none;
+		}
+	}
+
+	@media print {
+		.nyan-box,
+		.dio-box {
+			display: none !important;
+		}
 	}
 </style>
