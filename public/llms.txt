@@ -50,6 +50,10 @@ The blog covers topics including:
 - [HomuraJS: Rewriting Timelines with a DAG State Engine](https://biagiocyberspace.it/blog/homurajs-time-travel-dag-state-engine-released/): Announcing HomuraJS, a non-destructive time-travel state engine modeled as a Directed Acyclic Graph (DAG) for JavaScript, React, and WordPress.
 - [Yumia-MD: Presentations as Code — PPTX, PDF & HTML from One Source](https://biagiocyberspace.it/blog/yumia-md-programming-language-for-visual-documents/): Announcing Yumia-MD, an open-source design compiler that turns semantic slide intent into editable PowerPoint, vector PDF, and interactive HTML.
 - [KawaiJS: A Web-Native Visual Novel Engine Inspired by Ren'Py](https://biagiocyberspace.it/blog/kawaijs-web-native-visual-novel-engine/): Announcing KawaiJS, a browser visual novel engine with Ren'Py-style .kawa scripting, CSS UI, save/load, backlog, VFX, and static exports.
+- [Sorry for the Silence — Work Has Been Eating Me Alive](https://biagiocyberspace.it/blog/sorry-for-the-silence-work-has-been-eating-me/): Apology for the blog going quiet because the day job has been extremely stressful.
+- [Frutiger-JS Hit 10 GitHub Stars… and I Completely Missed It](https://biagiocyberspace.it/blog/frutiger-js-hit-ten-stars-and-i-missed-it/): Surprised thank-you after frutiger-js quietly reached 10 GitHub stars.
+- [Work Is Consuming Me — But We Are Still Standing](https://biagiocyberspace.it/blog/work-is-consuming-me-but-we-are-still-standing/): Personal log about burnout and persistence — the webmaster and Biagio Cyberspace are still online.
+- [Retroid Pocket Nova Review: 4:3 AMOLED Glory for Retro Emulation](https://biagiocyberspace.it/blog/retroid-pocket-nova-review/): Hands-on review of the Retroid Pocket Nova compact 4:3 120Hz AMOLED Android handheld.
 
 
 ## Projects
@@ -58,6 +62,7 @@ The blog covers topics including:
 - **Moon-Inferno**: An accessibility-first (WCAG 2.1 AA) React UI framework and design system built for retro, Y2K, CRT, cyberpunk, and pixel art applications. Live at https://biagio-scaglia.github.io/moon-inferno/ | GitHub: https://github.com/biagio-scaglia/moon-inferno
 - **Yumia-MD**: A programming language / design compiler for visual documents. Write semantic presentations once; export editable PPTX, vector PDF, and interactive HTML. Docs: https://biagio-scaglia.github.io/Yumia-MD/ | GitHub: https://github.com/biagio-scaglia/Yumia-MD | NPM: `yumiamd`
 - **KawaiJS**: A web-native visual novel engine inspired by Ren'Py, with .kawa scripting, CSS-skinned UI, save/load, backlog, and static HTML5 exports. Live at https://biagio-scaglia.github.io/KawaiJS/ | GitHub: https://github.com/biagio-scaglia/KawaiJS | NPM: `kawaijs`
+- **Frutiger-JS**: A custom CSS framework for Frutiger Aero nostalgia — glossy gradients, sky-glass UI vibes, and late-2000s aesthetic styling. GitHub: https://github.com/biagio-scaglia/frutiger-js
 - **Vellum - RPG Companion**: A mobile application designed for tabletop RPG players, serving as a digital character sheet and campaign management tool. Built with React Native.
 
 ## Technical Stack

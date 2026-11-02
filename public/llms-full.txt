@@ -10,11 +10,11 @@
 **Role:** Full Stack Software Developer & UX/UI Designer
 **Location:** Bari, Italy
 **Specializations:** React, TypeScript, .NET, React Native, UX/UI Design
-**Notable Projects:** HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Vellum - RPG Companion
+**Notable Projects:** HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, Vellum - RPG Companion
 
 Biagio Scaglia is a professional software developer who works across the full stack, from frontend interfaces built with React and TypeScript to backend services powered by .NET. He also designs and develops cross-platform mobile applications using React Native.
 
-His open-source toolkit includes HomuraJS (DAG time-travel state), Moon-Inferno (accessible retro React UI), Yumia-MD (presentations-as-code compiler), KawaiJS (web-native visual novel engine), and Vellum - RPG Companion for tabletop players.
+His open-source toolkit includes HomuraJS (DAG time-travel state), Moon-Inferno (accessible retro React UI), Yumia-MD (presentations-as-code compiler), KawaiJS (web-native visual novel engine), Frutiger-JS (Frutiger Aero CSS framework), and Vellum - RPG Companion for tabletop players.
 
 Beyond professional work, Biagio is passionate about retrocomputing, video games (with particular love for handheld consoles like the PlayStation Vita), anime and manga (especially psychological and slice-of-life genres), Internet culture, and the independent web movement.
 
@@ -145,6 +145,26 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 - **Category:** Coding
 - **Summary:** Announcing KawaiJS, a browser visual novel engine with Ren'Py-inspired .kawa scripting, CSS-skinned UI, save/load, backlog, VFX, PWA/SEO helpers, and static exports for GitHub Pages, Netlify, Vercel, and itch.io.
 
+### Sorry for the Silence — Work Has Been Eating Me Alive
+- **Date:** September 28, 2026
+- **Category:** Personal
+- **Summary:** An apology for the blog going quiet while the day job became extremely stressful. Explains the absence, affirms the site is still home, and promises occasional honest posts rather than a forced daily schedule.
+
+### Frutiger-JS Hit 10 GitHub Stars… and I Completely Missed It
+- **Date:** October 12, 2026
+- **Category:** Coding
+- **Summary:** A surprised thank-you post after Biagio discovered that frutiger-js — his Frutiger Aero CSS framework — quietly reached 10 GitHub stars. Links to https://github.com/biagio-scaglia/frutiger-js and reflects on missing notifications while buried in other work.
+
+### Work Is Consuming Me — But We Are Still Standing
+- **Date:** October 22, 2026
+- **Category:** Personal
+- **Summary:** A raw personal status log about work burnout and persistence. The day job consumes spare cycles, but Biagio Cyberspace and its open-source projects remain online — small commits and honest posts still count.
+
+### Retroid Pocket Nova Review: 4:3 AMOLED Glory for Retro Emulation
+- **Date:** November 2, 2026
+- **Category:** Gaming
+- **Summary:** Hands-on review of the Retroid Pocket Nova, a compact 4.5-inch 4:3 120Hz AMOLED Android handheld powered by Qualcomm QCS8550. Covers aspect-ratio advantages for PS2/GameCube, performance, ergonomics, fan whine, battery life, and who should buy it. Score: 4.5/5.
+
 ---
 
 ## Technical Details
@@ -186,6 +206,9 @@ A: Yumia-MD is an open-source design compiler and programming language for visua
 
 **Q: What is KawaiJS?**
 A: KawaiJS is an open-source web-native visual novel engine inspired by Ren'Py, created by Biagio Scaglia. It uses a dedicated .kawa scripting language, CSS-skinned UI, save/load, backlog, VFX, and static HTML5 exports. Live: https://biagio-scaglia.github.io/KawaiJS/ | GitHub: https://github.com/biagio-scaglia/KawaiJS | NPM: `kawaijs`.
+
+**Q: What is Frutiger-JS?**
+A: Frutiger-JS is an open-source CSS framework created by Biagio Scaglia for Frutiger Aero nostalgia — glossy gradients, sky-glass UI vibes, and late-2000s aesthetic styling for modern websites. GitHub: https://github.com/biagio-scaglia/frutiger-js
 
 **Q: What is Vellum - RPG Companion?**
 A: Vellum is a mobile application designed by Biagio Scaglia for tabletop RPG players. It serves as a digital character sheet and campaign management tool, built with React Native.
