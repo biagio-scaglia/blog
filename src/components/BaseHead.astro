@@ -49,6 +49,9 @@ const personSchema = {
 				"KawaiJS",
 				"Frutiger-JS",
 				"Frutiger Aero",
+				"Navia",
+				"OpenStreetMap",
+				"Flutter",
 				"React",
 				"TypeScript",
 				".NET",
@@ -59,6 +62,7 @@ const personSchema = {
 				"Visual Novel Engines",
 				"Presentation Compilers",
 				"CSS Frameworks",
+				"Privacy-first Navigation",
 				"Web Accessibility",
 				"WCAG 2.1 AA",
 				"WordPress Plugin Development",
@@ -70,7 +74,7 @@ const personSchema = {
 				"Web Design",
 				"Independent Web"
 			],
-			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. Creator of HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, and the mobile app Vellum - RPG Companion.",
+			"description": "Biagio Scaglia is a Full Stack Software Developer and UX/UI Designer based in Bari, Italy. Creator of Navia, HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, and the mobile app Vellum - RPG Companion.",
 			"address": {
 				"@type": "PostalAddress",
 				"addressLocality": "Bari",
@@ -143,6 +147,17 @@ const personSchema = {
 			"author": { "@id": personId },
 			"codeRepository": "https://github.com/biagio-scaglia/frutiger-js",
 			"url": "https://github.com/biagio-scaglia/frutiger-js"
+		},
+		{
+			"@type": "SoftwareApplication",
+			"@id": `${siteUrl}#navia`,
+			"name": "Navia",
+			"description": "Privacy-first open-source Android navigator with OpenStreetMap, turn-by-turn voice guidance in Italian, no ads, no accounts, and no tracking. Built with Flutter and MapLibre.",
+			"applicationCategory": "TravelApplication",
+			"operatingSystem": "Android",
+			"author": { "@id": personId },
+			"url": "https://biagio-scaglia.github.io/Navia/",
+			"codeRepository": "https://github.com/biagio-scaglia/Navia"
 		},
 		{
 			"@type": "SoftwareApplication",

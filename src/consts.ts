@@ -3,13 +3,22 @@ export const SITE_DESCRIPTION = "Biagio Scaglia's personal blog: full-stack deve
 
 /** Hand-edit this block when your "now" status changes — used by the sidebar Now widget. */
 export const NOW = {
-	building: 'Biagio Cyberspace polish + Frutiger-JS vibes',
+	building: 'Navia 0.8 — privacy-first Android navigator',
 	playing: 'Retroid Pocket Nova (PS2 / GameCube library)',
 	listening: 'Daft Punk — One More Time',
 	updatedLabel: 'Nov 2, 2026',
 };
 
 export const PROJECTS = [
+	{
+		id: 'navia',
+		name: 'Navia',
+		tagline: 'Privacy-first open-source Android navigator (no ads, no tracking)',
+		stack: 'Flutter · MapLibre · OpenStreetMap · MIT',
+		status: 'In development · 0.8.0',
+		url: 'https://biagio-scaglia.github.io/Navia/',
+		repo: 'https://github.com/biagio-scaglia/Navia',
+	},
 	{
 		id: 'homurajs',
 		name: 'HomuraJS',

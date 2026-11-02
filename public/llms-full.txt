@@ -10,11 +10,11 @@
 **Role:** Full Stack Software Developer & UX/UI Designer
 **Location:** Bari, Italy
 **Specializations:** React, TypeScript, .NET, React Native, UX/UI Design
-**Notable Projects:** HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, Vellum - RPG Companion
+**Notable Projects:** Navia, HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, Vellum - RPG Companion
 
-Biagio Scaglia is a professional software developer who works across the full stack, from frontend interfaces built with React and TypeScript to backend services powered by .NET. He also designs and develops cross-platform mobile applications using React Native.
+Biagio Scaglia is a professional software developer who works across the full stack, from frontend interfaces built with React and TypeScript to backend services powered by .NET. He also designs and develops cross-platform mobile applications using React Native and Flutter.
 
-His open-source toolkit includes HomuraJS (DAG time-travel state), Moon-Inferno (accessible retro React UI), Yumia-MD (presentations-as-code compiler), KawaiJS (web-native visual novel engine), Frutiger-JS (Frutiger Aero CSS framework), and Vellum - RPG Companion for tabletop players.
+His open-source toolkit includes Navia (privacy-first Android navigator), HomuraJS (DAG time-travel state), Moon-Inferno (accessible retro React UI), Yumia-MD (presentations-as-code compiler), KawaiJS (web-native visual novel engine), Frutiger-JS (Frutiger Aero CSS framework), and Vellum - RPG Companion for tabletop players.
 
 Beyond professional work, Biagio is passionate about retrocomputing, video games (with particular love for handheld consoles like the PlayStation Vita), anime and manga (especially psychological and slice-of-life genres), Internet culture, and the independent web movement.
 
@@ -38,7 +38,7 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 1. **Home Page** — Features a welcome message, latest blog posts, an image gallery, a guestbook widget, and a Nyan Cat animation.
 2. **About Page** — Author biography, hardware specs, site colophon, and FAQ section with structured Q&A for AI discoverability.
 3. **Blog** — All published articles, filterable by tags and categories.
-4. **Projects** — Open-source shrine listing HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, and Vellum with docs/repo links.
+4. **Projects** — Open-source shrine listing Navia, HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, and Vellum with docs/repo links.
 5. **Interests (Gaming & Anime Shrine)** — Dedicated pages showcasing Biagio's favorite video games and anime series.
 6. **Contributors** — Special thanks page dedicated to FDeveloper and trust network members supporting the site.
 
@@ -212,6 +212,9 @@ A: KawaiJS is an open-source web-native visual novel engine inspired by Ren'Py, 
 
 **Q: What is Frutiger-JS?**
 A: Frutiger-JS is an open-source CSS framework created by Biagio Scaglia for Frutiger Aero nostalgia — glossy gradients, sky-glass UI vibes, and late-2000s aesthetic styling for modern websites. GitHub: https://github.com/biagio-scaglia/frutiger-js
+
+**Q: What is Navia?**
+A: Navia is a privacy-first open-source Android navigator created by Biagio Scaglia. Built with Flutter and MapLibre on OpenStreetMap data, it offers maps, routing, and Italian voice guidance with no ads, no accounts, and no tracking. Site: https://biagio-scaglia.github.io/Navia/ | GitHub: https://github.com/biagio-scaglia/Navia
 
 **Q: What is Vellum - RPG Companion?**
 A: Vellum is a mobile application designed by Biagio Scaglia for tabletop RPG players. It serves as a digital character sheet and campaign management tool, built with React Native.
