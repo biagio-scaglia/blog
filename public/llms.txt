@@ -25,6 +25,7 @@ The blog covers topics including:
 - [Home](https://biagiocyberspace.it/): Main page with latest posts and site widgets
 - [About](https://biagiocyberspace.it/about/): Author biography and site colophon
 - [Blog](https://biagiocyberspace.it/blog/): All blog posts
+- [Projects](https://biagiocyberspace.it/projects/): Open-source project shrine (HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, Vellum)
 - [Interests](https://biagiocyberspace.it/interests/): Gaming and anime shrine
 - [Contributors](https://biagiocyberspace.it/contributors/): Special thanks and trust network members
 

@@ -35,6 +35,9 @@ import { SITE_TITLE } from '../consts';
 				<a href={import.meta.env.BASE_URL} class="home-btn">
 					🛸 [ Return to Home Base ]
 				</a>
+				<a href={`${import.meta.env.BASE_URL}blog/`} class="home-btn secondary-btn">
+					📂 [ Open Blog Directory ]
+				</a>
 			</div>
 		</div>
 	</Window>
@@ -132,6 +135,10 @@ import { SITE_TITLE } from '../consts';
 
 	.actions-row {
 		margin-top: 10px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
 	}
 
 	.home-btn {
@@ -155,6 +162,10 @@ import { SITE_TITLE } from '../consts';
 		&:active {
 			border-color: $win-dark-gray $win-white $win-white $win-dark-gray;
 			padding: 9px 19px 7px 21px;
+		}
+
+		&.secondary-btn {
+			font-size: 12px;
 		}
 	}
 

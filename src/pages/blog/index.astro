@@ -47,11 +47,16 @@ const posts = (await getCollection('blog')).sort(
 				<span class="address-folder-icon">📂</span>
 				<input type="text" value="C:\Windows\Desktop\diary_logs" readonly class="address-field" />
 			</div>
-			<div class="search-input-wrapper" style="display: flex; align-items: center; background: #ffffff; border: 2px inset #7f9db9; padding: 1px 4px; min-width: 180px;">
-				<span style="font-size: 11px; margin-right: 4px;">🔍</span>
-				<input type="text" id="blog-search-field" placeholder="Filter logs..." style="border: none; outline: none; font-family: monospace; font-size: 11px; width: 100%;" />
+			<div class="search-input-wrapper">
+				<span class="search-icon" aria-hidden="true">🔍</span>
+				<label for="blog-search-field" class="sr-only">Filter diary logs</label>
+				<input type="search" id="blog-search-field" placeholder="Filter logs..." autocomplete="off" />
 			</div>
 		</div>
+
+		<p class="blog-empty-state" id="blog-empty-state" hidden>
+			No diary logs match your filter. Try another keyword or <a href={`${import.meta.env.BASE_URL}blog/`}>clear filters</a>.
+		</p>
 
 		<div class="blog-view-container view-details" id="blog-view-container">
 			<!-- View 1: Large Icons Grid -->
@@ -104,7 +109,10 @@ const posts = (await getCollection('blog')).sort(
 									data-category={post.data.category || 'General'}
 									data-archive={archiveKey}
 									data-tags={post.data.tags ? post.data.tags.join(',') : ''}
-									onclick={`window.location.href='${import.meta.env.BASE_URL}blog/${post.id}/'`}
+									data-href={`${import.meta.env.BASE_URL}blog/${post.id}/`}
+									tabindex="0"
+									role="link"
+									aria-label={post.data.title}
 								>
 									<td class="name-col">
 										<NotepadIcon size={14} /> 
@@ -123,6 +131,12 @@ const posts = (await getCollection('blog')).sort(
 				</table>
 			</div>
 		</div>
+
+		<div class="win95-status-bar" role="status" aria-live="polite">
+			<span id="blog-status-count">{posts.length} object(s)</span>
+			<span class="status-sep">|</span>
+			<span>Biagio Cyberspace Diary</span>
+		</div>
 	</Window>
 </RetroLayout>
 
@@ -131,6 +145,28 @@ const posts = (await getCollection('blog')).sort(
 	const container = document.getElementById('blog-view-container');
 	const btnIcons = document.getElementById('btn-view-icons');
 	const btnDetails = document.getElementById('btn-view-details');
+	const emptyState = document.getElementById('blog-empty-state');
+	const statusCount = document.getElementById('blog-status-count');
+	const postWrappers = document.querySelectorAll('.post-wrapper');
+
+	function updateVisibleCount() {
+		let visible = 0;
+		postWrappers.forEach((wrapper) => {
+			if (!(wrapper instanceof HTMLElement)) return;
+			if (wrapper.style.display !== 'none') visible += 1;
+		});
+		// Each post appears twice (icons + details), so divide by 2
+		const uniqueVisible = Math.round(visible / 2);
+		if (statusCount) {
+			statusCount.textContent = `${uniqueVisible} object(s)`;
+		}
+		if (emptyState) {
+			emptyState.hidden = uniqueVisible > 0;
+		}
+		if (container) {
+			container.hidden = uniqueVisible === 0;
+		}
+	}
 
 	if (btnIcons && btnDetails && container) {
 		btnIcons.addEventListener('click', () => {
@@ -159,6 +195,26 @@ const posts = (await getCollection('blog')).sort(
 		}
 	}
 
+	// Keyboard + click navigation for details rows
+	document.querySelectorAll('.post-wrapper-tr[data-href]').forEach((row) => {
+		if (!(row instanceof HTMLElement)) return;
+		const go = () => {
+			const href = row.dataset.href;
+			if (href) window.location.href = href;
+		};
+		row.addEventListener('click', (event) => {
+			const target = event.target as HTMLElement | null;
+			if (target?.closest('a')) return;
+			go();
+		});
+		row.addEventListener('keydown', (event) => {
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				go();
+			}
+		});
+	});
+
 	// Handle filters
 	const params = new URLSearchParams(window.location.search);
 	const category = params.get('category');
@@ -168,28 +224,43 @@ const posts = (await getCollection('blog')).sort(
 	const alertDiv = document.getElementById('filter-alert');
 	const filterTypeSpan = document.getElementById('filter-type');
 	const filterValueSpan = document.getElementById('filter-value');
-	const postWrappers = document.querySelectorAll('.post-wrapper');
 
-	
-	// Instant Search Filter Logic
-	const searchField = document.getElementById('blog-search-field');
-	if (searchField) {
-		searchField.addEventListener('input', (e) => {
-			const query = (e.target.value || '').toLowerCase().trim();
-			postWrappers.forEach((wrapper) => {
-				if (!(wrapper instanceof HTMLElement)) return;
-				const textContent = wrapper.textContent ? wrapper.textContent.toLowerCase() : '';
-				const tags = wrapper.dataset.tags ? wrapper.dataset.tags.toLowerCase() : '';
-				const category = wrapper.dataset.category ? wrapper.dataset.category.toLowerCase() : '';
-				
-				const isMatch = !query || textContent.includes(query) || tags.includes(query) || category.includes(query);
-				if (isMatch) {
-					wrapper.style.display = wrapper.tagName === 'TR' ? 'table-row' : 'flex';
-				} else {
-					wrapper.style.display = 'none';
-				}
-			});
+	function matchesUrlFilter(wrapper: HTMLElement) {
+		if (category) return wrapper.dataset.category === category;
+		if (tag) {
+			const tags = wrapper.dataset.tags ? wrapper.dataset.tags.split(',') : [];
+			return tags.includes(tag);
+		}
+		if (archive) return wrapper.dataset.archive === archive;
+		return true;
+	}
+
+	function applyFilters(query = '') {
+		const normalized = query.toLowerCase().trim();
+		postWrappers.forEach((wrapper) => {
+			if (!(wrapper instanceof HTMLElement)) return;
+			const textContent = wrapper.textContent ? wrapper.textContent.toLowerCase() : '';
+			const tags = wrapper.dataset.tags ? wrapper.dataset.tags.toLowerCase() : '';
+			const cat = wrapper.dataset.category ? wrapper.dataset.category.toLowerCase() : '';
+			const searchMatch =
+				!normalized ||
+				textContent.includes(normalized) ||
+				tags.includes(normalized) ||
+				cat.includes(normalized);
+			const urlMatch = matchesUrlFilter(wrapper);
+			const isMatch = searchMatch && urlMatch;
+			wrapper.style.display = isMatch
+				? wrapper.tagName === 'TR'
+					? 'table-row'
+					: 'flex'
+				: 'none';
 		});
+		updateVisibleCount();
+	}
+
+	const searchField = document.getElementById('blog-search-field');
+	if (searchField instanceof HTMLInputElement) {
+		searchField.addEventListener('input', () => applyFilters(searchField.value));
 	}
 
 	if (category || tag || archive) {
@@ -206,28 +277,9 @@ const posts = (await getCollection('blog')).sort(
 				filterValueSpan.textContent = archive;
 			}
 		}
-
-		postWrappers.forEach((wrapper) => {
-			if (!(wrapper instanceof HTMLElement)) return;
-			let match = false;
-			if (category && wrapper.dataset.category === category) {
-				match = true;
-			} else if (tag) {
-				const tags = wrapper.dataset.tags ? wrapper.dataset.tags.split(',') : [];
-				if (tags.includes(tag)) {
-					match = true;
-				}
-			} else if (archive && wrapper.dataset.archive === archive) {
-				match = true;
-			}
-
-			if (match) {
-				wrapper.style.display = wrapper.tagName === 'TR' ? 'table-row' : 'flex';
-			} else {
-				wrapper.style.display = 'none';
-			}
-		});
 	}
+
+	applyFilters(searchField instanceof HTMLInputElement ? searchField.value : '');
 </script>
 
 <style lang="scss">
@@ -344,6 +396,54 @@ const posts = (await getCollection('blog')).sort(
 			font-size: 11px;
 			background: transparent;
 			color: $win-text;
+		}
+
+		.search-input-wrapper {
+			display: flex;
+			align-items: center;
+			background: #ffffff;
+			border: 2px inset #7f9db9;
+			padding: 1px 4px;
+			min-width: 180px;
+
+			.search-icon {
+				font-size: 11px;
+				margin-right: 4px;
+			}
+
+			input {
+				border: none;
+				outline: none;
+				font-family: $font-retro-mono;
+				font-size: 11px;
+				width: 100%;
+				background: transparent;
+			}
+		}
+	}
+
+	.blog-empty-state {
+		font-family: $font-verdana;
+		font-size: 12px;
+		background: #ffffcc;
+		border: 1px dashed #ff9900;
+		padding: 12px;
+		margin: 0 0 12px 0;
+	}
+
+	.win95-status-bar {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 8px;
+		padding: 3px 6px;
+		font-family: $font-tahoma;
+		font-size: 11px;
+		background: $win-light-gray;
+		@include win95-border-inset;
+
+		.status-sep {
+			color: $win-dark-gray;
 		}
 	}
 

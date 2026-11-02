@@ -1,0 +1,226 @@
+---
+import RetroLayout from '../layouts/RetroLayout.astro';
+import Window from '../components/Window.astro';
+import { SITE_TITLE, PROJECTS } from '../consts';
+import ComputerIcon from '../components/icons/ComputerIcon.astro';
+import FloppyIcon from '../components/icons/FloppyIcon.astro';
+import GlobeIcon from '../components/icons/GlobeIcon.astro';
+---
+
+<RetroLayout
+	title={`Open-Source Projects - ${SITE_TITLE}`}
+	description="Biagio Scaglia's open-source shrine: HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, and Vellum."
+>
+	<Window title="projects_shrine.exe ~ [C:\Dev\open_source]" theme="blue" icon="floppy">
+		<div class="projects-box">
+			<h2 class="projects-heading">
+				<ComputerIcon size={16} /> Open-Source Project Shrine
+			</h2>
+			<p class="projects-intro">
+				Hand-crafted tools from the Biagio Cyberspace lab. State engines, retro UI kits, presentation compilers, visual novel runtimes, Frutiger Aero CSS, and a tabletop RPG companion — all built with TypeScript love and zero AI-generated filler.
+			</p>
+
+			<table class="projects-table" width="100%" border="1" cellpadding="5" cellspacing="0">
+				<thead>
+					<tr class="projects-table-header">
+						<th style="width: 22%;">Project</th>
+						<th style="width: 34%;">Brief</th>
+						<th style="width: 22%;">Stack</th>
+						<th style="width: 12%;">Status</th>
+						<th style="width: 10%;">Links</th>
+					</tr>
+				</thead>
+				<tbody>
+					{PROJECTS.map((project) => (
+						<tr>
+							<td>
+								<strong>{project.name}</strong>
+							</td>
+							<td>{project.tagline}</td>
+							<td class="stack-cell">{project.stack}</td>
+							<td>
+								<span class={`status-pill status-${project.id}`}>{project.status}</span>
+							</td>
+							<td class="links-cell">
+								{!project.url && !project.repo && <span class="muted">soon</span>}
+								{project.url && (
+									<a href={project.url} target="_blank" rel="noopener noreferrer" title="Live / docs">
+										<GlobeIcon size={12} /> {project.repo === project.url ? 'GitHub' : 'Docs'}
+									</a>
+								)}
+								{project.repo && project.repo !== project.url && (
+									<a href={project.repo} target="_blank" rel="noopener noreferrer" title="GitHub">
+										<FloppyIcon size={12} /> Repo
+									</a>
+								)}
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+
+			<p class="projects-foot">
+				★ Prefer browsing on GitHub? →{' '}
+				<a href="https://github.com/biagio-scaglia" target="_blank" rel="noopener noreferrer">
+					github.com/biagio-scaglia
+				</a>
+			</p>
+		</div>
+	</Window>
+
+	<Window title="readme.txt" theme="yellow" icon="notepad">
+		<div class="projects-box">
+			<h3 class="projects-subheading"><FloppyIcon size={12} /> How to contribute / star</h3>
+			<p>
+				Stars, issues, and PRs are welcome on every public repo. If Frutiger-JS, HomuraJS, or KawaiJS helped your project, a star is the classic 2000s guestbook equivalent — and it genuinely makes the webmaster’s day. (☆´∀｀☆)
+			</p>
+		</div>
+	</Window>
+</RetroLayout>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.projects-box {
+		font-family: $font-verdana;
+		font-size: 12px;
+		line-height: 1.5;
+	}
+
+	.projects-heading {
+		font-family: $font-tahoma;
+		font-size: 15px;
+		color: $win-blue;
+		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border-bottom: 2px solid $win-light-gray;
+		padding-bottom: 6px;
+	}
+
+	.projects-subheading {
+		font-family: $font-tahoma;
+		font-size: 13px;
+		color: $win-blue;
+		margin: 0 0 8px 0;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.projects-intro {
+		margin: 0 0 14px 0;
+	}
+
+	.projects-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 11px;
+		@include win95-border-inset;
+
+		.projects-table-header {
+			background: $win-blue;
+			color: $win-white;
+			font-family: $font-tahoma;
+			font-weight: bold;
+			text-align: left;
+		}
+
+		th,
+		td {
+			padding: 7px 8px;
+			border: 1px solid $win-dark-gray;
+			vertical-align: top;
+		}
+
+		tr:not(.projects-table-header) {
+			background: $win-white;
+
+			&:nth-child(even) {
+				background: $win-light-gray;
+			}
+
+			&:hover {
+				background: #000080 !important;
+				color: #ffffff;
+
+				td,
+				a,
+				.muted,
+				.status-pill {
+					color: #ffffff !important;
+					background: transparent;
+					border-color: #ffffff;
+				}
+			}
+		}
+	}
+
+	.stack-cell {
+		font-family: $font-retro-mono;
+		font-size: 10px;
+	}
+
+	.links-cell {
+		white-space: nowrap;
+		font-size: 10px;
+		font-weight: bold;
+
+		a {
+			display: inline-flex;
+			align-items: center;
+			gap: 2px;
+			text-decoration: none;
+			margin-right: 4px;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.muted {
+		color: #888;
+	}
+
+	.status-pill {
+		display: inline-block;
+		font-family: $font-tahoma;
+		font-size: 9px;
+		font-weight: bold;
+		padding: 1px 5px;
+		border: 1px solid $win-dark-gray;
+		background: #e8ffe8;
+		color: #006600;
+		white-space: nowrap;
+	}
+
+	.status-frutiger-js {
+		background: #fff7cc;
+		color: #886600;
+	}
+
+	.status-vellum {
+		background: #e8f0ff;
+		color: #003399;
+	}
+
+	.projects-foot {
+		margin: 12px 0 0 0;
+		font-size: 11px;
+	}
+
+	@media (max-width: 700px) {
+		.projects-table {
+			display: block;
+			overflow-x: auto;
+		}
+	}
+
+	@media print {
+		.projects-foot {
+			display: none;
+		}
+	}
+</style>

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Window from './Window.astro';
 import MoodWidget from './MoodWidget.astro';
+import NowWidget from './NowWidget.astro';
 import MusicPlayer from './MusicPlayer.astro';
 import ArchiveWidget from './ArchiveWidget.astro';
 import Badge88x31 from './Badge88x31.astro';
@@ -79,6 +80,10 @@ if (currentWeek.length > 0) {
 		<MoodWidget />
 	</Window>
 
+	<Window title="now.exe" theme="green" icon="floppy">
+		<NowWidget />
+	</Window>
+
 	<Window title="shoutbox.txt" theme="windows" icon="notepad">
 		<Shoutbox />
 	</Window>
@@ -139,6 +144,19 @@ if (currentWeek.length > 0) {
 					</a>
 				);
 			})}
+		</div>
+	</Window>
+
+	<Window title="open_source.exe" theme="blue" icon="floppy">
+		<div class="links-widget">
+			<ul class="links-list">
+				<li><a href={`${import.meta.env.BASE_URL}projects/`}><FolderIcon size={12} class="link-icon" /> Projects shrine →</a></li>
+				<li><a href="https://biagio-scaglia.github.io/homura-js/" target="_blank" rel="noopener noreferrer"><ComputerIcon size={12} class="link-icon" /> HomuraJS</a></li>
+				<li><a href="https://biagio-scaglia.github.io/moon-inferno/" target="_blank" rel="noopener noreferrer"><FloppyIcon size={12} class="link-icon" /> Moon-Inferno</a></li>
+				<li><a href="https://biagio-scaglia.github.io/Yumia-MD/" target="_blank" rel="noopener noreferrer"><NotepadIcon size={12} class="link-icon" /> Yumia-MD</a></li>
+				<li><a href="https://biagio-scaglia.github.io/KawaiJS/" target="_blank" rel="noopener noreferrer"><JoystickIcon size={12} class="link-icon" /> KawaiJS</a></li>
+				<li><a href="https://github.com/biagio-scaglia/frutiger-js" target="_blank" rel="noopener noreferrer"><GlobeIcon size={12} class="link-icon" /> Frutiger-JS ★</a></li>
+			</ul>
 		</div>
 	</Window>
 

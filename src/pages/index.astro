@@ -11,6 +11,13 @@ import CameraIcon from '../components/icons/CameraIcon.astro';
 import ComputerIcon from '../components/icons/ComputerIcon.astro';
 import { Image } from 'astro:assets';
 import nyanCat from '../assets/nyan-cat.gif';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const latestPost = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+const lastUpdatedLabel = latestPost
+	? latestPost.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+	: 'November 2026';
 ---
 
 <RetroLayout title={`${SITE_TITLE} - Official Site of Biagio Scaglia`} description={SITE_DESCRIPTION}>
@@ -25,7 +32,7 @@ import nyanCat from '../assets/nyan-cat.gif';
 				Greetings, wanderer! You have landed on my personal databank. I built this space to host my software projects, retrocomputing experiments, anime reviews, and my thoughts on web development and design.
 			</p>
 			<p>
-				I'm Biagio Scaglia, a full-stack developer (React, TypeScript, .NET, React Native) and UX/UI designer. Here you'll find technical logs, design deep-dives, and documentation for my open-source frameworks, including <a href="https://biagio-scaglia.github.io/homura-js/" target="_blank" rel="noopener noreferrer"><strong>HomuraJS</strong></a> (DAG time-travel state engine), <a href="https://biagio-scaglia.github.io/moon-inferno/" target="_blank" rel="noopener noreferrer"><strong>Moon-Inferno</strong></a> (retro accessible React UI framework), <a href="https://biagio-scaglia.github.io/Yumia-MD/" target="_blank" rel="noopener noreferrer"><strong>Yumia-MD</strong></a> (presentations-as-code compiler), <a href="https://biagio-scaglia.github.io/KawaiJS/" target="_blank" rel="noopener noreferrer"><strong>KawaiJS</strong></a> (web-native visual novel engine), and my tabletop RPG app <strong>Vellum - RPG Companion</strong>.
+				I'm Biagio Scaglia, a full-stack developer (React, TypeScript, .NET, React Native) and UX/UI designer. Here you'll find technical logs, design deep-dives, and documentation for my open-source frameworks, including <a href="https://biagio-scaglia.github.io/homura-js/" target="_blank" rel="noopener noreferrer"><strong>HomuraJS</strong></a> (DAG time-travel state engine), <a href="https://biagio-scaglia.github.io/moon-inferno/" target="_blank" rel="noopener noreferrer"><strong>Moon-Inferno</strong></a> (retro accessible React UI framework), <a href="https://biagio-scaglia.github.io/Yumia-MD/" target="_blank" rel="noopener noreferrer"><strong>Yumia-MD</strong></a> (presentations-as-code compiler), <a href="https://biagio-scaglia.github.io/KawaiJS/" target="_blank" rel="noopener noreferrer"><strong>KawaiJS</strong></a> (web-native visual novel engine), <a href="https://github.com/biagio-scaglia/frutiger-js" target="_blank" rel="noopener noreferrer"><strong>Frutiger-JS</strong></a> (Frutiger Aero CSS), and my tabletop RPG app <strong>Vellum - RPG Companion</strong>.
 			</p>
 			<div class="system-status-table">
 				<table width="100%" border="1" cellpadding="4" cellspacing="0" class="retro-status-table">
@@ -42,11 +49,15 @@ import nyanCat from '../assets/nyan-cat.gif';
 					</tr>
 					<tr>
 						<td><strong>Featured Projects:</strong></td>
-						<td><a href="https://biagio-scaglia.github.io/homura-js/" target="_blank" rel="noopener noreferrer">HomuraJS</a>, <a href="https://biagio-scaglia.github.io/moon-inferno/" target="_blank" rel="noopener noreferrer">Moon-Inferno</a>, <a href="https://biagio-scaglia.github.io/Yumia-MD/" target="_blank" rel="noopener noreferrer">Yumia-MD</a>, <a href="https://biagio-scaglia.github.io/KawaiJS/" target="_blank" rel="noopener noreferrer">KawaiJS</a>, Vellum</td>
+						<td><a href="https://biagio-scaglia.github.io/homura-js/" target="_blank" rel="noopener noreferrer">HomuraJS</a>, <a href="https://biagio-scaglia.github.io/moon-inferno/" target="_blank" rel="noopener noreferrer">Moon-Inferno</a>, <a href="https://biagio-scaglia.github.io/Yumia-MD/" target="_blank" rel="noopener noreferrer">Yumia-MD</a>, <a href="https://biagio-scaglia.github.io/KawaiJS/" target="_blank" rel="noopener noreferrer">KawaiJS</a>, <a href="https://github.com/biagio-scaglia/frutiger-js" target="_blank" rel="noopener noreferrer">Frutiger-JS</a>, Vellum</td>
+					</tr>
+					<tr>
+						<td><strong>Diary Entries:</strong></td>
+						<td>{posts.length} logs indexed</td>
 					</tr>
 					<tr>
 						<td><strong>Last Updated:</strong></td>
-						<td>September 2026</td>
+						<td><time datetime={latestPost?.data.pubDate.toISOString()}>{lastUpdatedLabel}</time></td>
 					</tr>
 				</table>
 			</div>

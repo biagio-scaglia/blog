@@ -24,6 +24,7 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 		<BaseHead title={title} description={description} image={image} article={article} publishedDate={publishedDate} modifiedDate={modifiedDate} tags={tags} />
 	</head>
 	<body>
+		<a class="skip-link" href="#main-content">Skip to main content</a>
 		<div id="reading-progress-bar" class="reading-progress-bar" aria-hidden="true"></div>
 		<div class="retro-container" id="top">
 			<Header />
@@ -34,7 +35,7 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 						<Sidebar />
 					</td>
 					<td class="content-cell" valign="top">
-						<main class="main-content-pane">
+						<main class="main-content-pane" id="main-content" tabindex="-1">
 							<slot />
 						</main>
 					</td>
@@ -53,6 +54,8 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 				const btn = document.getElementById('sfx-toggle-btn');
 				if (btn) {
 					btn.textContent = isAudioMuted ? '[ 🔇 SFX MUTE ]' : '[ 🔊 SFX ON ]';
+					btn.setAttribute('aria-pressed', isAudioMuted ? 'true' : 'false');
+					btn.setAttribute('aria-label', isAudioMuted ? 'Unmute interface sound effects' : 'Mute interface sound effects');
 					if (isAudioMuted) {
 						btn.classList.add('muted');
 					} else {
@@ -60,6 +63,9 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 					}
 				}
 			}
+
+			const prefersReducedMotion = () =>
+				window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 			function initAudioContext() {
 				if (!blogAudioCtx && typeof window !== 'undefined') {
@@ -86,7 +92,7 @@ const { title, description, image, article, publishedDate, modifiedDate, tags } 
 			window.addEventListener('keydown', unlockAudio);
 
 			function playBlogSound(type = 'click') {
-				if (isAudioMuted) return;
+				if (isAudioMuted || prefersReducedMotion()) return;
 				const ctx = initAudioContext();
 				if (!ctx) return;
 				const now = ctx.currentTime;

@@ -38,8 +38,11 @@ The blog has zero tracking scripts, zero cookie consent banners, and zero sponso
 1. **Home Page** — Features a welcome message, latest blog posts, an image gallery, a guestbook widget, and a Nyan Cat animation.
 2. **About Page** — Author biography, hardware specs, site colophon, and FAQ section with structured Q&A for AI discoverability.
 3. **Blog** — All published articles, filterable by tags and categories.
-4. **Interests (Gaming & Anime Shrine)** — Dedicated pages showcasing Biagio's favorite video games and anime series.
-5. **Contributors** — Special thanks page dedicated to FDeveloper and trust network members supporting the site.
+4. **Projects** — Open-source shrine listing HomuraJS, Moon-Inferno, Yumia-MD, KawaiJS, Frutiger-JS, and Vellum with docs/repo links.
+5. **Interests (Gaming & Anime Shrine)** — Dedicated pages showcasing Biagio's favorite video games and anime series.
+6. **Contributors** — Special thanks page dedicated to FDeveloper and trust network members supporting the site.
+
+The sidebar also exposes a hand-edited **now.exe** status (building / playing / listening) from site constants.
 
 ---
 

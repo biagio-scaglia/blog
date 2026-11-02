@@ -1,0 +1,123 @@
+---
+import { NOW } from '../consts';
+import FloppyIcon from './icons/FloppyIcon.astro';
+import JoystickIcon from './icons/JoystickIcon.astro';
+import MusicIcon from './icons/MusicIcon.astro';
+---
+
+<div class="now-widget">
+	<div class="now-banner">
+		<span class="now-live" aria-hidden="true">●</span>
+		<span class="now-title">NOW STATUS</span>
+		<span class="now-sync">sync: {NOW.updatedLabel}</span>
+	</div>
+	<ul class="now-list">
+		<li>
+			<span class="now-label"><FloppyIcon size={11} class="now-icon" /> Building</span>
+			<span class="now-val">{NOW.building}</span>
+		</li>
+		<li>
+			<span class="now-label"><JoystickIcon size={11} class="now-icon" /> Playing</span>
+			<span class="now-val">{NOW.playing}</span>
+		</li>
+		<li>
+			<span class="now-label"><MusicIcon size={11} class="now-icon" /> Listening</span>
+			<span class="now-val">{NOW.listening}</span>
+		</li>
+	</ul>
+</div>
+
+<style lang="scss">
+	@use "../styles/variables" as *;
+
+	.now-widget {
+		font-family: $font-verdana;
+		font-size: 11px;
+	}
+
+	.now-banner {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		background: $win-blue;
+		color: $win-white;
+		font-family: $font-tahoma;
+		font-size: 10px;
+		font-weight: bold;
+		padding: 3px 6px;
+		margin-bottom: 6px;
+	}
+
+	.now-live {
+		color: $neon-green;
+		font-size: 9px;
+		animation: now-blink 1.2s step-start infinite;
+	}
+
+	.now-title {
+		flex: 1;
+		letter-spacing: 0.5px;
+	}
+
+	.now-sync {
+		font-weight: normal;
+		opacity: 0.85;
+		font-size: 9px;
+	}
+
+	.now-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		background: #ffffff;
+		@include win95-border-inset;
+	}
+
+	.now-list li {
+		padding: 6px 8px;
+		border-bottom: 1px dashed #ccc;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		&:hover {
+			background: #fffff2;
+		}
+	}
+
+	.now-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		font-family: $font-tahoma;
+		font-size: 9px;
+		font-weight: bold;
+		color: $win-blue;
+		text-transform: uppercase;
+	}
+
+	.now-icon {
+		flex-shrink: 0;
+	}
+
+	.now-val {
+		color: #222;
+		line-height: 1.35;
+		word-break: break-word;
+	}
+
+	@keyframes now-blink {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.25; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.now-live {
+			animation: none;
+		}
+	}
+</style>
