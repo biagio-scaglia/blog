@@ -90,26 +90,92 @@ const lastUpdatedLabel = latestPost
 	</Window>
 
 	<Window title="dio_hftf.exe ~ [ZA WARUDO]" theme="purple" icon="joystick">
-		<div class="dio-box">
-			<img
-				src={`${import.meta.env.BASE_URL}dio.gif`}
-				alt="Dio Brando idle animation from JoJo's Bizarre Adventure: Heritage for the Future"
-				class="dio-gif"
-				width="180"
-				height="220"
-				loading="lazy"
-			/>
+		<div class="dio-box" data-dio>
+			<div class="dio-stage" data-dio-stage>
+				<div class="dio-hud" aria-hidden="true">
+					<div class="dio-hud-row">
+						<span class="dio-tag">1P</span>
+						<div class="dio-bar dio-bar--hp"><span></span></div>
+						<span class="dio-time" data-dio-time>99</span>
+					</div>
+					<div class="dio-nameplate">DIO</div>
+					<div class="dio-hud-row dio-hud-row--stand">
+						<span class="dio-tag dio-tag--stand">STAND</span>
+						<div class="dio-bar dio-bar--stand"><span></span></div>
+					</div>
+				</div>
+
+				<div class="dio-menacing" aria-hidden="true">
+					<span>ゴ</span><span>ゴ</span><span>ゴ</span><span>ゴ</span>
+				</div>
+
+				<div class="dio-sphere" aria-hidden="true"></div>
+				<div class="dio-floor" aria-hidden="true"></div>
+
+				<img
+					src={`${import.meta.env.BASE_URL}dio.gif`}
+					alt="Dio Brando idle animation from JoJo's Bizarre Adventure: Heritage for the Future"
+					class="dio-gif"
+					width="498"
+					height="498"
+					loading="lazy"
+				/>
+
+				<p class="dio-overlay" data-dio-overlay aria-live="polite"></p>
+				<div class="dio-scanlines" aria-hidden="true"></div>
+			</div>
+
 			<div class="dio-caption">
-				<p class="dio-quote">「無駄無駄無駄無駄！」(￣ー￣)</p>
+				<p class="dio-quote">「無駄無駄無駄無駄！」<span class="dio-kaomoji">(￣ー￣)</span></p>
+				<p class="dio-romaji">MUDA MUDA MUDA MUDA!</p>
 				<p class="dio-meta">
 					Sprite dump: <strong>DIO</strong> idle loop from
-					<em>JoJo's Bizarre Adventure: Heritage for the Future</em> (CPS3).
+					<em>JoJo's Bizarre Adventure: Heritage for the Future</em> (CPS3, 1998).
 					Classic arcade menace, now guarding this cyberspace node.
 				</p>
+				<button type="button" class="dio-button" data-dio-button>
+					⏱ ZA WARUDO!
+				</button>
 			</div>
 		</div>
 	</Window>
 </RetroLayout>
+
+<script>
+	const root = document.querySelector<HTMLElement>('[data-dio]');
+	const stage = root?.querySelector<HTMLElement>('[data-dio-stage]');
+	const button = root?.querySelector<HTMLButtonElement>('[data-dio-button]');
+	const overlay = root?.querySelector<HTMLElement>('[data-dio-overlay]');
+	const timer = root?.querySelector<HTMLElement>('[data-dio-time]');
+
+	if (stage && button && overlay && timer) {
+		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+		const step = reduced ? 350 : 800;
+
+		button.addEventListener('click', async () => {
+			button.disabled = true;
+			overlay.textContent = 'ザ・ワールド！';
+			stage.classList.add('is-stopping');
+			await wait(reduced ? 200 : 450);
+			stage.classList.add('is-stopped');
+
+			for (let s = 1; s <= 5; s++) {
+				overlay.textContent = `${s}秒経過`;
+				await wait(step);
+			}
+
+			overlay.textContent = '時は動き出す';
+			await wait(step * 1.2);
+			stage.classList.remove('is-stopped', 'is-stopping');
+			overlay.textContent = '';
+
+			const left = Math.max(10, Number(timer.textContent) - 5);
+			timer.textContent = String(left);
+			button.disabled = false;
+		});
+	}
+</script>
 
 <style lang="scss">
 	@use "../styles/variables" as *;
@@ -224,43 +290,315 @@ const lastUpdatedLabel = latestPost
 		animation: rainbow-text 4s infinite linear;
 	}
 
+	$dio-gold: #ffd84a;
+	$dio-gold-deep: #c98a00;
+	$dio-purple: #2a0838;
+
 	.dio-box {
 		display: flex;
-		align-items: center;
-		gap: 16px;
-		padding: 8px 4px;
+		align-items: stretch;
+		gap: 14px;
+		padding: 4px;
 		flex-wrap: wrap;
 		justify-content: center;
 	}
 
-	.dio-gif {
-		image-rendering: pixelated;
-		image-rendering: crisp-edges;
-		width: 140px;
-		height: auto;
-		flex-shrink: 0;
-		filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.35));
+	/* ---------- arcade stage ---------- */
+	.dio-stage {
+		position: relative;
+		flex: 0 1 260px;
+		width: 260px;
+		max-width: 100%;
+		aspect-ratio: 1 / 1.08;
+		overflow: hidden;
+		@include win95-border-inset;
+		background:
+			radial-gradient(ellipse at 50% 78%, rgba(255, 216, 74, 0.35) 0%, transparent 55%),
+			repeating-conic-gradient(from 0deg at 50% 70%, rgba(255, 216, 74, 0.07) 0deg 8deg, transparent 8deg 16deg),
+			linear-gradient(180deg, #12001c 0%, $dio-purple 45%, #5a0f4a 78%, #1a0010 100%);
+		transition: filter 0.25s steps(3);
+		isolation: isolate;
 	}
 
+	.dio-gif {
+		position: absolute;
+		left: 50%;
+		bottom: -4%;
+		width: 104%;
+		max-width: none;
+		height: auto;
+		transform: translateX(-50%);
+		image-rendering: pixelated;
+		filter: drop-shadow(0 0 6px rgba(255, 216, 74, 0.45));
+		z-index: 3;
+	}
+
+	.dio-floor {
+		position: absolute;
+		left: 50%;
+		bottom: 4%;
+		width: 52%;
+		height: 7%;
+		transform: translateX(-50%);
+		background: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 0%, transparent 70%);
+		z-index: 2;
+	}
+
+	/* HUD */
+	.dio-hud {
+		position: absolute;
+		inset: 6px 8px auto 8px;
+		z-index: 5;
+		font-family: $font-retro-mono;
+		font-weight: bold;
+		color: #fff;
+		text-shadow: 1px 1px 0 #000;
+	}
+
+	.dio-hud-row {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 10px;
+
+		&--stand {
+			margin-top: 2px;
+			width: 70%;
+		}
+	}
+
+	.dio-tag {
+		color: $neon-cyan;
+
+		&--stand {
+			color: $dio-gold;
+			font-size: 8px;
+			letter-spacing: 0.5px;
+		}
+	}
+
+	.dio-bar {
+		flex: 1;
+		height: 7px;
+		border: 1px solid #000;
+		outline: 1px solid rgba(255, 255, 255, 0.6);
+		background: #400;
+
+		span {
+			display: block;
+			height: 100%;
+		}
+
+		&--hp span {
+			width: 100%;
+			background: linear-gradient(180deg, #fff6a0 0%, $dio-gold 40%, $dio-gold-deep 100%);
+		}
+
+		&--stand {
+			height: 5px;
+			background: #111;
+
+			span {
+				width: 100%;
+				background: linear-gradient(90deg, #3a7bff, $neon-cyan, #3a7bff);
+				background-size: 200% 100%;
+				animation: dio-stand-flow 1.2s linear infinite;
+			}
+		}
+	}
+
+	.dio-time {
+		min-width: 22px;
+		padding: 0 3px;
+		text-align: center;
+		font-size: 13px;
+		color: $dio-gold;
+		background: rgba(0, 0, 0, 0.55);
+		border: 1px solid $dio-gold-deep;
+	}
+
+	.dio-nameplate {
+		margin-top: 3px;
+		font-family: $font-tahoma;
+		font-size: 15px;
+		font-style: italic;
+		letter-spacing: 3px;
+		color: $dio-gold;
+		text-shadow: 2px 2px 0 #7a0040, -1px -1px 0 #000;
+	}
+
+	/* ゴゴゴ menacing */
+	.dio-menacing {
+		position: absolute;
+		inset: 0;
+		z-index: 4;
+		pointer-events: none;
+		font-family: $font-gothic;
+		font-weight: 900;
+		color: #d24bff;
+		text-shadow: 2px 2px 0 #000, 0 0 6px rgba(210, 75, 255, 0.7);
+
+		span {
+			position: absolute;
+			font-size: 26px;
+			animation: dio-menace 1.6s ease-in-out infinite;
+		}
+
+		span:nth-child(1) { left: 6%;  top: 34%; }
+		span:nth-child(2) { left: 12%; top: 54%; font-size: 20px; animation-delay: -0.4s; }
+		span:nth-child(3) { right: 6%; top: 40%; animation-delay: -0.8s; }
+		span:nth-child(4) { right: 13%; top: 60%; font-size: 20px; animation-delay: -1.2s; }
+	}
+
+	.dio-scanlines {
+		position: absolute;
+		inset: 0;
+		z-index: 6;
+		pointer-events: none;
+		background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 3px);
+		box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.75);
+	}
+
+	/* time-stop sphere + overlay */
+	.dio-sphere {
+		position: absolute;
+		left: 50%;
+		top: 55%;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		transform: translate(-50%, -50%) scale(0);
+		background: radial-gradient(circle, rgba(255, 255, 255, 0) 40%, rgba(160, 255, 255, 0.9) 62%, rgba(255, 0, 200, 0.6) 72%, transparent 76%);
+		z-index: 7;
+		pointer-events: none;
+		opacity: 0;
+	}
+
+	.dio-overlay {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 44%;
+		margin: 0;
+		z-index: 8;
+		text-align: center;
+		font-family: $font-gothic;
+		font-size: 22px;
+		font-weight: 900;
+		color: #fff;
+		text-shadow: 2px 2px 0 #000, 0 0 8px $neon-magenta;
+		pointer-events: none;
+	}
+
+	.dio-stage.is-stopping .dio-sphere {
+		animation: dio-sphere 0.9s ease-out forwards;
+	}
+
+	.dio-stage.is-stopped {
+		filter: invert(1) hue-rotate(180deg) saturate(0.6) contrast(1.15);
+
+		.dio-menacing span,
+		.dio-bar--stand span {
+			animation-play-state: paused;
+		}
+
+		.dio-overlay {
+			/* re-invert so the counter stays readable */
+			filter: invert(1) hue-rotate(180deg);
+		}
+	}
+
+	/* ---------- caption ---------- */
 	.dio-caption {
-		flex: 1 1 220px;
+		flex: 1 1 200px;
 		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		font-family: $font-verdana;
 		font-size: 12px;
 		line-height: 1.45;
 	}
 
 	.dio-quote {
-		font-family: $font-tahoma;
-		font-size: 14px;
+		font-family: $font-gothic;
+		font-size: 17px;
 		font-weight: bold;
 		color: #660066;
-		margin: 0 0 8px 0;
+		margin: 0;
+		text-shadow: 1px 1px 0 $dio-gold;
+	}
+
+	.dio-kaomoji {
+		font-size: 13px;
+		color: #333;
+		text-shadow: none;
+		white-space: nowrap;
+	}
+
+	.dio-romaji {
+		margin: 2px 0 10px 0;
+		font-family: $font-retro-mono;
+		font-size: 11px;
+		font-weight: bold;
+		letter-spacing: 2px;
+		color: $dio-gold-deep;
 	}
 
 	.dio-meta {
-		margin: 0;
+		margin: 0 0 12px 0;
 		color: #333;
+	}
+
+	.dio-button {
+		align-self: flex-start;
+		padding: 5px 14px;
+		font-family: $font-tahoma;
+		font-size: 12px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		color: $dio-gold;
+		background: linear-gradient(180deg, #7a1a8a 0%, #3b0548 100%);
+		text-shadow: 1px 1px 0 #000;
+		cursor: pointer;
+		border: 2px solid;
+		border-color: #c77ad6 #1a0022 #1a0022 #c77ad6;
+
+		&:hover:not(:disabled) {
+			background: linear-gradient(180deg, #9a2aac 0%, #4e0a60 100%);
+		}
+
+		&:active:not(:disabled) {
+			border-color: #1a0022 #c77ad6 #c77ad6 #1a0022;
+			transform: translate(1px, 1px);
+		}
+
+		&:focus-visible {
+			outline: 1px dotted #000;
+			outline-offset: 2px;
+		}
+
+		&:disabled {
+			cursor: wait;
+			opacity: 0.6;
+		}
+	}
+
+	@keyframes dio-menace {
+		0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+		25% { transform: translate(-1px, -3px) scale(1.06); opacity: 1; }
+		50% { transform: translate(1px, -1px) scale(1); }
+		75% { transform: translate(-1px, -4px) scale(1.08); opacity: 1; }
+	}
+
+	@keyframes dio-stand-flow {
+		to { background-position: -200% 0; }
+	}
+
+	@keyframes dio-sphere {
+		0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+		70% { opacity: 1; }
+		100% { transform: translate(-50%, -50%) scale(30); opacity: 0; }
 	}
 
 	@keyframes rainbow-text {
@@ -274,7 +612,13 @@ const lastUpdatedLabel = latestPost
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.nyan-text {
+		.nyan-text,
+		.dio-menacing span,
+		.dio-bar--stand span {
+			animation: none;
+		}
+
+		.dio-stage.is-stopping .dio-sphere {
 			animation: none;
 		}
 	}
